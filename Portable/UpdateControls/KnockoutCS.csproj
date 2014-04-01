@@ -73,7 +73,7 @@
     <Compile Include="Collections\IndependentList.cs" />
     <Compile Include="Dependent.cs" />
     <Compile Include="Fields\Dependent.cs" />
-    <Compile Include="Fields\Independent.cs" />
+    <Compile Include="Fields\Observable.cs" />
     <Compile Include="Observable.cs" />
     <Compile Include="InertialProperty.cs" />
     <Compile Include="MemoizedTypeName.cs" />
