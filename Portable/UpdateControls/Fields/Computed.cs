@@ -16,16 +16,16 @@ using System.ComponentModel;
 
 namespace KnockoutCS.Fields
 {
-	public class Dependent<T> : NamedDependent
+	public class Computed<T> : NamedDependent
 	{
 		protected internal T _value;
 		protected Func<T> _computeValue;
 
-		public Dependent(Func<T> compute) : base((string)null, null)
+		public Computed(Func<T> compute) : base((string)null, null)
 		{
 			base._update = Update; _computeValue = compute;
 		}
-		public Dependent(string name, Func<T> compute) : base(name, null)
+		public Computed(string name, Func<T> compute) : base(name, null)
 		{
 			base._update = Update; _computeValue = compute;
 		}
@@ -43,7 +43,7 @@ namespace KnockoutCS.Fields
 		{
 			get { base.OnGet(); return _value; }
 		}
-		public static implicit operator T(Dependent<T> dependent)
+		public static implicit operator T(Computed<T> dependent)
 		{
 			return dependent.Value;
 		}

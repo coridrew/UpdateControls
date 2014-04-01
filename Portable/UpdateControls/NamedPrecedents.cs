@@ -74,7 +74,7 @@ namespace KnockoutCS
 	}
 
 	[Obsolete]
-	public class NamedDependent<T> : KnockoutCS.Fields.Dependent<T>
+	public class NamedDependent<T> : KnockoutCS.Fields.Computed<T>
 	{
 		public NamedDependent(Func<T> compute) : base(compute) { }
 		public NamedDependent(string name, Func<T> compute) : base(name, compute) { }

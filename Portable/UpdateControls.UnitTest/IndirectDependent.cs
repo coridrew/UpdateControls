@@ -6,12 +6,12 @@ namespace KnockoutCS.UnitTest
 	{
 		private DirectDependent _indermediateDependent;
 
-        private Dependent<int> _property;
+        private Computed<int> _property;
 
         public IndirectDependent(DirectDependent indermediateDependent)
 		{
 			_indermediateDependent = indermediateDependent;
-            _property = new Dependent<int>(() => _indermediateDependent.DependentProperty);
+            _property = new Computed<int>(() => _indermediateDependent.DependentProperty);
 		}
 
 		public int DependentProperty

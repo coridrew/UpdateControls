@@ -51,7 +51,7 @@ namespace KnockoutCS.UnitTest
         {
             GC.Collect();
             long start = GC.GetTotalMemory(true);
-            Dependent<int> newDependent = new Dependent<int>(() => 42);
+            Computed<int> newDependent = new Computed<int>(() => 42);
             long end = GC.GetTotalMemory(true);
 
             // Started at 260.
@@ -76,7 +76,7 @@ namespace KnockoutCS.UnitTest
             GC.Collect();
             long start = GC.GetTotalMemory(true);
             Observable<int> newObservable = new Observable<int>();
-            Dependent<int> newDependent = new Dependent<int>(() => newObservable);
+            Computed<int> newDependent = new Computed<int>(() => newObservable);
             newObservable.Value = 42;
             long end = GC.GetTotalMemory(true);
 
@@ -102,7 +102,7 @@ namespace KnockoutCS.UnitTest
             GC.Collect();
             long start = GC.GetTotalMemory(true);
             Observable<int> newObservable = new Observable<int>();
-            Dependent<int> newDependent = new Dependent<int>(() => newObservable);
+            Computed<int> newDependent = new Computed<int>(() => newObservable);
             newObservable.Value = 42;
             int value = newDependent;
             long end = GC.GetTotalMemory(true);

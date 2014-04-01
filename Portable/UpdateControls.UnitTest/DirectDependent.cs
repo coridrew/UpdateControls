@@ -6,12 +6,12 @@ namespace KnockoutCS.UnitTest
 	{
 		private SourceData _source;
 
-        private Dependent<int> _property;
+        private Computed<int> _property;
 
 		public DirectDependent(SourceData source)
 		{
 			_source = source;
-            _property = new Dependent<int>(() => _source.SourceProperty);
+            _property = new Computed<int>(() => _source.SourceProperty);
 		}
 
 		public int DependentProperty

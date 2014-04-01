@@ -102,9 +102,9 @@ namespace KnockoutCS
 	public partial class Dependent : Precedent
 	{
 		public static Dependent New(Action update) { return DebugMode ? new NamedDependent(update) : new Dependent(update); }
-		public static Dependent<T> New<T>(Func<T> update) { return new Dependent<T>(update); }
+		public static Computed<T> New<T>(Func<T> update) { return new Computed<T>(update); }
 		public static NamedDependent New(string name, Action update) { return new NamedDependent(name, update); }
-		public static Dependent<T> New<T>(string name, Func<T> update) { return new Dependent<T>(name, update); }
+		public static Computed<T> New<T>(string name, Func<T> update) { return new Computed<T>(name, update); }
 
         private static ThreadLocal<Dependent> _currentUpdate = new ThreadLocal<Dependent>();
 

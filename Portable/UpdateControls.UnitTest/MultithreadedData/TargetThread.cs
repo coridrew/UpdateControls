@@ -9,13 +9,13 @@ namespace KnockoutCS.UnitTest.MultithreadedData
     {
         private SourceThread[] _sources;
         private Thread _thread;
-        private Dependent<int> _total;
+        private Computed<int> _total;
 
         public TargetThread(SourceThread[] sources)
         {
             _sources = sources;
             _thread = new Thread(ThreadProc);
-            _total = new Dependent<int>(() => _sources.Sum(source => source.Value));
+            _total = new Computed<int>(() => _sources.Sum(source => source.Value));
         }
 
         public void Start()

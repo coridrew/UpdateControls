@@ -49,7 +49,7 @@ namespace KnockoutCS.Fields
 
 		public override string VisualizerName(bool withValue)
 		{
-			string s = "[I] " + Dependent<T>.VisualizerName(Name);
+			string s = "[I] " + Computed<T>.VisualizerName(Name);
 			if (withValue)
 				s += " = " + (_value == null ? "null" : _value.ToString());
 			return s;
