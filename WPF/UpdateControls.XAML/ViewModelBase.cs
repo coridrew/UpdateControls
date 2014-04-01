@@ -148,7 +148,7 @@ namespace KnockoutCS.XAML
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private IDictionary<string, ComputedPropertyBase> _dependentPropertyByName = new Dictionary<string, ComputedPropertyBase>();
+        private IDictionary<string, ComputedPropertyBase> _computedPropertyByName = new Dictionary<string, ComputedPropertyBase>();
 
         protected T Get<T>(Func<T> getMethod)
         {
@@ -163,10 +163,10 @@ namespace KnockoutCS.XAML
         {
             ForView.Initialize();
             ComputedPropertyBase property;
-            if (!_dependentPropertyByName.TryGetValue(propertyName, out property))
+            if (!_computedPropertyByName.TryGetValue(propertyName, out property))
             {
                 property = new ComputedAtom<T>(() => FirePropertyChanged(propertyName), getMethod);
-                _dependentPropertyByName.Add(propertyName, property);
+                _computedPropertyByName.Add(propertyName, property);
             }
             return (T)property.Value;
         }
@@ -184,10 +184,10 @@ namespace KnockoutCS.XAML
         {
             ForView.Initialize();
             ComputedPropertyBase property;
-            if (!_dependentPropertyByName.TryGetValue(propertyName, out property))
+            if (!_computedPropertyByName.TryGetValue(propertyName, out property))
             {
                 property = new ComputedCollection<T>(getMethod);
-                _dependentPropertyByName.Add(propertyName, property);
+                _computedPropertyByName.Add(propertyName, property);
             }
             return (IEnumerable<T>)property.Value;
         }

@@ -9,20 +9,20 @@ namespace KnockoutCS.XAML
     {
         private class ViewModelContainer : IUpdatable
         {
-            private Computed _dependent;
+            private Computed _computed;
             private object _viewModel;
             private Action _firePropertyChanged;
 
             public ViewModelContainer(Action firePropertyChanged, Func<object> constructor)
             {
                 _firePropertyChanged = firePropertyChanged;
-                _dependent = new Computed(() => _viewModel = ForView.Wrap(constructor()));
-                _dependent.Invalidated += () => UpdateScheduler.ScheduleUpdate(this);
+                _computed = new Computed(() => _viewModel = ForView.Wrap(constructor()));
+                _computed.Invalidated += () => UpdateScheduler.ScheduleUpdate(this);
             }
 
             public object ViewModel
             {
-                get { _dependent.OnGet(); return _viewModel; }
+                get { _computed.OnGet(); return _viewModel; }
             }
 
             public void UpdateNow()

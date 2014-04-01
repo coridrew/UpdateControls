@@ -17,7 +17,7 @@ namespace KnockoutCS.Collections
 	{
 		private readonly Func<IEnumerable<KeyValuePair<TKey, TValue>>> _computeCollection;
 		private IDictionary<TKey, TValue> _dictionary;
-		private Computed _dependentSentry;
+		private Computed _computedSentry;
 		private bool _recycleValues;
 
 		/// <summary>Initializes ComputedDictionary.</summary>
@@ -44,7 +44,7 @@ namespace KnockoutCS.Collections
 		public ComputedDictionary(Func<IEnumerable<KeyValuePair<TKey, TValue>>> updateCollection, bool recycleValues)
 		{
 			_computeCollection = updateCollection;
-			_dependentSentry = new NamedComputed(MemoizedTypeName<ComputedDictionary<TKey, TValue>>.GenericName(), Update);
+			_computedSentry = new NamedComputed(MemoizedTypeName<ComputedDictionary<TKey, TValue>>.GenericName(), Update);
 			_recycleValues = recycleValues;
 		}
 
@@ -86,7 +86,7 @@ namespace KnockoutCS.Collections
 
 		public bool ContainsKey(TKey key)
 		{
-			_dependentSentry.OnGet();
+			_computedSentry.OnGet();
 			return _dictionary.ContainsKey(key);
 		}
 
@@ -94,7 +94,7 @@ namespace KnockoutCS.Collections
 		{
 			get { 
 				return new UpdateCollectionHelper<TKey>(() => {
-					_dependentSentry.OnGet();
+					_computedSentry.OnGet();
 					return _dictionary.Keys;
 				});
 			}
@@ -108,7 +108,7 @@ namespace KnockoutCS.Collections
 
 		public bool TryGetValue(TKey key, out TValue value)
 		{
-			_dependentSentry.OnGet();
+			_computedSentry.OnGet();
 			return _dictionary.TryGetValue(key, out value);
 		}
 
@@ -116,7 +116,7 @@ namespace KnockoutCS.Collections
 		{
 			get { 
 				return new UpdateCollectionHelper<TValue>(() => {
-					_dependentSentry.OnGet();
+					_computedSentry.OnGet();
 					return _dictionary.Values;
 				});
 			}
@@ -126,7 +126,7 @@ namespace KnockoutCS.Collections
 		public TValue this[TKey key]
 		{
 			get {
-				_dependentSentry.OnGet();
+				_computedSentry.OnGet();
 				return _dictionary[key];
 			}
 			set {
@@ -150,19 +150,19 @@ namespace KnockoutCS.Collections
 
 		public bool Contains(KeyValuePair<TKey, TValue> item)
 		{
-			_dependentSentry.OnGet();
+			_computedSentry.OnGet();
 			return _dictionary.Contains(item);
 		}
 
 		public void CopyTo(KeyValuePair<TKey, TValue>[] array, int arrayIndex)
 		{
-			_dependentSentry.OnGet();
+			_computedSentry.OnGet();
 			_dictionary.CopyTo(array, arrayIndex);
 		}
 
 		public int Count
 		{
-			get { _dependentSentry.OnGet(); return _dictionary.Count; }
+			get { _computedSentry.OnGet(); return _dictionary.Count; }
 		}
 
 		public bool IsReadOnly
@@ -181,7 +181,7 @@ namespace KnockoutCS.Collections
 
 		public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator()
 		{
-			_dependentSentry.OnGet();
+			_computedSentry.OnGet();
 			return _dictionary.GetEnumerator();
 		}
 		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
@@ -193,7 +193,7 @@ namespace KnockoutCS.Collections
 
 		public Computed ComputedSentry
 		{
-			get { return _dependentSentry; }
+			get { return _computedSentry; }
 		}
 	}
 }

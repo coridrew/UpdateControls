@@ -69,16 +69,16 @@ namespace KnockoutCS.Forms
 
 		private GuiUpdateHelper(bool startNow, params Computed[] dependents)
 		{
-			_dependents = dependents;
+			_computeds = dependents;
 			if (startNow)
 				StartOnCurrentThread();
 		}
 
 		private GuiUpdateHelper(bool startNow, params Action[] updaters)
 		{
-			_dependents = new Computed[updaters.Length];
+			_computeds = new Computed[updaters.Length];
 			for (int i = 0; i < updaters.Length; i++)
-				_dependents[i] = Computed.New(updaters[i]);
+				_computeds[i] = Computed.New(updaters[i]);
 			if (startNow)
 				StartOnCurrentThread();
 		}
@@ -89,16 +89,16 @@ namespace KnockoutCS.Forms
 			control.HandleDestroyed += (s, e) => Stop();
 		}
 
-		Computed[] _dependents;
+		Computed[] _computeds;
 		bool _started;
 
 		/// <summary>Finds the dependent associated with the specified updater 
 		/// method and calls its <see cref="Computed.OnGet"/> method.</summary>
 		public void OnGet(Action updater)
 		{
-			for (int i = 0; i < _dependents.Length; i++)
-				if (_dependents[i].UpdateMethod == updater)
-					_dependents[i].OnGet();
+			for (int i = 0; i < _computeds.Length; i++)
+				if (_computeds[i].UpdateMethod == updater)
+					_computeds[i].OnGet();
 		}
 
 		/// <summary>This method is called after updating all dependents,
@@ -112,12 +112,12 @@ namespace KnockoutCS.Forms
 		virtual public void UpdateNow()
 		{
 			bool updated = false;
-			for (int i = 0; i < _dependents.Length; i++)
+			for (int i = 0; i < _computeds.Length; i++)
 			{
-				if (!_dependents[i].IsUpToDate)
+				if (!_computeds[i].IsUpToDate)
 				{
 					updated = true;
-					_dependents[i].OnGet();
+					_computeds[i].OnGet();
 				}
 			}
 			if (OnUpdate != null)
@@ -156,8 +156,8 @@ namespace KnockoutCS.Forms
 		public virtual void Dispose()
 		{
 			Stop();
-			for (int i = 0; i < _dependents.Length; i++)
-				_dependents[i].Dispose();
+			for (int i = 0; i < _computeds.Length; i++)
+				_computeds[i].Dispose();
 		}
 	}
 }

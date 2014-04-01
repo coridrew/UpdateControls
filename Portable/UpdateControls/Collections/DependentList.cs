@@ -19,13 +19,13 @@ namespace KnockoutCS.Collections
         private readonly Func<IEnumerable<T>> _computeCollection;
 
         private List<T> _list = new List<T>();
-        private Computed _dependentSentry;
+        private Computed _computedSentry;
 
         public ComputedList(Func<IEnumerable<T>> computeCollection)
         {
             _computeCollection = computeCollection;
 
-            _dependentSentry = new NamedComputed(MemoizedTypeName<ComputedList<T>>.GenericName(),
+            _computedSentry = new NamedComputed(MemoizedTypeName<ComputedList<T>>.GenericName(),
 			delegate {
                 using (var bin = new RecycleBin<T>(_list))
                 {
@@ -39,7 +39,7 @@ namespace KnockoutCS.Collections
 
         public int IndexOf(T item)
         {
-            _dependentSentry.OnGet();
+            _computedSentry.OnGet();
             return _list.IndexOf(item);
         }
 
@@ -47,43 +47,43 @@ namespace KnockoutCS.Collections
         {
             get
             {
-                _dependentSentry.OnGet();
+                _computedSentry.OnGet();
                 return _list[index];
             }
         }
 
         public bool Contains(T item)
         {
-            _dependentSentry.OnGet();
+            _computedSentry.OnGet();
             return _list.Contains(item);
         }
 
         public void CopyTo(T[] array, int arrayIndex)
         {
-            _dependentSentry.OnGet();
+            _computedSentry.OnGet();
             _list.CopyTo(array, arrayIndex);
         }
 
         public int Count
         {
-            get { _dependentSentry.OnGet(); return _list.Count; }
+            get { _computedSentry.OnGet(); return _list.Count; }
         }
 
         public IEnumerator<T> GetEnumerator()
         {
-            _dependentSentry.OnGet();
+            _computedSentry.OnGet();
             return _list.GetEnumerator();
         }
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
-            _dependentSentry.OnGet();
+            _computedSentry.OnGet();
             return ((System.Collections.IEnumerable)_list).GetEnumerator();
         }
 
         public Computed ComputedSentry
         {
-            get { return _dependentSentry; }
+            get { return _computedSentry; }
         }
     }
 }
