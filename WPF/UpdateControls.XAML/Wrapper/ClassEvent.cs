@@ -13,7 +13,7 @@ using System;
 using System.ComponentModel;
 using System.Reflection;
 
-namespace UpdateControls.XAML.Wrapper
+namespace KnockoutCS.XAML.Wrapper
 {
     public class ClassEvent : EventDescriptor
     {

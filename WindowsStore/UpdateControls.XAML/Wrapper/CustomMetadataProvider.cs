@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Markup;
 
-namespace UpdateControls.XAML.Wrapper
+namespace KnockoutCS.XAML.Wrapper
 {
     public class CustomMetadataProvider : IXamlMetadataProvider
     {

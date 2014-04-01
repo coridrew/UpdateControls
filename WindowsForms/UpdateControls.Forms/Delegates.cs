@@ -14,7 +14,7 @@ using System.Collections;
 using System.Windows.Forms;
 using System.Collections.Generic;
 
-namespace UpdateControls.Forms
+namespace KnockoutCS.Forms
 {
 	/// <summary>
 	/// A delegate type used by dependent controls.

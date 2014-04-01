@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using UpdateControls.XAML.Wrapper;
+using KnockoutCS.XAML.Wrapper;
 using System.Diagnostics;
 
-namespace UpdateControls.XAML
+namespace KnockoutCS.XAML
 {
     public class ViewModelLocatorBase : INotifyPropertyChanged
     {

@@ -12,7 +12,7 @@
 using System;
 using System.Collections;
 
-namespace UpdateControls.XAML.Wrapper
+namespace KnockoutCS.XAML.Wrapper
 {
 	internal class ObjectPropertyCollectionNative : ObjectPropertyCollection
 	{

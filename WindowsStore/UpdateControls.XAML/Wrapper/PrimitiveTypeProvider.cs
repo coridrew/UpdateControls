@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Windows.UI.Xaml.Markup;
 
-namespace UpdateControls.XAML.Wrapper
+namespace KnockoutCS.XAML.Wrapper
 {
     public class PrimitiveTypeProvider : IXamlType
     {

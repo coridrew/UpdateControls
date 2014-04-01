@@ -1,6 +1,6 @@
 using System;
 
-namespace UpdateControls.UnitTest.ContactListData
+namespace KnockoutCS.UnitTest.ContactListData
 {
     public class ContactViewModel
     {

@@ -13,7 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace UpdateControls.Forms.Util
+namespace KnockoutCS.Forms.Util
 {
     /// <summary>
     /// Protects update methods against reentrancy.

@@ -1,7 +1,7 @@
 ﻿using System;
-using UpdateControls;
+using KnockoutCS;
 
-namespace UpdateControls.Test
+namespace KnockoutCS.Test
 {
     public class Person
 	{

@@ -11,9 +11,9 @@
 
 using System;
 using System.Collections.Generic;
-using UpdateControls.Collections;
+using KnockoutCS.Collections;
 
-namespace UpdateControls
+namespace KnockoutCS
 {
 	/// <summary>
 	/// A collection that maps new objects to old, equivalent versions of the
@@ -23,7 +23,7 @@ namespace UpdateControls
 	/// pattern, T is typically a type of view-model that wraps around a model
 	/// type.</typeparam>
 	/// <remarks>
-	/// This class helps implement the MVVM pattern with UpdateControls. In this
+	/// This class helps implement the MVVM pattern with KnockoutCS. In this
 	/// pattern, you typically write a "Model" class which contains all the state
 	/// information for your models, and a "ViewModel" class which is a thin 
 	/// wrapper around the Model. The ViewModel should be stateless, except for

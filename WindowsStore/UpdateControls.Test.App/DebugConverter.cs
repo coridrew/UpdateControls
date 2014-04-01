@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Data;
 
-namespace UpdateControls.Test.App
+namespace KnockoutCS.Test.App
 {
     public class DebugConverter : IValueConverter
     {

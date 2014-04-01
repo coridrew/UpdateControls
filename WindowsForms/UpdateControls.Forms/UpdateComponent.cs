@@ -16,7 +16,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace UpdateControls.Forms
+namespace KnockoutCS.Forms
 {
 	/// <summary>
 	/// A component that automatically updates any property.

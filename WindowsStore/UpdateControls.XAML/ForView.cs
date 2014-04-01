@@ -1,9 +1,9 @@
 ﻿using System;
-using UpdateControls.XAML.Wrapper;
+using KnockoutCS.XAML.Wrapper;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 
-namespace UpdateControls.XAML
+namespace KnockoutCS.XAML
 {
     public static class ForView
     {

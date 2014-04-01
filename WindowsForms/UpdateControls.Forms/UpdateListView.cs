@@ -18,7 +18,7 @@ using System.Windows.Forms;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace UpdateControls.Forms
+namespace KnockoutCS.Forms
 {
 	/// <summary>A list view that automatically updates its data.</summary>
     /// <remarks>
@@ -1132,9 +1132,9 @@ namespace UpdateControls.Forms
 			get
 			{
 				_depItems.OnGet();
-				return new UpdateControls.Forms.Util.ReadOnlyListDecorator(
+				return new KnockoutCS.Forms.Util.ReadOnlyListDecorator(
 					base.Items,
-					new UpdateControls.Forms.Util.MapDelegate(Map));
+					new KnockoutCS.Forms.Util.MapDelegate(Map));
 			}
 		}
 
@@ -1194,9 +1194,9 @@ namespace UpdateControls.Forms
 			get
 			{
 				_depItemSelected.OnGet();
-				return new UpdateControls.Forms.Util.ReadOnlyListDecorator(
+				return new KnockoutCS.Forms.Util.ReadOnlyListDecorator(
 					base.SelectedItems,
-					new UpdateControls.Forms.Util.MapDelegate(Map));
+					new KnockoutCS.Forms.Util.MapDelegate(Map));
 			}
 		}
 
@@ -1222,9 +1222,9 @@ namespace UpdateControls.Forms
 			get
 			{
 				_depItemChecked.OnGet();
-				return new UpdateControls.Forms.Util.ReadOnlyListDecorator(
+				return new KnockoutCS.Forms.Util.ReadOnlyListDecorator(
 					base.CheckedItems,
-					new UpdateControls.Forms.Util.MapDelegate(Map));
+					new KnockoutCS.Forms.Util.MapDelegate(Map));
 			}
 		}
 

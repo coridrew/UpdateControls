@@ -3,9 +3,9 @@ using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using UpdateControls.Fields;
+using KnockoutCS.Fields;
 
-namespace UpdateControls.UnitTest
+namespace KnockoutCS.UnitTest
 {
     [TestClass]
     public class MemoryLeakTest

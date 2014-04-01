@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
 using System.Threading;
-using UpdateControls.Fields;
+using KnockoutCS.Fields;
 
-namespace UpdateControls.UnitTest.MultithreadedData
+namespace KnockoutCS.UnitTest.MultithreadedData
 {
     public class TargetThread
     {

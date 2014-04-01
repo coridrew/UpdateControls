@@ -10,9 +10,9 @@
  **********************************************************************/
 
 using System;
-using UpdateControls;
+using KnockoutCS;
 
-namespace UpdateControls.XAML.Wrapper
+namespace KnockoutCS.XAML.Wrapper
 {
     internal abstract class ObjectPropertyAtom : ObjectProperty, IUpdatable
     {

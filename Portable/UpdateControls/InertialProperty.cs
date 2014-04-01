@@ -11,7 +11,7 @@
 
 using System;
 
-namespace UpdateControls
+namespace KnockoutCS
 {
     public class InertialProperty : IDisposable
     {

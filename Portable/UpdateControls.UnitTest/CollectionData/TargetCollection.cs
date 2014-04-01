@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace UpdateControls.UnitTest.CollectionData
+namespace KnockoutCS.UnitTest.CollectionData
 {
     public class TargetCollection
     {

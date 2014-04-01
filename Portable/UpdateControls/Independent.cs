@@ -11,9 +11,9 @@
 
 using System;
 using System.Diagnostics;
-using UpdateControls.Fields;
+using KnockoutCS.Fields;
 
-namespace UpdateControls
+namespace KnockoutCS
 {
 	/// <summary>
 	/// A sentry that controls an independent field.

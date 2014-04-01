@@ -16,9 +16,9 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
-using UpdateControls.Forms.Util;
+using KnockoutCS.Forms.Util;
 
-namespace UpdateControls.Forms
+namespace KnockoutCS.Forms
 {
 	/// <summary>A grid control that automatically updates its data.</summary>
     /// <remarks>
@@ -32,9 +32,9 @@ namespace UpdateControls.Forms
     /// An update grid control has very few events. The first that you want to implement is <see cref="GetColumns"/>.
     /// You need to return a <see cref="ColumnDefinitions"/> object. Add columns using dot-chaining:
     /// <code language="C#">
-    /// private UpdateControls.Forms.ColumnDefinitions itemsGrid_GetColumns()
+    /// private KnockoutCS.Forms.ColumnDefinitions itemsGrid_GetColumns()
     /// {
-    ///     return new UpdateControls.Forms.ColumnDefinitions()
+    ///     return new KnockoutCS.Forms.ColumnDefinitions()
     ///         .Add("Name", typeof(String))
     ///         .Add("Price", typeof(decimal))
     ///         .Add("Quantity", typeof(int))
@@ -42,8 +42,8 @@ namespace UpdateControls.Forms
     /// }
     /// </code>
     /// <code language="VB">
-    /// Private Function itemsGrid_GetColumns() As UpdateControls.Forms.ColumnDefinitions
-    /// 	Return New UpdateControls.Forms.ColumnDefinitions() _
+    /// Private Function itemsGrid_GetColumns() As KnockoutCS.Forms.ColumnDefinitions
+    /// 	Return New KnockoutCS.Forms.ColumnDefinitions() _
     /// 		.Add("Name", GetType(String)) _
     /// 		.Add("Price", GetType(Decimal)) _
     /// 		.Add("Quantity", GetType(Integer)) _
@@ -267,9 +267,9 @@ namespace UpdateControls.Forms
         /// </remarks>
         /// <example>Dot chaining UpdateGrid.ColumnDefinitions
         /// <code language="C#">
-        /// private UpdateControls.Forms.ColumnDefinitions itemsGrid_GetColumns()
+        /// private KnockoutCS.Forms.ColumnDefinitions itemsGrid_GetColumns()
         /// {
-        ///     return new UpdateControls.Forms.ColumnDefinitions()
+        ///     return new KnockoutCS.Forms.ColumnDefinitions()
         ///         .Add("Name", typeof(String))
         ///         .Add("Price", typeof(decimal))
         ///         .Add("Quantity", typeof(int))
@@ -277,8 +277,8 @@ namespace UpdateControls.Forms
         /// }
         /// </code>
         /// <code language="VB">
-        /// Private Function itemsGrid_GetColumns() As UpdateControls.Forms.ColumnDefinitions
-        /// 	Return New UpdateControls.Forms.ColumnDefinitions() _
+        /// Private Function itemsGrid_GetColumns() As KnockoutCS.Forms.ColumnDefinitions
+        /// 	Return New KnockoutCS.Forms.ColumnDefinitions() _
         /// 		.Add("Name", GetType(String)) _
         /// 		.Add("Price", GetType(Decimal)) _
         /// 		.Add("Quantity", GetType(Integer)) _

@@ -13,7 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace UpdateControls.Forms
+namespace KnockoutCS.Forms
 {
     public interface IErrorControl
     {

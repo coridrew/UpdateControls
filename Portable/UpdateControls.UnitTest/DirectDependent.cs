@@ -1,6 +1,6 @@
-using UpdateControls.Fields;
+using KnockoutCS.Fields;
 
-namespace UpdateControls.UnitTest
+namespace KnockoutCS.UnitTest
 {
 	public class DirectDependent
 	{

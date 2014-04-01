@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace UpdateControls.Collections
+namespace KnockoutCS.Collections
 {
-	using UpdateControls.Collections.Impl;
+	using KnockoutCS.Collections.Impl;
 
 	/// <summary>A dictionary tied to a dependent sentry.</summary>
 	/// <remarks>

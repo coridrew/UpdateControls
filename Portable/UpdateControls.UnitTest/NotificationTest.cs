@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace UpdateControls.UnitTest
+namespace KnockoutCS.UnitTest
 {
     public class NotifyingIndependent : Independent
     {

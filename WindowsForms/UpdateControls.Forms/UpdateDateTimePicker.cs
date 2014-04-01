@@ -16,7 +16,7 @@ using System.Diagnostics;
 using System.Windows.Forms;
 using System.Drawing;
 
-namespace UpdateControls.Forms
+namespace KnockoutCS.Forms
 {
 	/// <summary>
 	/// A date time picker that automatically updates its text.

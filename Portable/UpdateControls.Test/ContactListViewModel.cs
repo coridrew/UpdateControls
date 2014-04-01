@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
-using UpdateControls.Fields;
-using UpdateControls.XAML;
+using KnockoutCS.Fields;
+using KnockoutCS.XAML;
 
-namespace UpdateControls.Test
+namespace KnockoutCS.Test
 {
     public class ContactListViewModel
 	{

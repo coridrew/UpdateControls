@@ -14,7 +14,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.ComponentModel;
 
-namespace UpdateControls.XAML.Wrapper
+namespace KnockoutCS.XAML.Wrapper
 {
     public class ClassInstance : CustomTypeDescriptor
     {

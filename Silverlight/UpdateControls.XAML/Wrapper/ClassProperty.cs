@@ -19,7 +19,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Markup;
 
-namespace UpdateControls.XAML.Wrapper
+namespace KnockoutCS.XAML.Wrapper
 {
     public class ClassProperty : DelegatedPropertyInfo
     {

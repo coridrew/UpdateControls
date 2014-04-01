@@ -13,9 +13,9 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using UpdateControls.Fields;
+using KnockoutCS.Fields;
 
-namespace UpdateControls
+namespace KnockoutCS
 {
 	/// <summary>
 	/// A sentry that controls a dependent field.

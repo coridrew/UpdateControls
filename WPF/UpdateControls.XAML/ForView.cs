@@ -9,11 +9,11 @@
  * 
  **********************************************************************/
 
-using UpdateControls.XAML.Wrapper;
+using KnockoutCS.XAML.Wrapper;
 using System.Windows.Threading;
 using System;
 
-namespace UpdateControls.XAML
+namespace KnockoutCS.XAML
 {
     public static class ForView
     {

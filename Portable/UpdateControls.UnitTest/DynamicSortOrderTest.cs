@@ -1,8 +1,8 @@
 ﻿using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using UpdateControls.UnitTest.ContactListData;
+using KnockoutCS.UnitTest.ContactListData;
 
-namespace UpdateControls.UnitTest
+namespace KnockoutCS.UnitTest
 {
     [TestClass]
     public class DynamicSortOrderTest

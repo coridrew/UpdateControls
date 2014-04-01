@@ -14,7 +14,7 @@
 using System;
 using System.ComponentModel;
 
-namespace UpdateControls.Fields
+namespace KnockoutCS.Fields
 {
 	public class Dependent<T> : NamedDependent
 	{

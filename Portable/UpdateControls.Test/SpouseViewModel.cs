@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace UpdateControls.Test
+namespace KnockoutCS.Test
 {
     public class SpouseViewModel : ISpouseViewModel
     {

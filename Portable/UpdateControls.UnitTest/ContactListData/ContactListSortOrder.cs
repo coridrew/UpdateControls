@@ -1,5 +1,5 @@
 ﻿
-namespace UpdateControls.UnitTest.ContactListData
+namespace KnockoutCS.UnitTest.ContactListData
 {
     public enum ContactListSortOrder
     {

@@ -17,7 +17,7 @@ using System.Windows.Threading;
 using System.Reflection;
 using System.Diagnostics;
 
-namespace UpdateControls.XAML.Wrapper
+namespace KnockoutCS.XAML.Wrapper
 {
     [DebuggerDisplay("ForView.Wrap({_wrappedObject})")]
     public class ObjectInstance<TWrappedObjectType> : ICustomTypeProvider, IObjectInstance, INotifyPropertyChanged, IDataErrorInfo, IEditableObject

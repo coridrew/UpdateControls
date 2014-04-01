@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Reflection;
 
-namespace UpdateControls.XAML.Wrapper
+namespace KnockoutCS.XAML.Wrapper
 {
     public abstract class DelegatedPropertyInfo : PropertyInfo
     {

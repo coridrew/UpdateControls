@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using UpdateControls.XAML;
-using UpdateControls.Test;
+using KnockoutCS.XAML;
+using KnockoutCS.Test;
 
-namespace UpdateControls.Test.App
+namespace KnockoutCS.Test.App
 {
     public class ViewModelLocator : ViewModelLocatorBase
     {

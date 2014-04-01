@@ -16,7 +16,7 @@ using System.Diagnostics;
 using System.Windows.Forms;
 using System.Drawing;
 
-namespace UpdateControls.Forms
+namespace KnockoutCS.Forms
 {
 	/// <summary>
 	/// A map of objects to forms that automatically closes when objects are deleted.

@@ -16,7 +16,7 @@ using System.ComponentModel;
 using System.Windows.Threading;
 using System.Diagnostics;
 
-namespace UpdateControls.XAML.Wrapper
+namespace KnockoutCS.XAML.Wrapper
 {
     [DebuggerDisplay("ForView.Wrap({_wrappedObject})")]
     [TypeDescriptionProvider(typeof(ClassInstanceProvider))]

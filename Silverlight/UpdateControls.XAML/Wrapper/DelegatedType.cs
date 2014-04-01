@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Reflection;
 using System.Collections.Generic;
 
-namespace UpdateControls.XAML.Wrapper
+namespace KnockoutCS.XAML.Wrapper
 {
     public abstract class DelegatedType : Type
     {

@@ -1,6 +1,6 @@
-using UpdateControls;
+using KnockoutCS;
 
-namespace UpdateControls.UnitTest.ContactListData
+namespace KnockoutCS.UnitTest.ContactListData
 {
     public class Contact
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace UpdateControls.UnitTest
+namespace KnockoutCS.UnitTest
 {
 	[TestClass]
 	public class DirectConcurrencyTest

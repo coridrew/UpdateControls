@@ -14,7 +14,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 
-namespace UpdateControls
+namespace KnockoutCS
 {
     /// <summary>
     /// Base class for <see cref="Dynamic"/> and <see cref="Dependent"/> sentries.

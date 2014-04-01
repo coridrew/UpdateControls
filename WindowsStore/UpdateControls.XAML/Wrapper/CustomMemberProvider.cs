@@ -11,7 +11,7 @@ using System.ComponentModel;
 using System.Collections.Specialized;
 using System.Collections;
 
-namespace UpdateControls.XAML.Wrapper
+namespace KnockoutCS.XAML.Wrapper
 {
     class CustomMemberProvider : IXamlMember
     {

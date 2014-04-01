@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using UpdateControls.Collections;
+using KnockoutCS.Collections;
 
-namespace UpdateControls.UnitTest.ContactListData
+namespace KnockoutCS.UnitTest.ContactListData
 {
     public class ContactList
     {

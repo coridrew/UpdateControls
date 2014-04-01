@@ -11,7 +11,7 @@
 
 using System;
 
-namespace UpdateControls.XAML.Wrapper
+namespace KnockoutCS.XAML.Wrapper
 {
 	class ObjectPropertyAtomNative : ObjectPropertyAtom
     {

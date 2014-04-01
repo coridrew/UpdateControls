@@ -16,7 +16,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace UpdateControls.Forms
+namespace KnockoutCS.Forms
 {
 	/// <summary>
 	/// A list box that automatically updates its properties.
@@ -409,9 +409,9 @@ namespace UpdateControls.Forms
 			get
 			{
 				_depItems.OnGet();
-				return new UpdateControls.Forms.Util.ReadOnlyListDecorator(
+				return new KnockoutCS.Forms.Util.ReadOnlyListDecorator(
 					base.Items,
-					new UpdateControls.Forms.Util.MapDelegate(Map));
+					new KnockoutCS.Forms.Util.MapDelegate(Map));
 			}
         }
 
@@ -473,9 +473,9 @@ namespace UpdateControls.Forms
 			get
 			{
 				_depSelectedItem.OnGet();
-				return new UpdateControls.Forms.Util.ReadOnlyListDecorator(
+				return new KnockoutCS.Forms.Util.ReadOnlyListDecorator(
 					base.SelectedItems,
-					new UpdateControls.Forms.Util.MapDelegate(Map));
+					new KnockoutCS.Forms.Util.MapDelegate(Map));
 			}
         }
 

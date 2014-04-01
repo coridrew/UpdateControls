@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace UpdateControls.UnitTest.ContactListData
+namespace KnockoutCS.UnitTest.ContactListData
 {
     public class ContactListViewModel
     {

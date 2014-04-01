@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace UpdateControls.UnitTest.CollectionData
+namespace KnockoutCS.UnitTest.CollectionData
 {
     public class SourceCollection
     {

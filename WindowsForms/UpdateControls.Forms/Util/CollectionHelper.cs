@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace UpdateControls.Forms.Util
+namespace KnockoutCS.Forms.Util
 {
     public static class CollectionHelper
     {

@@ -12,7 +12,7 @@
 using System;
 using System.Collections.ObjectModel;
 
-namespace UpdateControls.XAML.Wrapper
+namespace KnockoutCS.XAML.Wrapper
 {
     class CollectionItem : IDisposable
     {

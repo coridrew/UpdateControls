@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using UpdateControls;
+using KnockoutCS;
 
-namespace UpdateControls.Test
+namespace KnockoutCS.Test
 {
 	public class ContactList
 	{

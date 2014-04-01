@@ -17,7 +17,7 @@ using System.Data;
 using System.Windows.Forms;
 using System.Linq;
 
-namespace UpdateControls.Forms
+namespace KnockoutCS.Forms
 {
 	/// <summary>
 	/// A combo box that automatically updates its properties.
@@ -481,9 +481,9 @@ namespace UpdateControls.Forms
 			get
 			{
 				_depItems.OnGet();
-				return new UpdateControls.Forms.Util.ReadOnlyListDecorator(
+				return new KnockoutCS.Forms.Util.ReadOnlyListDecorator(
 					base.Items,
-					new UpdateControls.Forms.Util.MapDelegate(Map));
+					new KnockoutCS.Forms.Util.MapDelegate(Map));
 			}
         }
 

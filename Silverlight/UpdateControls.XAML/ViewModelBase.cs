@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 
-namespace UpdateControls.XAML
+namespace KnockoutCS.XAML
 {
     internal class CollectionItem<T> : IDisposable
     {

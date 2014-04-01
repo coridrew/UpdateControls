@@ -14,7 +14,7 @@ using System.Collections.Generic;
 using System.Collections;
 using System.Linq;
 
-namespace UpdateControls.XAML.Wrapper
+namespace KnockoutCS.XAML.Wrapper
 {
     internal class ObjectPropertyCollectionObject : ObjectPropertyCollection
 	{

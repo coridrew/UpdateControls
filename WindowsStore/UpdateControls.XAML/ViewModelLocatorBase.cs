@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace UpdateControls.XAML
+namespace KnockoutCS.XAML
 {
     public class ViewModelLocatorBase : INotifyPropertyChanged
     {

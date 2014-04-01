@@ -18,7 +18,7 @@ using System.Windows.Forms;
 using System.Drawing;
 using System.Reflection;
 
-namespace UpdateControls.Forms
+namespace KnockoutCS.Forms
 {
     /// <summary>
     /// An error provider that automatically updates its properties.

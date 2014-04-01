@@ -22,7 +22,7 @@ using System.Windows.Media;
 using System.Windows.Media.Effects;
 using System.Windows.Markup;
 
-namespace UpdateControls.XAML.Wrapper
+namespace KnockoutCS.XAML.Wrapper
 {
     public class ClassProperty : PropertyDescriptor
     {

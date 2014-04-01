@@ -12,7 +12,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace UpdateControls.Collections
+namespace KnockoutCS.Collections
 {
     public class DependentList<T> : IEnumerable<T>
     {

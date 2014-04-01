@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace UpdateControls.Collections.Impl
+namespace KnockoutCS.Collections.Impl
 {
 	/// <summary>Helper structure used by DependentDictionary and 
 	/// IndependentDictionary to represent the "Keys" and "Values" members.</summary>

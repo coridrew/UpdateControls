@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace UpdateControls.Test
+namespace KnockoutCS.Test
 {
     public class PersonViewModel : PersonViewModelBase
 	{

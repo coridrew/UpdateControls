@@ -5,7 +5,7 @@ using System.Text;
 using System.Diagnostics;
 using System.Reflection;
 
-namespace UpdateControls
+namespace KnockoutCS
 {
 	public class NamedDependent : Dependent
 	{
@@ -64,7 +64,7 @@ namespace UpdateControls
 	}
 
 	[Obsolete]
-	public class NamedIndependent<T> : UpdateControls.Fields.Independent<T>
+	public class NamedIndependent<T> : KnockoutCS.Fields.Independent<T>
 	{
 		public NamedIndependent() : base() { }
 		public NamedIndependent(T value) : base(value) { }
@@ -74,7 +74,7 @@ namespace UpdateControls
 	}
 
 	[Obsolete]
-	public class NamedDependent<T> : UpdateControls.Fields.Dependent<T>
+	public class NamedDependent<T> : KnockoutCS.Fields.Dependent<T>
 	{
 		public NamedDependent(Func<T> compute) : base(compute) { }
 		public NamedDependent(string name, Func<T> compute) : base(name, compute) { }

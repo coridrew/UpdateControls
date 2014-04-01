@@ -15,7 +15,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace UpdateControls.Forms
+namespace KnockoutCS.Forms
 {
 	/// <summary>
 	/// A checked list box that automatically updates its properties.
@@ -387,9 +387,9 @@ namespace UpdateControls.Forms
 			get
 			{
 				_depItems.OnGet();
-				return new UpdateControls.Forms.Util.ReadOnlyListDecorator(
+				return new KnockoutCS.Forms.Util.ReadOnlyListDecorator(
 					base.Items,
-					new UpdateControls.Forms.Util.MapDelegate(Map));
+					new KnockoutCS.Forms.Util.MapDelegate(Map));
 			}
 		}
 
@@ -402,9 +402,9 @@ namespace UpdateControls.Forms
 			get
 			{
 				_depItemCheckState.OnGet();
-				return new UpdateControls.Forms.Util.ReadOnlyListDecorator(
+				return new KnockoutCS.Forms.Util.ReadOnlyListDecorator(
 					base.CheckedItems,
-					new UpdateControls.Forms.Util.MapDelegate(Map));
+					new KnockoutCS.Forms.Util.MapDelegate(Map));
 			}
 		}
 

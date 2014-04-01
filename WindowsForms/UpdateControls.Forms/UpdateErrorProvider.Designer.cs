@@ -1,6 +1,6 @@
 using System.Windows.Forms;
 using System;
-namespace UpdateControls.Forms
+namespace KnockoutCS.Forms
 {
     partial class UpdateErrorProvider
     {

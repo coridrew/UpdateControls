@@ -10,9 +10,9 @@
  **********************************************************************/
 
 using System.Collections.Generic;
-using UpdateControls.Collections.Impl;
+using KnockoutCS.Collections.Impl;
 
-namespace UpdateControls.Collections
+namespace KnockoutCS.Collections
 {
 	public class IndependentDictionary<TKey, TValue> : IDictionary<TKey, TValue>
 	{

@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
-using UpdateControls.XAML;
+using KnockoutCS.XAML;
 using System.ComponentModel;
 
-namespace UpdateControls.Test
+namespace KnockoutCS.Test
 {
     public class DataGridPersonViewModel : IEditableObject
     {

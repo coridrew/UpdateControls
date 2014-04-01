@@ -6,7 +6,7 @@ using System.Windows.Forms;
 using System.ComponentModel;
 using System.Diagnostics;
 
-namespace UpdateControls.Forms
+namespace KnockoutCS.Forms
 {
 	/// <summary>
 	/// A check box that automatically updates its properties.

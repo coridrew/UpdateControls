@@ -18,7 +18,7 @@ using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace UpdateControls.Forms
+namespace KnockoutCS.Forms
 {
 	/// <summary>
 	/// A tree view that automatically updates its properties.

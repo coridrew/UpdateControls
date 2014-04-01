@@ -14,7 +14,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace UpdateControls.XAML.Wrapper
+namespace KnockoutCS.XAML.Wrapper
 {
     public class ClassInstance : DelegatedType
     {

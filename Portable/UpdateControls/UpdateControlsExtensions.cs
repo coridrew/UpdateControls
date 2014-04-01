@@ -12,7 +12,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace UpdateControls
+namespace KnockoutCS
 {
 	public static class UpdateControlsExtensions
 	{
