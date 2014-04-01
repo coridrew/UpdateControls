@@ -108,9 +108,9 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
-    <ProjectReference Include="..\..\Portable\UpdateControls.Test\UpdateControls.Test.csproj">
+    <ProjectReference Include="..\..\Portable\UpdateControls.Test\KnockoutCS.Test.csproj">
       <Project>{b107c9d8-0f56-4923-bddd-92653ec82e5a}</Project>
-      <Name>UpdateControls.Test</Name>
+      <Name>KnockoutCS.Test</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Portable\UpdateControls\KnockoutCS.csproj">
       <Project>{0f197cdb-cf38-438b-90ad-1b4f0976061e}</Project>

@@ -17,7 +17,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WindowsForms", "WindowsForm
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnockoutCS", "Portable\UpdateControls\KnockoutCS.csproj", "{0F197CDB-CF38-438B-90AD-1B4F0976061E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpdateControls.Test", "Portable\UpdateControls.Test\UpdateControls.Test.csproj", "{B107C9D8-0F56-4923-BDDD-92653EC82E5A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnockoutCS.Test", "Portable\UpdateControls.Test\KnockoutCS.Test.csproj", "{B107C9D8-0F56-4923-BDDD-92653EC82E5A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpdateControls.XAML", "WindowsStore\UpdateControls.XAML\UpdateControls.XAML.csproj", "{6D17230D-75E8-41D5-B26C-6AD517E769FB}"
 EndProject
