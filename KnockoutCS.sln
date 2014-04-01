@@ -19,9 +19,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnockoutCS", "Portable\Upda
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnockoutCS.Test", "Portable\UpdateControls.Test\KnockoutCS.Test.csproj", "{B107C9D8-0F56-4923-BDDD-92653EC82E5A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpdateControls.XAML", "WindowsStore\UpdateControls.XAML\UpdateControls.XAML.csproj", "{6D17230D-75E8-41D5-B26C-6AD517E769FB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnockoutCS.XAML", "WindowsStore\UpdateControls.XAML\KnockoutCS.XAML.csproj", "{6D17230D-75E8-41D5-B26C-6AD517E769FB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpdateControls.Test.App", "WindowsStore\UpdateControls.Test.App\UpdateControls.Test.App.csproj", "{A1077BA7-8697-4816-8BE9-F26DF8E4198E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnockoutCS.Test.App", "WindowsStore\UpdateControls.Test.App\KnockoutCS.Test.App.csproj", "{A1077BA7-8697-4816-8BE9-F26DF8E4198E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnockoutCS.XAML", "WPF\UpdateControls.XAML\KnockoutCS.XAML.csproj", "{FEFABF21-E62D-4E4A-A51A-30803EDFA37F}"
 EndProject
