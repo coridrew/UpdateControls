@@ -11,10 +11,10 @@ namespace KnockoutCS.UnitTest
     public class MemoryLeakTest
     {
 #if SILVERLIGHT
-        // In Silverlight, Dependent is 12 bytes bigger. Why?
-        private const int DependentPlatformOffset = 12;
+        // In Silverlight, Computed is 12 bytes bigger. Why?
+        private const int ComputedPlatformOffset = 12;
 #else
-        private const int DependentPlatformOffset = 0;
+        private const int ComputedPlatformOffset = 0;
 #endif
 #if SILVERLIGHT
         // In Silverlight, Observable is 8 bytes smaller. Why?
@@ -35,7 +35,7 @@ namespace KnockoutCS.UnitTest
 
             // Started at 92.
             // Making Precedent a base class: 80.
-            // Removing Gain/LoseDependent events: 72.
+            // Removing Gain/LoseComputed events: 72.
             // Custom linked list implementation for dependents: 48.
             // Other optimizations: 40.
             // Removed WeakReferenceToSelf: 20.
@@ -47,25 +47,25 @@ namespace KnockoutCS.UnitTest
 
         [TestMethod]
         //[Ignore]
-        public void DependentIsAsSmallAsPossible()
+        public void ComputedIsAsSmallAsPossible()
         {
             GC.Collect();
             long start = GC.GetTotalMemory(true);
-            Computed<int> newDependent = new Computed<int>(() => 42);
+            Computed<int> newComputed = new Computed<int>(() => 42);
             long end = GC.GetTotalMemory(true);
 
             // Started at 260.
             // Making Precedent a base class: 248.
-            // Removing Gain/LoseDependent events: 232.
+            // Removing Gain/LoseComputed events: 232.
             // Making IsUpToDate no longer a precident: 192.
             // Custom linked list implementation for dependents: 152.
             // Custom linked list implementation for precedents: 112.
             // Other optimizations: 104.
 			// Added WeakReferenceToSelf: 108.
             // Removed WeakReferenceToSelf: 104.
-            Assert.AreEqual(104 + DependentPlatformOffset, end - start);
+            Assert.AreEqual(104 + ComputedPlatformOffset, end - start);
 
-            int value = newDependent;
+            int value = newComputed;
             Assert.AreEqual(42, value);
         }
 
@@ -76,13 +76,13 @@ namespace KnockoutCS.UnitTest
             GC.Collect();
             long start = GC.GetTotalMemory(true);
             Observable<int> newObservable = new Observable<int>();
-            Computed<int> newDependent = new Computed<int>(() => newObservable);
+            Computed<int> newComputed = new Computed<int>(() => newObservable);
             newObservable.Value = 42;
             long end = GC.GetTotalMemory(true);
 
             // Started at 336.
             // Making Precedent a base class: 312.
-            // Removing Gain/LoseDependent events: 288.
+            // Removing Gain/LoseComputed events: 288.
             // Making IsUpToDate no longer a precident: 248.
             // Custom linked list implementation for dependents: 200.
             // Custom linked list implementation for precedents: 160.
@@ -91,7 +91,7 @@ namespace KnockoutCS.UnitTest
             // Removed WeakReferenceToSelf: 124.
 			Assert.AreEqual(124 + ObservablePlatformOffset, end - start);
 
-            int value = newDependent;
+            int value = newComputed;
             Assert.AreEqual(42, value);
         }
 
@@ -102,14 +102,14 @@ namespace KnockoutCS.UnitTest
             GC.Collect();
             long start = GC.GetTotalMemory(true);
             Observable<int> newObservable = new Observable<int>();
-            Computed<int> newDependent = new Computed<int>(() => newObservable);
+            Computed<int> newComputed = new Computed<int>(() => newObservable);
             newObservable.Value = 42;
-            int value = newDependent;
+            int value = newComputed;
             long end = GC.GetTotalMemory(true);
 
             // Started at 460.
             // Making Precedent a base class: 436.
-            // Removing Gain/LoseDependent events: 412.
+            // Removing Gain/LoseComputed events: 412.
             // Making IsUpToDate no longer a precident: 372.
             // Custom linked list implementation for dependents: 308.
             // Custom linked list implementation for precedents: 192.
@@ -119,28 +119,28 @@ namespace KnockoutCS.UnitTest
             // Removed WeakReferenceToSelf: 168 - 324.
 			Assert.AreEqual(324 + ObservablePlatformOffset, end - start);
 
-            value = newDependent;
+            value = newComputed;
             Assert.AreEqual(42, value);
         }
 
         [TestMethod]
-        public void DirectDependentObjectCanBeGarbageCollected()
+        public void DirectComputedObjectCanBeGarbageCollected()
         {
             GC.Collect();
             SourceData observable = new SourceData();
-            DirectDependent dependent = new DirectDependent(observable);
+            DirectComputed dependent = new DirectComputed(observable);
             observable.SourceProperty = 42;
-            Assert.AreEqual(42, dependent.DependentProperty);
-            WeakReference weakDependent = new WeakReference(dependent);
+            Assert.AreEqual(42, dependent.ComputedProperty);
+            WeakReference weakComputed = new WeakReference(dependent);
 
             GC.Collect();
-            Assert.IsTrue(weakDependent.IsAlive, "Since we hold a strong reference to the dependent, the object should still be alive.");
+            Assert.IsTrue(weakComputed.IsAlive, "Since we hold a strong reference to the dependent, the object should still be alive.");
             // This assertion here to make sure the dependent is not optimized away.
-            Assert.AreEqual(42, dependent.DependentProperty);
+            Assert.AreEqual(42, dependent.ComputedProperty);
 
             dependent = null;
             GC.Collect();
-            Assert.IsFalse(weakDependent.IsAlive, "Since we released the strong reference to the dependent, the object should not be alive.");
+            Assert.IsFalse(weakComputed.IsAlive, "Since we released the strong reference to the dependent, the object should not be alive.");
 
             // Make sure we can still modify the observable.
             observable.SourceProperty = 32;
@@ -148,29 +148,29 @@ namespace KnockoutCS.UnitTest
         }
 
         [TestMethod]
-        public void IndirectDependentObjectCanBeGarbageCollected()
+        public void IndirectComputedObjectCanBeGarbageCollected()
         {
             GC.Collect();
             SourceData observable = new SourceData();
-            DirectDependent intermediate = new DirectDependent(observable);
-            IndirectDependent indirectDependent = new IndirectDependent(intermediate);
+            DirectComputed intermediate = new DirectComputed(observable);
+            IndirectComputed indirectComputed = new IndirectComputed(intermediate);
             observable.SourceProperty = 42;
-            Assert.AreEqual(42, indirectDependent.DependentProperty);
-            WeakReference weakIndirectDependent = new WeakReference(indirectDependent);
+            Assert.AreEqual(42, indirectComputed.ComputedProperty);
+            WeakReference weakIndirectComputed = new WeakReference(indirectComputed);
 
             GC.Collect();
-            Assert.IsTrue(weakIndirectDependent.IsAlive, "Since we hold a strong reference to the dependent, the object should still be alive.");
+            Assert.IsTrue(weakIndirectComputed.IsAlive, "Since we hold a strong reference to the dependent, the object should still be alive.");
             // This assertion here to make sure the dependent is not optimized away.
-            Assert.AreEqual(42, indirectDependent.DependentProperty);
+            Assert.AreEqual(42, indirectComputed.ComputedProperty);
 
-            indirectDependent = null;
+            indirectComputed = null;
             GC.Collect();
-            Assert.IsFalse(weakIndirectDependent.IsAlive, "Since we released the strong reference to the dependent, the object should not be alive.");
+            Assert.IsFalse(weakIndirectComputed.IsAlive, "Since we released the strong reference to the dependent, the object should not be alive.");
 
             // Make sure we can still modify the observable, and that the intermediate still depends upon it.
             observable.SourceProperty = 32;
             Assert.AreEqual(32, observable.SourceProperty);
-            Assert.AreEqual(32, intermediate.DependentProperty);
+            Assert.AreEqual(32, intermediate.ComputedProperty);
         }
     }
 }

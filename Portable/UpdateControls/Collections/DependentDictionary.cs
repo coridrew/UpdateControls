@@ -9,28 +9,28 @@ namespace KnockoutCS.Collections
 
 	/// <summary>A dictionary tied to a dependent sentry.</summary>
 	/// <remarks>
-	/// To use DependentDictionary, you must pass a method to the constructor whose 
+	/// To use ComputedDictionary, you must pass a method to the constructor whose 
 	/// job is to choose the contents of the dictionary (either as a list of key-
 	/// value pairs, or as an object that implements <see cref="IDictionary{TKey,TValue}"/>).
 	/// </remarks>
-	public class DependentDictionary<TKey, TValue> : IDictionary<TKey, TValue>
+	public class ComputedDictionary<TKey, TValue> : IDictionary<TKey, TValue>
 	{
 		private readonly Func<IEnumerable<KeyValuePair<TKey, TValue>>> _computeCollection;
 		private IDictionary<TKey, TValue> _dictionary;
 		private Computed _dependentSentry;
 		private bool _recycleValues;
 
-		/// <summary>Initializes DependentDictionary.</summary>
+		/// <summary>Initializes ComputedDictionary.</summary>
 		/// <param name="updateCollection">A method that is called to choose the 
 		/// contents of the dictionary.</param>
 		/// <remarks>
 		/// The update method will be called automatically when someone accesses the 
 		/// dictionary, and either (1) it is being accessed for the first time, or
-		/// (2) one of the precedents (Dependent and Observable sentries) that were 
+		/// (2) one of the precedents (Computed and Observable sentries) that were 
 		/// accessed by updateCollection() has changed since the last time it was
 		/// called.
 		/// <para/>
-		/// DependentDictionary assumes that the "keys" are stateless objects that
+		/// ComputedDictionary assumes that the "keys" are stateless objects that
 		/// do not require recycling, but that values do require recycling. If the
 		/// values are stateless, you will get better performance if you disable 
 		/// recycling by adding a "false" parameter to the constructor, especially 
@@ -40,11 +40,11 @@ namespace KnockoutCS.Collections
 		/// you should use recycling (which is the default) so that the extra state 
 		/// information is not lost during updates.
 		/// </remarks>
-		public DependentDictionary(Func<IEnumerable<KeyValuePair<TKey, TValue>>> updateCollection) : this(updateCollection, true) { }
-		public DependentDictionary(Func<IEnumerable<KeyValuePair<TKey, TValue>>> updateCollection, bool recycleValues)
+		public ComputedDictionary(Func<IEnumerable<KeyValuePair<TKey, TValue>>> updateCollection) : this(updateCollection, true) { }
+		public ComputedDictionary(Func<IEnumerable<KeyValuePair<TKey, TValue>>> updateCollection, bool recycleValues)
 		{
 			_computeCollection = updateCollection;
-			_dependentSentry = new NamedDependent(MemoizedTypeName<DependentDictionary<TKey, TValue>>.GenericName(), Update);
+			_dependentSentry = new NamedComputed(MemoizedTypeName<ComputedDictionary<TKey, TValue>>.GenericName(), Update);
 			_recycleValues = recycleValues;
 		}
 
@@ -191,7 +191,7 @@ namespace KnockoutCS.Collections
 
 		#endregion
 
-		public Computed DependentSentry
+		public Computed ComputedSentry
 		{
 			get { return _dependentSentry; }
 		}

@@ -23,13 +23,13 @@ namespace KnockoutCS.XAML.Wrapper
                 if (type.GetGenericTypeDefinition() == typeof(ObjectInstance<>))
                 {
                     Type wrappedType = type.GenericTypeArguments[0];
-                    return GetDependentType(wrappedType);
+                    return GetComputedType(wrappedType);
                 }
             }
             return null;
         }
 
-        public static IXamlType GetDependentType(Type wrappedType)
+        public static IXamlType GetComputedType(Type wrappedType)
         {
             lock (_xamlTypeFromCLR)
             {

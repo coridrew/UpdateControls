@@ -149,7 +149,7 @@ namespace KnockoutCS.Forms
 	{
         private static string TAG_COLUMN_NAME = "@@TAG@@";
 
-		private class DependentDataRow : IDisposable
+		private class ComputedDataRow : IDisposable
 		{
             private UpdateGrid _grid;
             private DataTable _table;
@@ -159,7 +159,7 @@ namespace KnockoutCS.Forms
 
             private Computed _depValue;
 
-            public DependentDataRow(UpdateGrid grid, DataTable table, object tag, UpdateController updateController)
+            public ComputedDataRow(UpdateGrid grid, DataTable table, object tag, UpdateController updateController)
 			{
                 _grid = grid;
                 _table = table;
@@ -234,7 +234,7 @@ namespace KnockoutCS.Forms
 					return false;
 				if ( obj.GetType() != GetType() )
 					return false;
-                DependentDataRow that = (DependentDataRow)obj;
+                ComputedDataRow that = (ComputedDataRow)obj;
 				return Object.Equals( this._tag, that._tag );
 			}
 
@@ -437,7 +437,7 @@ namespace KnockoutCS.Forms
 
         private ColumnDefinitions _columnDefinitions;
         private DataTable _table;
-        private List<DependentDataRow> _rows = new List<DependentDataRow>();
+        private List<ComputedDataRow> _rows = new List<ComputedDataRow>();
         private DataRow _newRow;
         private object _newTag;
         private UpdateController _updateController = new UpdateController();
@@ -465,7 +465,7 @@ namespace KnockoutCS.Forms
             {
                 using (_updateController.BeginUpdating())
                 {
-                    DependentDataRow row = e.Row[TAG_COLUMN_NAME] as DependentDataRow;
+                    ComputedDataRow row = e.Row[TAG_COLUMN_NAME] as ComputedDataRow;
                     object tag = null;
 
                     if (row != null)
@@ -492,7 +492,7 @@ namespace KnockoutCS.Forms
         {
             if (_updateController.NotUpdating && RowDeleted != null)
             {
-                DependentDataRow row = e.Row[TAG_COLUMN_NAME] as DependentDataRow;
+                ComputedDataRow row = e.Row[TAG_COLUMN_NAME] as ComputedDataRow;
 
                 if (row != null)
                     RowDeleted(row.Tag);
@@ -516,7 +516,7 @@ namespace KnockoutCS.Forms
                     _columnDefinitions = GetColumns();
 
                     // Dispose of all rows.
-                    foreach (DependentDataRow row in _rows)
+                    foreach (ComputedDataRow row in _rows)
                         row.Dispose();
                     _rows.Clear();
 
@@ -558,8 +558,8 @@ namespace KnockoutCS.Forms
                         // Extract each item from the recycle bin.
                         foreach (object item in GetItems())
                         {
-                            DependentDataRow dependentDataRow = recycleBin.Extract(
-                                new DependentDataRow(this, _table, item, _updateController));
+                            ComputedDataRow dependentDataRow = recycleBin.Extract(
+                                new ComputedDataRow(this, _table, item, _updateController));
                             _rows.Add(dependentDataRow);
                             if (dependentDataRow.DataRow == null)
                             {
@@ -615,7 +615,7 @@ namespace KnockoutCS.Forms
 		private void UpdateItemValue()
 		{
 			_depItems.OnGet();
-            foreach (DependentDataRow dependentDataRow in _rows)
+            foreach (ComputedDataRow dependentDataRow in _rows)
                 dependentDataRow.OnGetValue();
 		}
 
@@ -642,7 +642,7 @@ namespace KnockoutCS.Forms
 			_depColumns.Dispose();
 			_depItems.Dispose();
 			_depItemValue.Dispose();
-            foreach (DependentDataRow dependentDataRow in _rows)
+            foreach (ComputedDataRow dependentDataRow in _rows)
                 dependentDataRow.Dispose();
 			base.OnHandleDestroyed (e);
 		}
@@ -709,7 +709,7 @@ namespace KnockoutCS.Forms
                 ArrayList items = new ArrayList();
                 foreach (DataGridViewRow row in base.SelectedRows)
                 {
-                    DependentDataRow dependentRow = (DependentDataRow)row.Cells[TAG_COLUMN_NAME].Value;
+                    ComputedDataRow dependentRow = (ComputedDataRow)row.Cells[TAG_COLUMN_NAME].Value;
                     if (dependentRow != null)
                         items.Add(dependentRow.Tag);
                 }

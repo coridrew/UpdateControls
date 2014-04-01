@@ -152,7 +152,7 @@ namespace KnockoutCS.Forms
 			UpdateNow();
 		}
 
-		/// <summary>Unsubscribes from Application.Idle and disposes all Dependents.</summary>
+		/// <summary>Unsubscribes from Application.Idle and disposes all Computeds.</summary>
 		public virtual void Dispose()
 		{
 			Stop();

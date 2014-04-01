@@ -38,7 +38,7 @@ namespace KnockoutCS.Forms
             private Control _control;
             private GetStringDelegate _getError;
 
-            // Dependent error text.
+            // Computed error text.
             private Computed _depErrorText;
             private string _errorText;
 

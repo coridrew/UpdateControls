@@ -9,99 +9,99 @@ namespace KnockoutCS.UnitTest
 		public TestContext TestContext { get; set; }
 
 		private SourceData _source;
-		private DirectDependent _intermediateDependent;
-		private IndirectDependent _dependent;
+		private DirectComputed _intermediateComputed;
+		private IndirectComputed _dependent;
 
 		[TestInitialize]
 		public void Initialize()
 		{
 			_source = new SourceData();
-			_intermediateDependent = new DirectDependent(_source);
-			_dependent = new IndirectDependent(_intermediateDependent);
+			_intermediateComputed = new DirectComputed(_source);
+			_dependent = new IndirectComputed(_intermediateComputed);
 		}
 
 		[TestMethod]
-		public void DependentIsOutOfDateAfterConcurrentChange()
+		public void ComputedIsOutOfDateAfterConcurrentChange()
 		{
 			_source.AfterGet += () => _source.SourceProperty = 4;
 
 			_source.SourceProperty = 3;
-			int fetch = _dependent.DependentProperty;
+			int fetch = _dependent.ComputedProperty;
 
 			Assert.IsFalse(_dependent.IsUpToDate, "The dependent is up to date after a concurrent change");
 		}
 
 		[TestMethod]
-		public void DependentHasOriginalValueAfterConcurrentChange()
+		public void ComputedHasOriginalValueAfterConcurrentChange()
 		{
 			_source.AfterGet += () => _source.SourceProperty = 4;
 
 			_source.SourceProperty = 3;
-			Assert.AreEqual(3, _dependent.DependentProperty);
+			Assert.AreEqual(3, _dependent.ComputedProperty);
 		}
 
 		[TestMethod]
-		public void DependentIsUpToDateAfterSecondGet()
+		public void ComputedIsUpToDateAfterSecondGet()
 		{
 			Action concurrentChange = () => _source.SourceProperty = 4;
 			_source.AfterGet += concurrentChange;
 
 			_source.SourceProperty = 3;
-			int fetch = _dependent.DependentProperty;
+			int fetch = _dependent.ComputedProperty;
 
 			_source.AfterGet -= concurrentChange;
 
-			fetch = _dependent.DependentProperty;
+			fetch = _dependent.ComputedProperty;
 
 			Assert.IsTrue(_dependent.IsUpToDate, "The dependent is not up to date after the second get");
 		}
 
 		[TestMethod]
-		public void DependentHasModifiedValueAfterSecondGet()
+		public void ComputedHasModifiedValueAfterSecondGet()
 		{
 			Action concurrentChange = () => _source.SourceProperty = 4;
 			_source.AfterGet += concurrentChange;
 
 			_source.SourceProperty = 3;
-			int fetch = _dependent.DependentProperty;
+			int fetch = _dependent.ComputedProperty;
 
 			_source.AfterGet -= concurrentChange;
 
-			Assert.AreEqual(4, _dependent.DependentProperty);
+			Assert.AreEqual(4, _dependent.ComputedProperty);
 		}
 
 		[TestMethod]
-		public void DependentStillDependsUponPrecedent()
+		public void ComputedStillDependsUponPrecedent()
 		{
 			Action concurrentChange = () => _source.SourceProperty = 4;
 			_source.AfterGet += concurrentChange;
 
 			_source.SourceProperty = 3;
-			int fetch = _dependent.DependentProperty;
+			int fetch = _dependent.ComputedProperty;
 
 			_source.AfterGet -= concurrentChange;
 
-			fetch = _dependent.DependentProperty;
+			fetch = _dependent.ComputedProperty;
 			_source.SourceProperty = 5;
 
 			Assert.IsFalse(_dependent.IsUpToDate, "The dependent no longer depends upon the precedent");
 		}
 
 		[TestMethod]
-		public void DependentGetsTheUltimateValue()
+		public void ComputedGetsTheUltimateValue()
 		{
 			Action concurrentChange = () => _source.SourceProperty = 4;
 			_source.AfterGet += concurrentChange;
 
 			_source.SourceProperty = 3;
-			int fetch = _dependent.DependentProperty;
+			int fetch = _dependent.ComputedProperty;
 
 			_source.AfterGet -= concurrentChange;
 
-			fetch = _dependent.DependentProperty;
+			fetch = _dependent.ComputedProperty;
 			_source.SourceProperty = 5;
 
-			Assert.AreEqual(5, _dependent.DependentProperty);
+			Assert.AreEqual(5, _dependent.ComputedProperty);
 		}
 	}
 }

@@ -123,7 +123,7 @@ namespace KnockoutCS
 		{
 			// Establish dependency between the current update
 			// and this field.
-			RecordDependent();
+			RecordComputed();
 		}
 
 		/// <summary>
@@ -143,14 +143,14 @@ namespace KnockoutCS
 
 			// When an observable field changes,
 			// its dependents become out-of-date.
-			MakeDependentsOutOfDate();
+			MakeComputedsOutOfDate();
 		}
 
-		/// <summary>Intended for the debugger. Returns a tree of Dependents that 
-		/// use this Dependent.</summary>
-		protected DependentVisualizer UsedBy
+		/// <summary>Intended for the debugger. Returns a tree of Computeds that 
+		/// use this Computed.</summary>
+		protected ComputedVisualizer UsedBy
 		{
-			get { return new DependentVisualizer(this); }
+			get { return new ComputedVisualizer(this); }
 		}
 	}
 }

@@ -62,18 +62,18 @@ namespace KnockoutCS.XAML
         }
     }
 
-    internal abstract class DependentPropertyBase
+    internal abstract class ComputedPropertyBase
     {
         public abstract object Value { get; }
     }
 
-    internal class DependentAtom<T> : DependentPropertyBase, IUpdatable
+    internal class ComputedAtom<T> : ComputedPropertyBase, IUpdatable
     {
         private Computed _depValue;
         private T _value;
         private Action _firePropertyChanged;
 
-        public DependentAtom(Action firePropertyChanged, Func<T> getMethod)
+        public ComputedAtom(Action firePropertyChanged, Func<T> getMethod)
         {
             _firePropertyChanged = firePropertyChanged;
             _depValue = new Computed(() => _value = getMethod());
@@ -91,13 +91,13 @@ namespace KnockoutCS.XAML
         }
     }
 
-    internal class DependentCollection<T> : DependentPropertyBase, IUpdatable
+    internal class ComputedCollection<T> : ComputedPropertyBase, IUpdatable
     {
         private Func<IEnumerable<T>> _getMethod;
         private Computed _depCollection;
         private ObservableCollection<T> _collection = new ObservableCollection<T>();
 
-        public DependentCollection(Func<IEnumerable<T>> getMethod)
+        public ComputedCollection(Func<IEnumerable<T>> getMethod)
         {
             _getMethod = getMethod;
             _depCollection = new Computed(OnUpdateCollection);
@@ -148,15 +148,15 @@ namespace KnockoutCS.XAML
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private IDictionary<string, DependentPropertyBase> _dependentPropertyByName = new Dictionary<string, DependentPropertyBase>();
+        private IDictionary<string, ComputedPropertyBase> _dependentPropertyByName = new Dictionary<string, ComputedPropertyBase>();
 
         protected T Get<T>(Func<T> getMethod, [CallerMemberName] string propertyName = "")
         {
             ForView.Initialize();
-            DependentPropertyBase property;
+            ComputedPropertyBase property;
             if (!_dependentPropertyByName.TryGetValue(propertyName, out property))
             {
-                property = new DependentAtom<T>(() => FirePropertyChanged(propertyName), getMethod);
+                property = new ComputedAtom<T>(() => FirePropertyChanged(propertyName), getMethod);
                 _dependentPropertyByName.Add(propertyName, property);
             }
             return (T)property.Value;
@@ -165,10 +165,10 @@ namespace KnockoutCS.XAML
         protected IEnumerable<T> GetCollection<T>(Func<IEnumerable<T>> getMethod, [CallerMemberName] string propertyName = "")
         {
             ForView.Initialize();
-            DependentPropertyBase property;
+            ComputedPropertyBase property;
             if (!_dependentPropertyByName.TryGetValue(propertyName, out property))
             {
-                property = new DependentCollection<T>(getMethod);
+                property = new ComputedCollection<T>(getMethod);
                 _dependentPropertyByName.Add(propertyName, property);
             }
             return (IEnumerable<T>)property.Value;

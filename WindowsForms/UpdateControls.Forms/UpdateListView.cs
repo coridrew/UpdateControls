@@ -198,7 +198,7 @@ namespace KnockoutCS.Forms
 			public GetObjectCollectionDelegate GetSubItems;
 		}
 
-		private class DependentListViewItem : ListViewItem, IDisposable
+		private class ComputedListViewItem : ListViewItem, IDisposable
 		{
             private IDictionary<object, ListViewGroup> _groupsByTag;
 			private ItemDelegates _itemDelegates;
@@ -218,7 +218,7 @@ namespace KnockoutCS.Forms
 
 			private int _updating = 0;
 
-            public DependentListViewItem(object tag, IDictionary<object, ListViewGroup> groupsByTag, ItemDelegates itemDelegates)
+            public ComputedListViewItem(object tag, IDictionary<object, ListViewGroup> groupsByTag, ItemDelegates itemDelegates)
 			{
 				base.Tag = tag;
                 _groupsByTag = groupsByTag;
@@ -433,7 +433,7 @@ namespace KnockoutCS.Forms
 					return false;
 				if ( obj.GetType() != GetType() )
 					return false;
-				DependentListViewItem that = (DependentListViewItem)obj;
+				ComputedListViewItem that = (ComputedListViewItem)obj;
 				return Object.Equals( base.Tag, that.Tag );
 			}
 
@@ -452,7 +452,7 @@ namespace KnockoutCS.Forms
             public GetObjectHorizontalAlignmentDelegate GetGroupAlignment;
         }
 
-        private class DependentListViewGroup : IDisposable
+        private class ComputedListViewGroup : IDisposable
         {
             private object _tag;
             private GroupDelegates _groupDelegates;
@@ -463,15 +463,15 @@ namespace KnockoutCS.Forms
             private Computed _depHeader;
             private Computed _depAlignment;
 
-            public DependentListViewGroup(object tag, GroupDelegates groupDelegates, ListView listView)
+            public ComputedListViewGroup(object tag, GroupDelegates groupDelegates, ListView listView)
             {
                 _tag = tag;
                 _groupDelegates = groupDelegates;
                 _listView = listView;
 
-                _depName = Computed.New("DependentListViewGroup.Name", UpdateName);
-				_depHeader = Computed.New("DependentListViewGroup.Header", UpdateHeader);
-				_depAlignment = Computed.New("DependentListViewGroup.Alignment", UpdateAlignment);
+                _depName = Computed.New("ComputedListViewGroup.Name", UpdateName);
+				_depHeader = Computed.New("ComputedListViewGroup.Header", UpdateHeader);
+				_depAlignment = Computed.New("ComputedListViewGroup.Alignment", UpdateAlignment);
             }
 
             public void Dispose()
@@ -540,7 +540,7 @@ namespace KnockoutCS.Forms
 					return false;
 				if ( obj.GetType() != GetType() )
 					return false;
-                DependentListViewGroup that = (DependentListViewGroup)obj;
+                ComputedListViewGroup that = (ComputedListViewGroup)obj;
 				return Object.Equals( _tag, that._tag );
 			}
 
@@ -788,7 +788,7 @@ namespace KnockoutCS.Forms
 
 		private int _updating = 0;
 
-        private List<DependentListViewGroup> _groups = new List<DependentListViewGroup>();
+        private List<ComputedListViewGroup> _groups = new List<ComputedListViewGroup>();
 
 		private ItemDelegates _itemDelegates;
         private GroupDelegates _groupDelegates;
@@ -838,7 +838,7 @@ namespace KnockoutCS.Forms
         public void SelectItem(object tag)
 		{
 			_depItems.OnGet();
-			foreach ( DependentListViewItem item in base.Items )
+			foreach ( ComputedListViewItem item in base.Items )
 				item.Selected = item.Tag == tag;
 		}
 
@@ -852,8 +852,8 @@ namespace KnockoutCS.Forms
 		public void EditItem( object tag )
 		{
 			_depItems.OnGet();
-			DependentListViewItem selectedItem = null;
-			foreach ( DependentListViewItem item in base.Items )
+			ComputedListViewItem selectedItem = null;
+			foreach ( ComputedListViewItem item in base.Items )
 			{
 				item.Selected = item.Tag == tag;
 				if ( item.Tag == tag )
@@ -883,13 +883,13 @@ namespace KnockoutCS.Forms
                 {
                     _groups.AddRange(
                         from object g in GetGroups()
-                        select bin.Extract(new DependentListViewGroup(g, _groupDelegates, this)));
+                        select bin.Extract(new ComputedListViewGroup(g, _groupDelegates, this)));
                 }
 
                 // Organize the list view groups.
                 _groupsByTag.Clear();
                 int index = 0;
-                foreach (DependentListViewGroup group in _groups)
+                foreach (ComputedListViewGroup group in _groups)
                 {
                     group.SetIndex(index++);
                     _groupsByTag[group.Tag] = group.ListViewGroup;
@@ -901,7 +901,7 @@ namespace KnockoutCS.Forms
         {
             // Update all group properties.
             _depGroups.OnGet();
-            foreach (DependentListViewGroup group in _groups)
+            foreach (ComputedListViewGroup group in _groups)
                 group.OnGetProperties();
         }
 
@@ -919,9 +919,9 @@ namespace KnockoutCS.Forms
                         var newItems = Util.CollectionHelper.RecycleCollection(
                             base.Items,
                             GetItems().OfType<object>().Select(item =>
-                                new DependentListViewItem(item, _groupsByTag, _itemDelegates)));
+                                new ComputedListViewItem(item, _groupsByTag, _itemDelegates)));
 
-                        foreach (DependentListViewItem item in newItems)
+                        foreach (ComputedListViewItem item in newItems)
                             item.UpdateGroup();
                     }
                     finally
@@ -940,14 +940,14 @@ namespace KnockoutCS.Forms
         {
             _depGroups.OnGet();
             _depItems.OnGet();
-            foreach (DependentListViewItem item in base.Items)
+            foreach (ComputedListViewItem item in base.Items)
                 item.OnGetGroups();
         }
 
 		private void UpdateItemText()
 		{
 			_depItems.OnGet();
-			foreach ( DependentListViewItem item in base.Items )
+			foreach ( ComputedListViewItem item in base.Items )
 			{
 				string dummy = item.Text;
 			}
@@ -958,7 +958,7 @@ namespace KnockoutCS.Forms
 		private void UpdateItemSelected()
 		{
 			_depItems.OnGet();
-			foreach ( DependentListViewItem item in base.Items )
+			foreach ( ComputedListViewItem item in base.Items )
 			{
 				bool dummy = item.Selected;
 			}
@@ -967,7 +967,7 @@ namespace KnockoutCS.Forms
 		private void UpdateItemChecked()
 		{
 			_depItems.OnGet();
-			foreach ( DependentListViewItem item in base.Items )
+			foreach ( ComputedListViewItem item in base.Items )
 			{
 				bool dummy = item.Checked;
 			}
@@ -976,7 +976,7 @@ namespace KnockoutCS.Forms
 		private void UpdateItemImageIndex()
 		{
 			_depItems.OnGet();
-			foreach ( DependentListViewItem item in base.Items )
+			foreach ( ComputedListViewItem item in base.Items )
 			{
 				int dummy = item.ImageIndex;
 			}
@@ -985,7 +985,7 @@ namespace KnockoutCS.Forms
 		private void UpdateSubItems()
 		{
 			_depItems.OnGet();
-			foreach ( DependentListViewItem item in base.Items )
+			foreach ( ComputedListViewItem item in base.Items )
 			{
 				item.OnGetSubItems();
 			}
@@ -1034,7 +1034,7 @@ namespace KnockoutCS.Forms
                 _depItemChecked.Dispose();
                 _depItemImageIndex.Dispose();
                 _depSubItems.Dispose();
-                foreach (DependentListViewItem item in base.Items)
+                foreach (ComputedListViewItem item in base.Items)
                     item.Dispose();
             }
 			base.OnHandleDestroyed (e);
@@ -1045,7 +1045,7 @@ namespace KnockoutCS.Forms
 		protected override void OnSelectedIndexChanged(EventArgs e)
 		{
 			// Set the selected state of each item.
-			foreach ( DependentListViewItem item in base.Items )
+			foreach ( ComputedListViewItem item in base.Items )
 				item.SetSelected();
 
 			base.OnSelectedIndexChanged (e);
@@ -1057,7 +1057,7 @@ namespace KnockoutCS.Forms
 		{
 			if ( _updating == 0 )
 			{
-				DependentListViewItem item = (DependentListViewItem)base.Items[ ice.Index ];
+				ComputedListViewItem item = (ComputedListViewItem)base.Items[ ice.Index ];
 				item.Checked = ice.NewValue != CheckState.Unchecked;
 			}
 
@@ -1070,7 +1070,7 @@ namespace KnockoutCS.Forms
 		{
 			if ( _updating == 0 && !e.CancelEdit && e.Label != null )
 			{
-				DependentListViewItem item = (DependentListViewItem)base.Items[ e.Item ];
+				ComputedListViewItem item = (ComputedListViewItem)base.Items[ e.Item ];
 				item.Text = e.Label;
 
 				// The assignment was only a suggestion. See if it was honored.
@@ -1120,7 +1120,7 @@ namespace KnockoutCS.Forms
 
 		private static object Map( object source )
 		{
-			return ((DependentListViewItem)source).Tag;
+			return ((ComputedListViewItem)source).Tag;
 		}
 
 		/// <summary>

@@ -25,31 +25,31 @@ namespace KnockoutCS
     /// </remarks>
     public abstract class Precedent
     {
-		internal class DependentNode
+		internal class ComputedNode
         {
-            public WeakReference Dependent;
-            public DependentNode Next;
+            public WeakReference Computed;
+            public ComputedNode Next;
         }
 
-        internal DependentNode _firstDependent = null;
+        internal ComputedNode _firstComputed = null;
 
         /// <summary>
         /// Method called when the first dependent references this field. This event only
-        /// fires when HasDependents goes from false to true. If the field already
+        /// fires when HasComputeds goes from false to true. If the field already
         /// has dependents, then this event does not fire.
         /// </summary>
-        protected virtual void GainDependent()
+        protected virtual void GainComputed()
         {
         }
 
         /// <summary>
         /// Method called when the last dependent goes out-of-date. This event
-        /// only fires when HasDependents goes from true to false. If the field has
+        /// only fires when HasComputeds goes from true to false. If the field has
         /// other dependents, then this event does not fire. If the dependent is
         /// currently updating and it still depends upon this field, then the
-        /// GainDependent event will be fired immediately.
+        /// GainComputed event will be fired immediately.
         /// </summary>
-        protected virtual void LoseDependent()
+        protected virtual void LoseComputed()
         {
         }
 
@@ -57,31 +57,31 @@ namespace KnockoutCS
         /// Establishes a relationship between this precedent and the currently
         /// updating dependent.
         /// </summary>
-        internal void RecordDependent()
+        internal void RecordComputed()
         {
             // Get the current dependent.
             Computed update = Computed.GetCurrentUpdate();
             if (update != null && !Contains(update) && update.AddPrecedent(this))
             {
                 if (Insert(update))
-                    GainDependent();
+                    GainComputed();
             }
             else if (!Any())
             {
                 // Though there is no lasting dependency, someone
                 // has shown interest.
-                GainDependent();
-                LoseDependent();
+                GainComputed();
+                LoseComputed();
             }
         }
 
         /// <summary>
         /// Makes all direct and indirect dependents out of date.
         /// </summary>
-        internal void MakeDependentsOutOfDate()
+        internal void MakeComputedsOutOfDate()
         {
             // When I make a dependent out-of-date, it will
-            // call RemoveDependent, thereby removing it from
+            // call RemoveComputed, thereby removing it from
             // the list.
             Computed first;
             while ((first = First()) != null)
@@ -90,10 +90,10 @@ namespace KnockoutCS
             }
         }
 
-        internal void RemoveDependent(Computed dependent)
+        internal void RemoveComputed(Computed dependent)
         {
             if (Delete(dependent))
-                LoseDependent();
+                LoseComputed();
         }
 
         /// <summary>
@@ -101,7 +101,7 @@ namespace KnockoutCS
         /// </summary>
         /// <remarks>
         /// If any dependent field has used this observable field while updating,
-        /// then HasDependents is true. When that dependent becomes out-of-date,
+        /// then HasComputeds is true. When that dependent becomes out-of-date,
         /// however, it no longer depends upon this field.
         /// <para/>
         /// This property is useful for caching. When all dependents are up-to-date,
@@ -110,7 +110,7 @@ namespace KnockoutCS
         /// unload the cache while dependents are still out-of-date, since
         /// those dependents may in fact need the field when they update.
         /// </remarks>
-        public bool HasDependents
+        public bool HasComputeds
 		{
             get { return Any(); }
 		}
@@ -119,8 +119,8 @@ namespace KnockoutCS
         {
             lock (this)
             {
-                bool first = _firstDependent == null;
-                _firstDependent = new DependentNode { Dependent = new WeakReference(update), Next = _firstDependent };
+                bool first = _firstComputed == null;
+                _firstComputed = new ComputedNode { Computed = new WeakReference(update), Next = _firstComputed };
                 return first;
             }
         }
@@ -132,10 +132,10 @@ namespace KnockoutCS
             lock (this)
             {
                 int count = 0;
-                DependentNode prior = null;
-                for (DependentNode current = _firstDependent; current != null; current = current.Next)
+                ComputedNode prior = null;
+                for (ComputedNode current = _firstComputed; current != null; current = current.Next)
                 {
-                    object target = current.Dependent.Target;
+                    object target = current.Computed.Target;
                     if (target == null || target == dependent)
                     {
                         if (target == null)
@@ -143,7 +143,7 @@ namespace KnockoutCS
                         if (target == dependent)
                             ++count;
                         if (prior == null)
-                            _firstDependent = current.Next;
+                            _firstComputed = current.Next;
                         else
                             prior.Next = current.Next;
                     }
@@ -151,7 +151,7 @@ namespace KnockoutCS
                         prior = current;
                 }
 				if (count != 1) Debug.Assert(false, String.Format("Expected 1 dependent, found {0}.", count));
-                return _firstDependent == null;
+                return _firstComputed == null;
             }
         }
 
@@ -159,8 +159,8 @@ namespace KnockoutCS
         {
             lock (this)
             {
-                for (DependentNode current = _firstDependent; current != null; current = current.Next)
-                    if (current.Dependent.Target == update)
+                for (ComputedNode current = _firstComputed; current != null; current = current.Next)
+                    if (current.Computed.Target == update)
                         return true;
                 return false;
             }
@@ -170,7 +170,7 @@ namespace KnockoutCS
         {
             lock (this)
             {
-                return _firstDependent != null;
+                return _firstComputed != null;
             }
         }
 
@@ -178,13 +178,13 @@ namespace KnockoutCS
         {
             lock (this)
             {
-                while (_firstDependent != null)
+                while (_firstComputed != null)
                 {
-                    Computed dependent = (Computed)_firstDependent.Dependent.Target;
+                    Computed dependent = (Computed)_firstComputed.Computed.Target;
                     if (dependent != null)
                         return dependent;
                     else
-                        _firstDependent = _firstDependent.Next;
+                        _firstComputed = _firstComputed.Next;
                 }
                 return null;
             }
@@ -235,24 +235,24 @@ namespace KnockoutCS
 				return name;
 		}
 
-		protected class DependentVisualizer
+		protected class ComputedVisualizer
 		{
 			Precedent _self;
-			public DependentVisualizer(Precedent self) { _self = self; }
+			public ComputedVisualizer(Precedent self) { _self = self; }
 			public override string ToString() { return _self.VisualizerName(true); }
 
 			[DebuggerBrowsable(DebuggerBrowsableState.RootHidden)]
-			public DependentVisualizer[] Items
+			public ComputedVisualizer[] Items
 			{
 				get {
-					var list = new List<DependentVisualizer>();
+					var list = new List<ComputedVisualizer>();
 					lock (_self)
 					{
-						for (DependentNode current = _self._firstDependent; current != null; current = current.Next)
+						for (ComputedNode current = _self._firstComputed; current != null; current = current.Next)
 						{
-							var dep = current.Dependent.Target as Computed;
+							var dep = current.Computed.Target as Computed;
 							if (dep != null)
-								list.Add(new DependentVisualizer(dep));
+								list.Add(new ComputedVisualizer(dep));
 						}
 
 						list.Sort((a, b) => a.ToString().CompareTo(b.ToString()));

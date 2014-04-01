@@ -27,7 +27,7 @@ namespace KnockoutCS
         private long _ticks = 0;
         private Observable _dynTicks = new Observable();
 
-        // Dependent
+        // Computed
         private float _targetValue;
         private bool _hasInertia;
         private Computed _depTargetValue;

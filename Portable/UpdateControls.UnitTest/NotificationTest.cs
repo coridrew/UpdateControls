@@ -5,19 +5,19 @@ namespace KnockoutCS.UnitTest
 {
     public class NotifyingObservable : Observable
     {
-        public event Action OnGainDependent;
-        public event Action OnLoseDependent;
+        public event Action OnGainComputed;
+        public event Action OnLoseComputed;
 
-        protected override void GainDependent()
+        protected override void GainComputed()
         {
-            if (OnGainDependent != null)
-                OnGainDependent();
+            if (OnGainComputed != null)
+                OnGainComputed();
         }
 
-        protected override void LoseDependent()
+        protected override void LoseComputed()
         {
-            if (OnLoseDependent != null)
-                OnLoseDependent();
+            if (OnLoseComputed != null)
+                OnLoseComputed();
         }
     }
 
@@ -28,56 +28,56 @@ namespace KnockoutCS.UnitTest
         private bool _lost;
         private NotifyingObservable _observable;
         private Computed _dependent;
-        private Computed _secondDependent;
+        private Computed _secondComputed;
 
         [TestInitialize]
         public void Initialize()
         {
             _gained = false;
             _observable = new NotifyingObservable();
-            _observable.OnGainDependent += () => { _gained = true; };
-            _observable.OnLoseDependent += () => { _lost = true; };
+            _observable.OnGainComputed += () => { _gained = true; };
+            _observable.OnLoseComputed += () => { _lost = true; };
             _dependent = new Computed(() => { _observable.OnGet(); });
-            _secondDependent = new Computed(() => { _observable.OnGet(); });
+            _secondComputed = new Computed(() => { _observable.OnGet(); });
         }
 
         [TestMethod]
-        public void DoesNotGainDependentOnCreation()
+        public void DoesNotGainComputedOnCreation()
         {
             Assert.IsFalse(_gained, "The observable should not have gained a dependent.");
         }
 
         [TestMethod]
-        public void GainsDependentOnFirstUse()
+        public void GainsComputedOnFirstUse()
         {
             _dependent.OnGet();
             Assert.IsTrue(_gained, "The observable should have gained a dependent.");
         }
 
         [TestMethod]
-        public void DoesNotGainDependentOnSecondUse()
+        public void DoesNotGainComputedOnSecondUse()
         {
             _dependent.OnGet();
             _gained = false;
-            _secondDependent.OnGet();
+            _secondComputed.OnGet();
             Assert.IsFalse(_gained, "The observable should not have gained a dependent.");
         }
 
         [TestMethod]
-        public void DoesNotLoseDependentOnCreation()
+        public void DoesNotLoseComputedOnCreation()
         {
             Assert.IsFalse(_lost, "The observable should not have lost a dependent.");
         }
 
         [TestMethod]
-        public void DoesNotLoseDependentOnFirstUse()
+        public void DoesNotLoseComputedOnFirstUse()
         {
             _dependent.OnGet();
             Assert.IsFalse(_lost, "The observable should not have lost a dependent.");
         }
 
         [TestMethod]
-        public void LosesDependentWhenChanging()
+        public void LosesComputedWhenChanging()
         {
             _dependent.OnGet();
             _observable.OnSet();

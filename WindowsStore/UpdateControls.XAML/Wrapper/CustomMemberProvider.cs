@@ -147,7 +147,7 @@ namespace KnockoutCS.XAML.Wrapper
                 return
                     _isPrimitive || _isCollection
                         ? (IXamlType)new PrimitiveTypeProvider(_propertyInfo.PropertyType)
-                        : CustomMetadataProvider.GetDependentType(_propertyInfo.PropertyType);
+                        : CustomMetadataProvider.GetComputedType(_propertyInfo.PropertyType);
             }
         }
 

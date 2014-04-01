@@ -14,18 +14,18 @@ using System.Collections.Generic;
 
 namespace KnockoutCS.Collections
 {
-    public class DependentList<T> : IEnumerable<T>
+    public class ComputedList<T> : IEnumerable<T>
     {
         private readonly Func<IEnumerable<T>> _computeCollection;
 
         private List<T> _list = new List<T>();
         private Computed _dependentSentry;
 
-        public DependentList(Func<IEnumerable<T>> computeCollection)
+        public ComputedList(Func<IEnumerable<T>> computeCollection)
         {
             _computeCollection = computeCollection;
 
-            _dependentSentry = new NamedDependent(MemoizedTypeName<DependentList<T>>.GenericName(),
+            _dependentSentry = new NamedComputed(MemoizedTypeName<ComputedList<T>>.GenericName(),
 			delegate {
                 using (var bin = new RecycleBin<T>(_list))
                 {
@@ -81,7 +81,7 @@ namespace KnockoutCS.Collections
             return ((System.Collections.IEnumerable)_list).GetEnumerator();
         }
 
-        public Computed DependentSentry
+        public Computed ComputedSentry
         {
             get { return _dependentSentry; }
         }

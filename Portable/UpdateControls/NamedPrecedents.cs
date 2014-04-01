@@ -7,10 +7,10 @@ using System.Reflection;
 
 namespace KnockoutCS
 {
-	public class NamedDependent : Computed
+	public class NamedComputed : Computed
 	{
-		public NamedDependent(Action update) : this(null, update) { }
-		public NamedDependent(string name, Action update) : base(update) { _name = name; }
+		public NamedComputed(Action update) : this(null, update) { }
+		public NamedComputed(string name, Action update) : base(update) { _name = name; }
 
 		protected string _name;
 		public string Name
@@ -74,9 +74,9 @@ namespace KnockoutCS
 	}
 
 	[Obsolete]
-	public class NamedDependent<T> : KnockoutCS.Fields.Computed<T>
+	public class NamedComputed<T> : KnockoutCS.Fields.Computed<T>
 	{
-		public NamedDependent(Func<T> compute) : base(compute) { }
-		public NamedDependent(string name, Func<T> compute) : base(name, compute) { }
+		public NamedComputed(Func<T> compute) : base(compute) { }
+		public NamedComputed(string name, Func<T> compute) : base(name, compute) { }
 	}
 }

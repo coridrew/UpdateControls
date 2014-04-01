@@ -16,7 +16,7 @@ using System.ComponentModel;
 
 namespace KnockoutCS.Fields
 {
-	public class Computed<T> : NamedDependent
+	public class Computed<T> : NamedComputed
 	{
 		protected internal T _value;
 		protected Func<T> _computeValue;
@@ -50,7 +50,7 @@ namespace KnockoutCS.Fields
 
 		public override string VisualizerName(bool withValue)
 		{
-			string s = VisualizerName(_name ?? "NamedDependent");
+			string s = VisualizerName(_name ?? "NamedComputed");
 			if (withValue)
 				s += " = " + (_value == null ? "null" : _value.ToString());
 			return s;
@@ -65,7 +65,7 @@ namespace KnockoutCS.Fields
 		}
 
 		[Obsolete, EditorBrowsable(EditorBrowsableState.Never)]
-		public Computed DependentSentry
+		public Computed ComputedSentry
 		{
 			get { return this; }
 		}

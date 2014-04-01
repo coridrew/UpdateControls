@@ -6,10 +6,10 @@ using KnockoutCS.UnitTest.ContactListData;
 namespace KnockoutCS.UnitTest
 {
     [TestClass]
-    public class DependentListTest
+    public class ComputedListTest
     {
         private ContactList _model;
-        private DependentList<ContactViewModel> _contactViewModels;
+        private ComputedList<ContactViewModel> _contactViewModels;
 
         [TestInitialize]
         public void Initialize()
@@ -17,14 +17,14 @@ namespace KnockoutCS.UnitTest
             _model = new ContactList();
             _model.AddContact(new Contact() { FirstName = "Charles", LastName = "Babbage" });
             _model.AddContact(new Contact() { FirstName = "Alan", LastName = "Turing" });
-            _contactViewModels = new DependentList<ContactViewModel>(() =>
+            _contactViewModels = new ComputedList<ContactViewModel>(() =>
                 from c in _model.Contacts
                 select new ContactViewModel(c)
             );
         }
 
         [TestMethod]
-        public void DependentListMapsToSourceList()
+        public void ComputedListMapsToSourceList()
         {
             Assert.AreEqual(2, _contactViewModels.Count);
             Assert.AreEqual("Charles Babbage", _contactViewModels[0].FullName);
@@ -32,7 +32,7 @@ namespace KnockoutCS.UnitTest
         }
 
         [TestMethod]
-        public void WhenSourceListChanges_DependentListChanges()
+        public void WhenSourceListChanges_ComputedListChanges()
         {
             _model.AddContact(new Contact() { FirstName = "Bertrand", LastName = "Meyer" });
 
@@ -41,7 +41,7 @@ namespace KnockoutCS.UnitTest
         }
 
         [TestMethod]
-        public void DependentsAreRecycled()
+        public void ComputedsAreRecycled()
         {
             ContactViewModel oldObject = _contactViewModels[0];
             _model.AddContact(new Contact() { FirstName = "Bertrand", LastName = "Meyer" });
@@ -54,7 +54,7 @@ namespace KnockoutCS.UnitTest
         {
             int triggerUpdate = _contactViewModels.Count;
             bool wasInvalidated = false;
-            _contactViewModels.DependentSentry.Invalidated += delegate
+            _contactViewModels.ComputedSentry.Invalidated += delegate
             {
                 wasInvalidated = true;
             };
@@ -69,7 +69,7 @@ namespace KnockoutCS.UnitTest
         {
             int triggerUpdate = _contactViewModels.Count;
             bool wasInvalidated = false;
-            _contactViewModels.DependentSentry.Invalidated += delegate
+            _contactViewModels.ComputedSentry.Invalidated += delegate
             {
                 wasInvalidated = true;
             };

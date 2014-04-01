@@ -17,7 +17,7 @@ namespace KnockoutCS
 {
 	/// <summary>
 	/// A collection that maps new objects to old, equivalent versions of the
-	/// same objects. It is typically used with LINQ during a Dependent update.
+	/// same objects. It is typically used with LINQ during a Computed update.
 	/// </summary>
 	/// <typeparam name="T">Type of object to recycle. When using the MVVM design
 	/// pattern, T is typically a type of view-model that wraps around a model
@@ -35,7 +35,7 @@ namespace KnockoutCS
 	/// ViewModel object for each Model, and some kind of dependent collection is 
 	/// used to keep the set of ViewModels synchronized with the set of Models. 
 	/// RecycleBin plays an important role in this paradigm. If you use a class 
-	/// such as <see cref="DependentList{T}"/>, it will use a RecycleBin for you,
+	/// such as <see cref="ComputedList{T}"/>, it will use a RecycleBin for you,
 	/// but if you use <see cref="Computed"/> directly then you may need to 
 	/// create a RecycleBin yourself.
 	/// <para/>
@@ -44,7 +44,7 @@ namespace KnockoutCS
 	/// information in the ViewModel wrappers.
 	/// <para/>
 	/// Typical usage is as follows: you first construct a RecycleBin within a 
-	/// <see cref="Computed"/>'s update function (assuming that the Dependent 
+	/// <see cref="Computed"/>'s update function (assuming that the Computed 
 	/// controls a collection.) You fill the recycle bin with the old contents 
 	/// of your collection of ViewModels, then construct a new collection of 
 	/// ViewModels (from scratch, e.g. using a LINQ query over your models), and 
@@ -53,7 +53,7 @@ namespace KnockoutCS
 	/// Extract returns the old ViewModel; otherwise it returns the new ViewModel.
 	/// This ensures that the ViewModel state is preserved. For example, if your 
 	/// ViewModel has an IsSelected flag, then failing to use a RecycleBin would 
-	/// cause any selected objects to become deselected whenever the Dependent 
+	/// cause any selected objects to become deselected whenever the Computed 
 	/// is updated (assuming IsSelected is false by default).
 	/// <para/>
 	/// The recycle bin extracts objects based on a prototype. If

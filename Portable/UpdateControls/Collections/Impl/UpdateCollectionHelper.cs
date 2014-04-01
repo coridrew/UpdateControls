@@ -5,15 +5,15 @@ using System.Text;
 
 namespace KnockoutCS.Collections.Impl
 {
-	/// <summary>Helper structure used by DependentDictionary and 
+	/// <summary>Helper structure used by ComputedDictionary and 
 	/// ObservableDictionary to represent the "Keys" and "Values" members.</summary>
 	/// <remarks>
 	/// If you save a reference to the Keys or Values property of <see cref="ObservableDictionary{TKey,TValue}"/>,
 	/// the observable sentry should be informed when that collection is accessed. 
 	/// This helper class ensures that the sentry is notified.
 	/// <para/>
-	/// For <see cref="DependentDictionary{TKey,TValue}"/>, this class is even more 
-	/// important. Whenever DependentDictionary is updated, a new dictionary is 
+	/// For <see cref="ComputedDictionary{TKey,TValue}"/>, this class is even more 
+	/// important. Whenever ComputedDictionary is updated, a new dictionary is 
 	/// created to hold the updated content, so the Keys and Values collections 
 	/// change frequently. This wrapper ensure that you do not accidentally hold 
 	/// a reference to an out-of-date version of the Keys or Values collection. 

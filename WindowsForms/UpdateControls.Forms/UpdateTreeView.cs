@@ -40,7 +40,7 @@ namespace KnockoutCS.Forms
             public GetObjectBoolDelegate GetHasSubItems;
 		}
 
-		private class DependentTreeNode : TreeNode, IDisposable
+		private class ComputedTreeNode : TreeNode, IDisposable
 		{
 			private ItemDelegates _itemDelegates;
 
@@ -54,7 +54,7 @@ namespace KnockoutCS.Forms
 
 			private int _updating = 0;
 
-			public DependentTreeNode( object tag, ItemDelegates itemDelegates )
+			public ComputedTreeNode( object tag, ItemDelegates itemDelegates )
 			{
 				base.Tag = tag;
 				_itemDelegates = itemDelegates;
@@ -133,11 +133,11 @@ namespace KnockoutCS.Forms
                     _dynWasExpanded.OnGet();
                     if (!_wasExpanded)
                     {
-                        foreach (DependentTreeNode node in base.Nodes)
+                        foreach (ComputedTreeNode node in base.Nodes)
                             node.Dispose();
                         base.Nodes.Clear();
                         if (_itemDelegates.GetHasSubItems(base.Tag))
-                            base.Nodes.Add(new DependentTreeNode(null, _itemDelegates));
+                            base.Nodes.Add(new ComputedTreeNode(null, _itemDelegates));
                         return;
                     }
                 }
@@ -148,11 +148,11 @@ namespace KnockoutCS.Forms
                     Util.CollectionHelper.RecycleCollection(
                         base.Nodes,
                         _itemDelegates.GetSubItems(base.Tag).OfType<object>().Select(item =>
-                            new DependentTreeNode(item, _itemDelegates)));
+                            new ComputedTreeNode(item, _itemDelegates)));
                 }
                 else
                 {
-                    foreach (DependentTreeNode node in base.Nodes)
+                    foreach (ComputedTreeNode node in base.Nodes)
                         node.Dispose();
                     base.Nodes.Clear();
                 }
@@ -178,7 +178,7 @@ namespace KnockoutCS.Forms
                 _dynWasExpanded.OnGet();
                 if (_wasExpanded)
                 {
-                    foreach (DependentTreeNode node in base.Nodes)
+                    foreach (ComputedTreeNode node in base.Nodes)
                     {
                         node.OnGetRecursive();
                     }
@@ -191,7 +191,7 @@ namespace KnockoutCS.Forms
 					return false;
 				if ( obj.GetType() != GetType() )
 					return false;
-				DependentTreeNode that = (DependentTreeNode)obj;
+				ComputedTreeNode that = (ComputedTreeNode)obj;
 				return Object.Equals( base.Tag, that.Tag );
 			}
 
@@ -308,14 +308,14 @@ namespace KnockoutCS.Forms
 
 			if ( base.SelectedNode != null )
 			{
-				string dummy = ((DependentTreeNode)base.SelectedNode).Text;
+				string dummy = ((ComputedTreeNode)base.SelectedNode).Text;
 				base.SelectedNode.BeginEdit();
 			}
 		}
 
         public void ExpandItem(object tag)
         {
-            DependentTreeNode node = NodeFromTag(tag);
+            ComputedTreeNode node = NodeFromTag(tag);
             if (node != null)
             {
                 node.OnSetExpanded();
@@ -326,7 +326,7 @@ namespace KnockoutCS.Forms
 
         public void CollapseItem(object tag)
         {
-            DependentTreeNode node = NodeFromTag(tag);
+            ComputedTreeNode node = NodeFromTag(tag);
             if (node != null)
             {
                 node.OnSetExpanded();
@@ -337,7 +337,7 @@ namespace KnockoutCS.Forms
 
         public void ToggleItem(object tag)
         {
-            DependentTreeNode node = NodeFromTag(tag);
+            ComputedTreeNode node = NodeFromTag(tag);
             if (node != null)
             {
                 node.OnSetExpanded();
@@ -348,7 +348,7 @@ namespace KnockoutCS.Forms
 
         public bool IsItemExpanded(object tag)
         {
-            DependentTreeNode node = NodeFromTag(tag);
+            ComputedTreeNode node = NodeFromTag(tag);
             if (node != null)
                 return node.IsExpanded;
             else
@@ -377,7 +377,7 @@ namespace KnockoutCS.Forms
                         Util.CollectionHelper.RecycleCollection(
                             base.Nodes,
                             GetItems().OfType<object>().Select(item =>
-                                new DependentTreeNode(item, _itemDelegates)));
+                                new ComputedTreeNode(item, _itemDelegates)));
                     }
                     finally
                     {
@@ -395,7 +395,7 @@ namespace KnockoutCS.Forms
 		{
 			_depNodes.OnGet();
 			base.BeginUpdate();
-			foreach ( DependentTreeNode item in base.Nodes )
+			foreach ( ComputedTreeNode item in base.Nodes )
 			{
 				item.OnGetRecursive();
 			}
@@ -425,19 +425,19 @@ namespace KnockoutCS.Forms
 			}
 		}
 
-		private DependentTreeNode NodeFromTag( object tag )
+		private ComputedTreeNode NodeFromTag( object tag )
 		{
             _depRecursive.OnGet();
 			return RecursiveNodeFromTag(base.Nodes, tag);
 		}
 
-        private DependentTreeNode RecursiveNodeFromTag(TreeNodeCollection nodes, object tag)
+        private ComputedTreeNode RecursiveNodeFromTag(TreeNodeCollection nodes, object tag)
         {
-            foreach (DependentTreeNode node in nodes)
+            foreach (ComputedTreeNode node in nodes)
             {
                 if (object.Equals(node.Tag, tag))
                     return node;
-                DependentTreeNode found = RecursiveNodeFromTag(node.Nodes, tag);
+                ComputedTreeNode found = RecursiveNodeFromTag(node.Nodes, tag);
                 if (found != null)
                     return found;
             }
@@ -476,7 +476,7 @@ namespace KnockoutCS.Forms
 			_depRecursive.Dispose();
 			_depSelectedNode.Dispose();
 
-			foreach ( DependentTreeNode item in base.Nodes )
+			foreach ( ComputedTreeNode item in base.Nodes )
 				item.Dispose();
 			base.OnHandleDestroyed (e);
 		}
@@ -503,7 +503,7 @@ namespace KnockoutCS.Forms
 		{
 			if ( _updating == 0 && !e.CancelEdit && e.Label != null )
 			{
-				DependentTreeNode item = (DependentTreeNode)e.Node;
+				ComputedTreeNode item = (ComputedTreeNode)e.Node;
 				item.Text = e.Label;
 
 				// The assignment was only a suggestion. See if it was honored.
@@ -523,7 +523,7 @@ namespace KnockoutCS.Forms
 		protected override void OnAfterExpand(TreeViewEventArgs e)
 		{
 			// Notify the node that it has expanded.
-			((DependentTreeNode)e.Node).OnSetExpanded();
+			((ComputedTreeNode)e.Node).OnSetExpanded();
 			base.OnAfterExpand (e);
 		}
 
@@ -534,7 +534,7 @@ namespace KnockoutCS.Forms
 		protected override void OnAfterCollapse(TreeViewEventArgs e)
 		{
 			// Notify the node that it has collapsed.
-			((DependentTreeNode)e.Node).OnSetExpanded();
+			((ComputedTreeNode)e.Node).OnSetExpanded();
 			base.OnAfterCollapse (e);
 		}
 
@@ -575,7 +575,7 @@ namespace KnockoutCS.Forms
 			{
 				_depNodes.OnGet();
 				ArrayList items = new ArrayList( base.Nodes.Count );
-				foreach ( DependentTreeNode item in base.Nodes )
+				foreach ( ComputedTreeNode item in base.Nodes )
 					items.Add( item.Tag );
 				return items;
 			}

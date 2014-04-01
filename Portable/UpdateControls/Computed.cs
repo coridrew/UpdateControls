@@ -26,9 +26,9 @@ namespace KnockoutCS
 	/// <remarks>
 	/// <para>
 	/// A dependent field is one whose value is determined by an update
-	/// procedure. Use a Dependent sentry to control such a field.
+	/// procedure. Use a Computed sentry to control such a field.
 	/// </para><para>
-	/// Define a field of type Dependent in the same class as the dependent
+	/// Define a field of type Computed in the same class as the dependent
 	/// field, and initialize it with an update procedure, also defined
 	/// within the class.
 	/// </para><para>
@@ -37,7 +37,7 @@ namespace KnockoutCS
 	/// field.
 	/// </para><para>
 	/// Before each line of code that gets the dependent field, call
-	/// the sentry's <see cref="Dependent.OnGet"/>. This will ensure
+	/// the sentry's <see cref="Computed.OnGet"/>. This will ensure
 	/// that the field is up-to-date, and will record any dependencies
 	/// upon the field.
 	/// </para><para>
@@ -52,12 +52,12 @@ namespace KnockoutCS
 	/// 	{
 	/// 		private MyDynamicObject _someOtherObject;
 	/// 		private string _text;
-	/// 		private Dependent _depText;
+	/// 		private Computed _depText;
 	/// 
 	/// 		public MyCalculatedObject( MyDynamicObject someOtherObject )
 	/// 		{
 	/// 			_someOtherObject = someOtherObject;
-	/// 			_depText = new Dependent( UpdateText );
+	/// 			_depText = new Computed( UpdateText );
 	/// 		}
 	/// 
 	/// 		private void UpdateText()
@@ -79,11 +79,11 @@ namespace KnockoutCS
 	/// Public Class MyCalculatedObject
 	///     Private _someOtherObject As MyDynamicObject
 	///     Private _text As String
-	///     Private _depText As Dependent
+	///     Private _depText As Computed
 
 	///     Public Sub New(ByVal someOtherObject As MyDynamicObject)
 	///         _someOtherObject = someOtherObject
-	///         _depText = New Dependent(New UpdateProcedure(UpdateText))
+	///         _depText = New Computed(New UpdateProcedure(UpdateText))
 	///     End Sub
 
 	///     Private Sub UpdateText()
@@ -101,9 +101,9 @@ namespace KnockoutCS
 	/// </example>
 	public partial class Computed : Precedent
 	{
-		public static Computed New(Action update) { return DebugMode ? new NamedDependent(update) : new Computed(update); }
+		public static Computed New(Action update) { return DebugMode ? new NamedComputed(update) : new Computed(update); }
 		public static Computed<T> New<T>(Func<T> update) { return new Computed<T>(update); }
-		public static NamedDependent New(string name, Action update) { return new NamedDependent(name, update); }
+		public static NamedComputed New(string name, Action update) { return new NamedComputed(name, update); }
 		public static Computed<T> New<T>(string name, Func<T> update) { return new Computed<T>(name, update); }
 
         private static ThreadLocal<Computed> _currentUpdate = new ThreadLocal<Computed>();
@@ -184,7 +184,7 @@ namespace KnockoutCS
 			{
 				// Establish dependency between the current update
 				// and this attribute.
-				RecordDependent();
+				RecordComputed();
 			}
 			else
 			{
@@ -267,7 +267,7 @@ namespace KnockoutCS
 
                     // Tell all precedents to forget about me.
                     for (PrecedentNode current = _firstPrecedent; current != null; current = current.Next)
-                        current.Precedent.RemoveDependent(this);
+                        current.Precedent.RemoveComputed(this);
 
                     _firstPrecedent = null;
 
@@ -283,7 +283,7 @@ namespace KnockoutCS
 
             if (wasUpToDate)
                 // Make all indirect dependents out-of-date, too.
-                MakeDependentsOutOfDate();
+                MakeComputedsOutOfDate();
         }
 
 		internal bool MakeUpToDate()
@@ -367,25 +367,25 @@ namespace KnockoutCS
 
 		#region Debugger Visualization
 
-		/// <summary>Intended for the debugger. Returns a tree of Dependents that 
-		/// use this Dependent.</summary>
-		/// <remarks>UsedBy is defined separately in Observable and Dependent so 
+		/// <summary>Intended for the debugger. Returns a tree of Computeds that 
+		/// use this Computed.</summary>
+		/// <remarks>UsedBy is defined separately in Observable and Computed so 
 		/// that the user doesn't have to drill down to the final base class, 
 		/// Precedent, in order to view this property.</remarks>
-		protected DependentVisualizer UsedBy
+		protected ComputedVisualizer UsedBy
 		{
-			get { return new DependentVisualizer(this); }
+			get { return new ComputedVisualizer(this); }
 		}
 
 		/// <summary>Intended for the debugger. Returns a tree of Precedents that 
-		/// were accessed when this Dependent was last updated.</summary>
+		/// were accessed when this Computed was last updated.</summary>
 		protected PrecedentVisualizer Uses
 		{
 			get { return new PrecedentVisualizer(this); }
 		}
 
 		/// <summary>Intended for the debugger. Returns a tree of Precedents that 
-		/// were accessed when this Dependent was last updated, collapsed so that
+		/// were accessed when this Computed was last updated, collapsed so that
 		/// all precedents that have the same name are shown as a single item.</summary>
 		protected PrecedentSummarizer UsesSummary
 		{
@@ -393,8 +393,8 @@ namespace KnockoutCS
 		}
 
 		/// <summary>Helper class, intended to be viewed in the debugger, that 
-		/// shows a list of Dependents and Observables that are used by this 
-		/// Dependent.</summary>
+		/// shows a list of Computeds and Observables that are used by this 
+		/// Computed.</summary>
 		protected class PrecedentVisualizer
 		{
 			Computed _self;
@@ -468,18 +468,18 @@ namespace KnockoutCS
 					{
 						if (item is Computed) lock (item)
 						{
-							//if (_isDependentTree)
+							//if (_isComputedTree)
 							//{
-							//    for (DependentNode current = item._firstDependent; current != null; current = current.Next)
+							//    for (ComputedNode current = item._firstComputed; current != null; current = current.Next)
 							//    {
-							//        var dep = current.Dependent.Target as Dependent;
+							//        var dep = current.Computed.Target as Computed;
 							//        if (dep != null)
 							//        {
 							//            PrecedentSummarizer child;
 							//            if (dict.TryGetValue(dep.ToString(), out child))
 							//                child._list.Add(dep);
 							//            else
-							//                dict[dep.ToString()] = new PrecedentSummarizer(dep, _isDependentTree);
+							//                dict[dep.ToString()] = new PrecedentSummarizer(dep, _isComputedTree);
 							//        }
 							//    }
 							//}
