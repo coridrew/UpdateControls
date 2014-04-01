@@ -17,7 +17,7 @@ namespace KnockoutCS.Collections
 	{
 		private readonly Func<IEnumerable<KeyValuePair<TKey, TValue>>> _computeCollection;
 		private IDictionary<TKey, TValue> _dictionary;
-		private Dependent _dependentSentry;
+		private Computed _dependentSentry;
 		private bool _recycleValues;
 
 		/// <summary>Initializes DependentDictionary.</summary>
@@ -191,7 +191,7 @@ namespace KnockoutCS.Collections
 
 		#endregion
 
-		public Dependent DependentSentry
+		public Computed DependentSentry
 		{
 			get { return _dependentSentry; }
 		}

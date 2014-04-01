@@ -99,16 +99,16 @@ namespace KnockoutCS
 	/// End Class
 	/// </code>
 	/// </example>
-	public partial class Dependent : Precedent
+	public partial class Computed : Precedent
 	{
-		public static Dependent New(Action update) { return DebugMode ? new NamedDependent(update) : new Dependent(update); }
+		public static Computed New(Action update) { return DebugMode ? new NamedDependent(update) : new Computed(update); }
 		public static Computed<T> New<T>(Func<T> update) { return new Computed<T>(update); }
 		public static NamedDependent New(string name, Action update) { return new NamedDependent(name, update); }
 		public static Computed<T> New<T>(string name, Func<T> update) { return new Computed<T>(name, update); }
 
-        private static ThreadLocal<Dependent> _currentUpdate = new ThreadLocal<Dependent>();
+        private static ThreadLocal<Computed> _currentUpdate = new ThreadLocal<Computed>();
 
-        internal static Dependent GetCurrentUpdate()
+        internal static Computed GetCurrentUpdate()
         {
             return _currentUpdate.Get();
         }
@@ -162,7 +162,7 @@ namespace KnockoutCS
 		/// base class. Instead, update must be null and the _update member must 
 		/// be set afterward.
 		/// </remarks>
-		public Dependent( Action update )
+		public Computed( Action update )
 		{
 			_update = update;
 			_status = StatusType.OUT_OF_DATE;
@@ -190,7 +190,7 @@ namespace KnockoutCS
 			{
 				// We're still not up-to-date (because of a concurrent change).
 				// The current update should similarly not be up-to-date.
-                Dependent currentUpdate = _currentUpdate.Get();
+                Computed currentUpdate = _currentUpdate.Get();
 				if (currentUpdate != null)
 					currentUpdate.MakeOutOfDate();
 			}
@@ -312,7 +312,7 @@ namespace KnockoutCS
 			else if (formerStatus == StatusType.OUT_OF_DATE)
 			{
 				// Push myself to the update stack.
-				Dependent stack = _currentUpdate.Get();
+				Computed stack = _currentUpdate.Get();
                 _currentUpdate.Set(this);
 
 				// Update the attribute.
@@ -323,7 +323,7 @@ namespace KnockoutCS
 				finally
 				{
 					// Pop myself off the update stack.
-					Dependent that = _currentUpdate.Get();
+					Computed that = _currentUpdate.Get();
 					Debug.Assert(that == this);
                     _currentUpdate.Set(stack);
 
@@ -397,8 +397,8 @@ namespace KnockoutCS
 		/// Dependent.</summary>
 		protected class PrecedentVisualizer
 		{
-			Dependent _self;
-			public PrecedentVisualizer(Dependent self) { _self = self; }
+			Computed _self;
+			public PrecedentVisualizer(Computed self) { _self = self; }
 			public override string ToString() { return _self.VisualizerName(true); }
 
 			[DebuggerBrowsable(DebuggerBrowsableState.RootHidden)]
@@ -410,7 +410,7 @@ namespace KnockoutCS
 					{
 						for (PrecedentNode current = _self._firstPrecedent; current != null; current = current.Next)
 						{
-							var dep = current.Precedent as Dependent;
+							var dep = current.Precedent as Computed;
 							var ind = current.Precedent as Observable;
 							if (dep != null)
 								list.Add(new PrecedentVisualizer(dep));
@@ -466,7 +466,7 @@ namespace KnockoutCS
 					var dict = new Dictionary<string, PrecedentSummarizer>();
 					foreach (var item in _precedentsAtThisLevel)
 					{
-						if (item is Dependent) lock (item)
+						if (item is Computed) lock (item)
 						{
 							//if (_isDependentTree)
 							//{
@@ -483,7 +483,7 @@ namespace KnockoutCS
 							//        }
 							//    }
 							//}
-							for (PrecedentNode current = (item as Dependent)._firstPrecedent; current != null; current = current.Next)
+							for (PrecedentNode current = (item as Computed)._firstPrecedent; current != null; current = current.Next)
 							{
 								Precedent p = current.Precedent;
 								string name = p.VisualizerName(false);

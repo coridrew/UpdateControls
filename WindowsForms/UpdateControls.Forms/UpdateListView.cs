@@ -203,12 +203,12 @@ namespace KnockoutCS.Forms
             private IDictionary<object, ListViewGroup> _groupsByTag;
 			private ItemDelegates _itemDelegates;
 
-            private Dependent _depGroup;
-			private Dependent _depText;
-			private Dependent _depSelected;
-			private Dependent _depChecked;
-			private Dependent _depImageIndex;
-			private Dependent _depSubItems;
+            private Computed _depGroup;
+			private Computed _depText;
+			private Computed _depSelected;
+			private Computed _depChecked;
+			private Computed _depImageIndex;
+			private Computed _depSubItems;
 
 			private Observable _dynSelected = Observable.New("UpdateListView.Selected");
 			private Observable _dynChecked = Observable.New("UpdateListView.Checked");
@@ -223,12 +223,12 @@ namespace KnockoutCS.Forms
 				base.Tag = tag;
                 _groupsByTag = groupsByTag;
 				_itemDelegates = itemDelegates;
-                _depGroup = Dependent.New("UpdateListViewItem.Group", UpdateGroup);
-				_depText = Dependent.New("UpdateListViewItem.Text", UpdateText);
-				_depSelected = Dependent.New("UpdateListViewItem.Selected", UpdateSelected);
-				_depChecked = Dependent.New("UpdateListViewItem.Checked", UpdateChecked);
-				_depImageIndex = Dependent.New("UpdateListViewItem.ImageIndex", UpdateImageIndex);
-				_depSubItems = Dependent.New("UpdateListViewItem.SubItems", UpdateSubItems);
+                _depGroup = Computed.New("UpdateListViewItem.Group", UpdateGroup);
+				_depText = Computed.New("UpdateListViewItem.Text", UpdateText);
+				_depSelected = Computed.New("UpdateListViewItem.Selected", UpdateSelected);
+				_depChecked = Computed.New("UpdateListViewItem.Checked", UpdateChecked);
+				_depImageIndex = Computed.New("UpdateListViewItem.ImageIndex", UpdateImageIndex);
+				_depSubItems = Computed.New("UpdateListViewItem.SubItems", UpdateSubItems);
 			}
 
 			public void Dispose()
@@ -459,9 +459,9 @@ namespace KnockoutCS.Forms
             private ListView _listView;
             private ListViewGroup _listViewGroup = null;
 
-            private Dependent _depName;
-            private Dependent _depHeader;
-            private Dependent _depAlignment;
+            private Computed _depName;
+            private Computed _depHeader;
+            private Computed _depAlignment;
 
             public DependentListViewGroup(object tag, GroupDelegates groupDelegates, ListView listView)
             {
@@ -469,9 +469,9 @@ namespace KnockoutCS.Forms
                 _groupDelegates = groupDelegates;
                 _listView = listView;
 
-                _depName = Dependent.New("DependentListViewGroup.Name", UpdateName);
-				_depHeader = Dependent.New("DependentListViewGroup.Header", UpdateHeader);
-				_depAlignment = Dependent.New("DependentListViewGroup.Alignment", UpdateAlignment);
+                _depName = Computed.New("DependentListViewGroup.Name", UpdateName);
+				_depHeader = Computed.New("DependentListViewGroup.Header", UpdateHeader);
+				_depAlignment = Computed.New("DependentListViewGroup.Alignment", UpdateAlignment);
             }
 
             public void Dispose()
@@ -775,16 +775,16 @@ namespace KnockoutCS.Forms
 		[Description("Event fired to determine the sub items of a list view item."),Category("Update")]
 		public event GetObjectCollectionDelegate GetSubItems;
 
-		private Dependent _depEnabled;
-        private Dependent _depGroups;
-        private Dependent _depGroupProperties;
-		private Dependent _depItems;
-        private Dependent _depItemGroups;
-		private Dependent _depItemText;
-		private Dependent _depItemSelected;
-		private Dependent _depItemChecked;
-		private Dependent _depItemImageIndex;
-		private Dependent _depSubItems;
+		private Computed _depEnabled;
+        private Computed _depGroups;
+        private Computed _depGroupProperties;
+		private Computed _depItems;
+        private Computed _depItemGroups;
+		private Computed _depItemText;
+		private Computed _depItemSelected;
+		private Computed _depItemChecked;
+		private Computed _depItemImageIndex;
+		private Computed _depSubItems;
 
 		private int _updating = 0;
 
@@ -798,16 +798,16 @@ namespace KnockoutCS.Forms
 		public UpdateListView()
 		{
             // Create all dependent sentries.
-			_depEnabled = Dependent.New("UpdateListView.Enabled", UpdateEnabled);
-			_depGroups = Dependent.New("UpdateListView.Groups", UpdateGroups);
-			_depGroupProperties = Dependent.New("UpdateListView.GroupProperties", UpdateGroupProperties);
-			_depItems = Dependent.New("UpdateListView.Items", UpdateItems);
-			_depItemGroups = Dependent.New("UpdateListView.ItemGroups", UpdateItemGroups);
-			_depItemText = Dependent.New("UpdateListView.ItemText", UpdateItemText);
-			_depItemSelected = Dependent.New("UpdateListView.ItemSelected", UpdateItemSelected);
-			_depItemChecked = Dependent.New("UpdateListView.ItemChecked", UpdateItemChecked);
-			_depItemImageIndex = Dependent.New("UpdateListView.ItemImageIndex", UpdateItemImageIndex);
-			_depSubItems = Dependent.New("UpdateListView.SubItems", UpdateSubItems);
+			_depEnabled = Computed.New("UpdateListView.Enabled", UpdateEnabled);
+			_depGroups = Computed.New("UpdateListView.Groups", UpdateGroups);
+			_depGroupProperties = Computed.New("UpdateListView.GroupProperties", UpdateGroupProperties);
+			_depItems = Computed.New("UpdateListView.Items", UpdateItems);
+			_depItemGroups = Computed.New("UpdateListView.ItemGroups", UpdateItemGroups);
+			_depItemText = Computed.New("UpdateListView.ItemText", UpdateItemText);
+			_depItemSelected = Computed.New("UpdateListView.ItemSelected", UpdateItemSelected);
+			_depItemChecked = Computed.New("UpdateListView.ItemChecked", UpdateItemChecked);
+			_depItemImageIndex = Computed.New("UpdateListView.ItemImageIndex", UpdateItemImageIndex);
+			_depSubItems = Computed.New("UpdateListView.SubItems", UpdateSubItems);
 		}
 
 		/// <summary>Select an item in the list view.</summary>

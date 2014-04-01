@@ -17,7 +17,7 @@ using System.Linq;
 namespace KnockoutCS
 {
     /// <summary>
-    /// Base class for <see cref="Dynamic"/> and <see cref="Dependent"/> sentries.
+    /// Base class for <see cref="Dynamic"/> and <see cref="Computed"/> sentries.
     /// </summary>
     /// <threadsafety static="true" instance="true"/>
     /// <remarks>
@@ -60,7 +60,7 @@ namespace KnockoutCS
         internal void RecordDependent()
         {
             // Get the current dependent.
-            Dependent update = Dependent.GetCurrentUpdate();
+            Computed update = Computed.GetCurrentUpdate();
             if (update != null && !Contains(update) && update.AddPrecedent(this))
             {
                 if (Insert(update))
@@ -83,14 +83,14 @@ namespace KnockoutCS
             // When I make a dependent out-of-date, it will
             // call RemoveDependent, thereby removing it from
             // the list.
-            Dependent first;
+            Computed first;
             while ((first = First()) != null)
             {
                 first.MakeOutOfDate();
             }
         }
 
-        internal void RemoveDependent(Dependent dependent)
+        internal void RemoveDependent(Computed dependent)
         {
             if (Delete(dependent))
                 LoseDependent();
@@ -115,7 +115,7 @@ namespace KnockoutCS
             get { return Any(); }
 		}
 
-        private bool Insert(Dependent update)
+        private bool Insert(Computed update)
         {
             lock (this)
             {
@@ -127,7 +127,7 @@ namespace KnockoutCS
 
         private static int _referenceCount = 0;
 
-        private bool Delete(Dependent dependent)
+        private bool Delete(Computed dependent)
         {
             lock (this)
             {
@@ -155,7 +155,7 @@ namespace KnockoutCS
             }
         }
 
-        private bool Contains(Dependent update)
+        private bool Contains(Computed update)
         {
             lock (this)
             {
@@ -174,13 +174,13 @@ namespace KnockoutCS
             }
         }
 
-        private Dependent First()
+        private Computed First()
         {
             lock (this)
             {
                 while (_firstDependent != null)
                 {
-                    Dependent dependent = (Dependent)_firstDependent.Dependent.Target;
+                    Computed dependent = (Computed)_firstDependent.Dependent.Target;
                     if (dependent != null)
                         return dependent;
                     else
@@ -201,7 +201,7 @@ namespace KnockoutCS
 		/// <remarks>
 		/// This flag currently just controls automatic name detection for untitled
 		/// NamedObservables, and other precedents that were created without a name 
-		/// by calling <see cref="Observable.New"/>() or <see cref="Dependent.New"/>(),
+		/// by calling <see cref="Observable.New"/>() or <see cref="Computed.New"/>(),
 		/// including dependents created implicitly by <see cref="GuiUpdateHelper"/>.
 		/// <para/>
 		/// DebugMode should be enabled before creating any UpdateControls sentries,
@@ -250,7 +250,7 @@ namespace KnockoutCS
 					{
 						for (DependentNode current = _self._firstDependent; current != null; current = current.Next)
 						{
-							var dep = current.Dependent.Target as Dependent;
+							var dep = current.Dependent.Target as Computed;
 							if (dep != null)
 								list.Add(new DependentVisualizer(dep));
 						}

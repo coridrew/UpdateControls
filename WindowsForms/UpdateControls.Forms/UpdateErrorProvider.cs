@@ -39,7 +39,7 @@ namespace KnockoutCS.Forms
             private GetStringDelegate _getError;
 
             // Dependent error text.
-            private Dependent _depErrorText;
+            private Computed _depErrorText;
             private string _errorText;
 
             public ControlValidater(
@@ -51,7 +51,7 @@ namespace KnockoutCS.Forms
                 _control = control;
                 _getError = getError;
 
-                _depErrorText = new Dependent(UpdateControlError);
+                _depErrorText = new Computed(UpdateControlError);
             }
 
             public void Dispose()
@@ -97,21 +97,21 @@ namespace KnockoutCS.Forms
         private bool _validation = true;
 
         // Visible sentry to update error text.
-        private Dependent _visErrorText;
+        private Computed _visErrorText;
 
         // Intermediate sentries for each control.
         private IDictionary<Control, ControlValidater> _controlSentry = new Dictionary<Control, ControlValidater>();
 
         public UpdateErrorProvider()
         {
-            _visErrorText = new Dependent(UpdateError);
+            _visErrorText = new Computed(UpdateError);
             InitializeComponent();
             Application.Idle += new EventHandler(Application_Idle);
         }
 
         public UpdateErrorProvider(IContainer container)
         {
-            _visErrorText = new Dependent(UpdateError);
+            _visErrorText = new Computed(UpdateError);
             container.Add(this);
 
             InitializeComponent();

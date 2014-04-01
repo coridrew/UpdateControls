@@ -44,8 +44,8 @@ namespace KnockoutCS.Forms
         [Description("Event fired to determine whether the control is enabled."), Category("Update")]
 		public event GetBoolDelegate GetEnabled;
 
-		private Dependent _depText;
-		private Dependent _depEnabled;
+		private Computed _depText;
+		private Computed _depEnabled;
 		private Observable _dynModified = Observable.New("UpdateTextBox.Modified");
 		private Observable _dynError = Observable.New("UpdateTextBox.Error");
 
@@ -60,8 +60,8 @@ namespace KnockoutCS.Forms
 		public UpdateTextBox()
 		{
             // Create all dependent sentries.
-			_depText = Dependent.New("UpdateTextBox.Text", UpdateText);
-			_depEnabled = Dependent.New("UpdateTextBox.Enabled", UpdateEnabled);
+			_depText = Computed.New("UpdateTextBox.Text", UpdateText);
+			_depEnabled = Computed.New("UpdateTextBox.Enabled", UpdateEnabled);
 		}
 
 		private void UpdateText()

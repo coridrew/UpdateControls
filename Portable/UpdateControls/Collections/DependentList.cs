@@ -19,7 +19,7 @@ namespace KnockoutCS.Collections
         private readonly Func<IEnumerable<T>> _computeCollection;
 
         private List<T> _list = new List<T>();
-        private Dependent _dependentSentry;
+        private Computed _dependentSentry;
 
         public DependentList(Func<IEnumerable<T>> computeCollection)
         {
@@ -81,7 +81,7 @@ namespace KnockoutCS.Collections
             return ((System.Collections.IEnumerable)_list).GetEnumerator();
         }
 
-        public Dependent DependentSentry
+        public Computed DependentSentry
         {
             get { return _dependentSentry; }
         }

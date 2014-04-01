@@ -11,7 +11,7 @@ namespace KnockoutCS.UnitTest.ContactListData
         private Observable _indSortOrder = new Observable();
 
         private List<ContactViewModel> _contactViewModels;
-        private Dependent _depContactViewModels;
+        private Computed _depContactViewModels;
 
         public delegate void NotifyCollectionChanged();
         public event NotifyCollectionChanged ContactsCollectionChanged;
@@ -19,7 +19,7 @@ namespace KnockoutCS.UnitTest.ContactListData
         public ContactListViewModel(ContactList contactList)
         {
             _contactList = contactList;
-            _depContactViewModels = new Dependent(UpdateContactViewModels);
+            _depContactViewModels = new Computed(UpdateContactViewModels);
             _depContactViewModels.Invalidated += new Action(_depContactViewModels_Invalidated);
         }
 

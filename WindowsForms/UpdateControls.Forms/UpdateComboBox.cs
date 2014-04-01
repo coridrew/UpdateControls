@@ -33,14 +33,14 @@ namespace KnockoutCS.Forms
 		{
 			private object _tag;
 			private string _text;
-			private Dependent _depText;
+			private Computed _depText;
 			private GetObjectStringDelegate _getItemText;
 
 			public ComboBoxItem( object tag, GetObjectStringDelegate getItemText )
 			{
 				_tag = tag;
 				_getItemText = getItemText;
-				_depText = Dependent.New("ComboBoxItem.Text", UpdateText );
+				_depText = Computed.New("ComboBoxItem.Text", UpdateText );
 			}
 
 			public void Dispose()
@@ -127,10 +127,10 @@ namespace KnockoutCS.Forms
 		[Description("Event fired when the user selects an item."),Category("Update")]
 		public event SetObjectDelegate SetSelectedItem;
 
-		private Dependent _depText;
-		private Dependent _depEnabled;
-		private Dependent _depItems;
-		private Dependent _depSelectedItem;
+		private Computed _depText;
+		private Computed _depEnabled;
+		private Computed _depItems;
+		private Computed _depSelectedItem;
 
 		private Observable _dynModified = new Observable();
 		private Observable _dynSelectedItem = new Observable();
@@ -147,10 +147,10 @@ namespace KnockoutCS.Forms
 		public UpdateComboBox()
 		{
             // Create all dependent sentries.
-			_depText = Dependent.New("UpdateComboBox.Text", UpdateText );
-			_depEnabled = Dependent.New("UpdateComboBox.Enabled", UpdateEnabled);
-			_depItems = Dependent.New("UpdateComboBox.Items", UpdateItems);
-			_depSelectedItem = Dependent.New("UpdateComboBox.SelectedItem", UpdateSelectedItem);
+			_depText = Computed.New("UpdateComboBox.Text", UpdateText );
+			_depEnabled = Computed.New("UpdateComboBox.Enabled", UpdateEnabled);
+			_depItems = Computed.New("UpdateComboBox.Items", UpdateItems);
+			_depSelectedItem = Computed.New("UpdateComboBox.SelectedItem", UpdateSelectedItem);
 		}
 
 		private void UpdateText()

@@ -46,8 +46,8 @@ namespace KnockoutCS.Forms
 		[Description("Event fired with the selected date and time changes."),Category("Update")]
 		public event SetDateTimeDelegate SetValue;
 
-		private Dependent _depEnabled;
-		private Dependent _depValue;
+		private Computed _depEnabled;
+		private Computed _depValue;
 		private Observable _dynValue = Observable.New("UpdateDateTimePicker.Value");
 
 		private int _updating = 0;
@@ -58,8 +58,8 @@ namespace KnockoutCS.Forms
 		public UpdateDateTimePicker()
 		{
             // Create all dependent sentries.
-			_depEnabled = Dependent.New("UpdateDateTimePicker.Enabled", UpdateEnabled);
-			_depValue = Dependent.New("UpdateDateTimePicker.Value", UpdateValue);
+			_depEnabled = Computed.New("UpdateDateTimePicker.Enabled", UpdateEnabled);
+			_depValue = Computed.New("UpdateDateTimePicker.Value", UpdateValue);
 		}
 
 		private void UpdateEnabled()

@@ -39,7 +39,7 @@ namespace KnockoutCS.Forms
 		[Description("Event fired to update the property."),Category("Update")]
 		public event ActionDelegate Update;
 
-		private Dependent _depUpdate;
+		private Computed _depUpdate;
 
 		/// <summary>
 		/// Creates a new dependent component inside a container.
@@ -51,7 +51,7 @@ namespace KnockoutCS.Forms
 			InitializeComponent();
 
 			// Create all dependent sentries.
-			_depUpdate = new Dependent( DoUpdate );
+			_depUpdate = new Computed( DoUpdate );
 
 			// Register idle-time updates.
 			Application.Idle += new EventHandler(Application_Idle);
@@ -65,7 +65,7 @@ namespace KnockoutCS.Forms
             InitializeComponent();
 
 			// Create all dependent sentries.
-			_depUpdate = new Dependent( DoUpdate );
+			_depUpdate = new Computed( DoUpdate );
 
 			// Register idle-time updates.
 			Application.Idle += new EventHandler(Application_Idle);

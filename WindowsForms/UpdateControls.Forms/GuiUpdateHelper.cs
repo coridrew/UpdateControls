@@ -31,7 +31,7 @@ namespace KnockoutCS.Forms
 		/// <summary>Initializes GuiUpdateHelper.</summary>
 		/// <param name="updaters">A list of dependents whose OnGet() method needs to be called during every Application.Idle event.</param>
 		/// <remarks>This constructor immediately subscribes to Application.Idle.</remarks>
-		public GuiUpdateHelper(params Dependent[] dependents) : this(true, dependents) { }
+		public GuiUpdateHelper(params Computed[] dependents) : this(true, dependents) { }
 
 		/// <summary>Initializes a GuiUpdateHelper and associates it with a Windows 
 		/// Forms control.</summary>
@@ -61,13 +61,13 @@ namespace KnockoutCS.Forms
 		/// case the control is not constructed in the GUI thread. Also, these 
 		/// constructors avoid calling OnGet when the control does not physically 
 		/// exist yet.</remarks>
-		public GuiUpdateHelper(Control control, params Dependent[] dependents)
+		public GuiUpdateHelper(Control control, params Computed[] dependents)
 			: this(false, dependents)
 		{
 			InitEvents(control);
 		}
 
-		private GuiUpdateHelper(bool startNow, params Dependent[] dependents)
+		private GuiUpdateHelper(bool startNow, params Computed[] dependents)
 		{
 			_dependents = dependents;
 			if (startNow)
@@ -76,9 +76,9 @@ namespace KnockoutCS.Forms
 
 		private GuiUpdateHelper(bool startNow, params Action[] updaters)
 		{
-			_dependents = new Dependent[updaters.Length];
+			_dependents = new Computed[updaters.Length];
 			for (int i = 0; i < updaters.Length; i++)
-				_dependents[i] = Dependent.New(updaters[i]);
+				_dependents[i] = Computed.New(updaters[i]);
 			if (startNow)
 				StartOnCurrentThread();
 		}
@@ -89,11 +89,11 @@ namespace KnockoutCS.Forms
 			control.HandleDestroyed += (s, e) => Stop();
 		}
 
-		Dependent[] _dependents;
+		Computed[] _dependents;
 		bool _started;
 
 		/// <summary>Finds the dependent associated with the specified updater 
-		/// method and calls its <see cref="Dependent.OnGet"/> method.</summary>
+		/// method and calls its <see cref="Computed.OnGet"/> method.</summary>
 		public void OnGet(Action updater)
 		{
 			for (int i = 0; i < _dependents.Length; i++)

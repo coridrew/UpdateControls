@@ -69,14 +69,14 @@ namespace KnockoutCS.XAML
 
     internal class DependentAtom<T> : DependentPropertyBase, IUpdatable
     {
-        private Dependent _depValue;
+        private Computed _depValue;
         private T _value;
         private Action _firePropertyChanged;
         
         public DependentAtom(Action firePropertyChanged, Func<T> getMethod)
         {
             _firePropertyChanged = firePropertyChanged;
-            _depValue = new Dependent(() => _value = getMethod());
+            _depValue = new Computed(() => _value = getMethod());
             _depValue.Invalidated += () => UpdateScheduler.ScheduleUpdate(this);
         }
 
@@ -94,13 +94,13 @@ namespace KnockoutCS.XAML
     internal class DependentCollection<T> : DependentPropertyBase, IUpdatable
     {
         private Func<IEnumerable<T>> _getMethod;
-        private Dependent _depCollection;
+        private Computed _depCollection;
         private ObservableCollection<T> _collection = new ObservableCollection<T>();
 
         public DependentCollection(Func<IEnumerable<T>> getMethod)
         {
             _getMethod = getMethod;
-            _depCollection = new Dependent(OnUpdateCollection);
+            _depCollection = new Computed(OnUpdateCollection);
             _depCollection.Invalidated += () => UpdateScheduler.ScheduleUpdate(this);
             _depCollection.Touch();
         }

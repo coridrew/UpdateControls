@@ -65,7 +65,7 @@ namespace KnockoutCS.Fields
 		}
 
 		[Obsolete, EditorBrowsable(EditorBrowsableState.Never)]
-		public Dependent DependentSentry
+		public Computed DependentSentry
 		{
 			get { return this; }
 		}

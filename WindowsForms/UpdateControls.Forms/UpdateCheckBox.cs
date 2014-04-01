@@ -54,8 +54,8 @@ namespace KnockoutCS.Forms
         [Description("Event fired to determine whether the control is enabled."), Category("Update")]
 		public event GetBoolDelegate GetEnabled;
 
-		private Dependent _depChecked;
-		private Dependent _depEnabled;
+		private Computed _depChecked;
+		private Computed _depEnabled;
 
 		private Observable _dynChecked = Observable.New("UpdateCheckBox.Checked");
 
@@ -67,8 +67,8 @@ namespace KnockoutCS.Forms
 		public UpdateCheckBox()
 		{
 			// Create all dependent sentries.
-			_depChecked = Dependent.New("UpdateCheckBox.Checked", UpdateChecked);
-			_depEnabled = Dependent.New("UpdateCheckBox.Enabled", UpdateEnabled);
+			_depChecked = Computed.New("UpdateCheckBox.Checked", UpdateChecked);
+			_depEnabled = Computed.New("UpdateCheckBox.Enabled", UpdateEnabled);
 		}
 
 		private void UpdateChecked()

@@ -30,17 +30,17 @@ namespace KnockoutCS
         // Dependent
         private float _targetValue;
         private bool _hasInertia;
-        private Dependent _depTargetValue;
+        private Computed _depTargetValue;
 
         private bool _initialized = false;
         private long _targetTicks;
         private float _a;
         private float _c;
         private bool _atRest = true;
-        private Dependent _depParameters;
+        private Computed _depParameters;
 
         private float _value;
-        private Dependent _depValue;
+        private Computed _depValue;
 
         public InertialProperty(Func<float> getTargetValue)
             : this(getTargetValue, () => true)
@@ -51,9 +51,9 @@ namespace KnockoutCS
         {
             _getTargetValue = getTargetValue;
             _getHasInertia = getHasInertia;
-            _depTargetValue = new Dependent(UpdateTargetValue);
-            _depParameters = new Dependent(UpdateParameters);
-            _depValue = new Dependent(UpdateValue);
+            _depTargetValue = new Computed(UpdateTargetValue);
+            _depParameters = new Computed(UpdateParameters);
+            _depValue = new Computed(UpdateValue);
         }
 
         private void UpdateTargetValue()

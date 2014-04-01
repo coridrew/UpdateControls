@@ -30,7 +30,7 @@ namespace KnockoutCS.XAML
 
             // A dependent flag, true when the command can be executed.
             private bool _canExecute = false;
-            private Dependent _depCanExecute;
+            private Computed _depCanExecute;
 
             public Command(Func<bool> canExecute, Action execute)
             {
@@ -38,7 +38,7 @@ namespace KnockoutCS.XAML
                 _execute = execute;
 
                 // Create a dependent sentry to control the "can execute" flag.
-                _depCanExecute = new Dependent(UpdateCanExecute);
+                _depCanExecute = new Computed(UpdateCanExecute);
                 _depCanExecute.Invalidated += new Action(Invalidated);
 
                 // It begins its life out-of-date, so prepare to update it.

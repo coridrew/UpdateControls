@@ -34,7 +34,7 @@ namespace KnockoutCS.Forms
         [Description("Event fired to determine whether the control is enabled."), Category("Update")]
 		public event GetBoolDelegate GetEnabled;
 
-		private Dependent _depEnabled;
+		private Computed _depEnabled;
 
 		/// <summary>
 		/// Constructs a new dependent button.
@@ -42,7 +42,7 @@ namespace KnockoutCS.Forms
 		public UpdateButton()
 		{
             // Create all dependent sentries.
-			_depEnabled = Dependent.New("UpdateButton.Enabled", UpdateEnabled);
+			_depEnabled = Computed.New("UpdateButton.Enabled", UpdateEnabled);
 		}
 
 		/// <summary>

@@ -7,7 +7,7 @@ using System.Reflection;
 
 namespace KnockoutCS
 {
-	public class NamedDependent : Dependent
+	public class NamedDependent : Computed
 	{
 		public NamedDependent(Action update) : this(null, update) { }
 		public NamedDependent(string name, Action update) : base(update) { _name = name; }

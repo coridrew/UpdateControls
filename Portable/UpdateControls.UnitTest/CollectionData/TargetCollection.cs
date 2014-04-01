@@ -7,12 +7,12 @@ namespace KnockoutCS.UnitTest.CollectionData
     {
         private SourceCollection _source;
         private List<int> _results = new List<int>();
-        private Dependent _depResults;
+        private Computed _depResults;
 
         public TargetCollection(SourceCollection source)
         {
             _source = source;
-            _depResults = new Dependent(UpdateResults);
+            _depResults = new Computed(UpdateResults);
         }
 
         public IEnumerable<int> Results

@@ -32,8 +32,8 @@ namespace KnockoutCS.Forms
 			private object _tag;
 			private string _text;
 			private CheckState _checkState;
-			private Dependent _depText;
-			private Dependent _depCheckState;
+			private Computed _depText;
+			private Computed _depCheckState;
 			private GetObjectStringDelegate _getItemText;
 			private GetObjectCheckStateDelegate _getItemCheckState;
 			private SetObjectCheckStateDelegate _setItemCheckState;
@@ -44,8 +44,8 @@ namespace KnockoutCS.Forms
 				_getItemText = getItemText;
 				_getItemCheckState = getItemCheckState;
 				_setItemCheckState = setItemCheckState;
-				_depText = Dependent.New("CheckedListBoxItem.Text", UpdateText );
-				_depCheckState = Dependent.New("CheckedListBoxItem.CheckState", UpdateCheckState);
+				_depText = Computed.New("CheckedListBoxItem.Text", UpdateText );
+				_depCheckState = Computed.New("CheckedListBoxItem.CheckState", UpdateCheckState);
 			}
 
 			public void Dispose()
@@ -156,9 +156,9 @@ namespace KnockoutCS.Forms
 		[Description("Event fired when the check state of an item is changed."),Category("Update")]
 		public new event SetObjectCheckStateDelegate SetItemCheckState;
 
-		private Dependent _depEnabled;
-		private Dependent _depItems;
-		private Dependent _depItemCheckState;
+		private Computed _depEnabled;
+		private Computed _depItems;
+		private Computed _depItemCheckState;
 
 		private Observable _dynItemCheckState = new Observable();
 
@@ -170,9 +170,9 @@ namespace KnockoutCS.Forms
 		public UpdateCheckedListBox()
 		{
             // Create all dependent sentries.
-			_depEnabled = Dependent.New("UpdateCheckedListBox.Enabled", UpdateEnabled);
-			_depItems = Dependent.New("UpdateCheckedListBox.Items", UpdateItems);
-			_depItemCheckState = Dependent.New("UpdateCheckedListBox.ItemCheckState", UpdateItemCheckState);
+			_depEnabled = Computed.New("UpdateCheckedListBox.Enabled", UpdateEnabled);
+			_depItems = Computed.New("UpdateCheckedListBox.Items", UpdateItems);
+			_depItemCheckState = Computed.New("UpdateCheckedListBox.ItemCheckState", UpdateItemCheckState);
 		}
 
 		private void UpdateEnabled()

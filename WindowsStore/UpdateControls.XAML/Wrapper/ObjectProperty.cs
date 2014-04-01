@@ -19,7 +19,7 @@ namespace KnockoutCS.XAML.Wrapper
         private object _value;
         private List<object> _sourceCollection;
         private ObservableCollection<object> _collection;
-        private Dependent _depValue;
+        private Computed _depValue;
         private bool _initialized = false;
         
         public ObjectProperty(IObjectInstance wrapper, object wrappedObject, PropertyInfo propertyInfo, CustomMemberProvider provider)
@@ -35,7 +35,7 @@ namespace KnockoutCS.XAML.Wrapper
                 _value = _collection;
             }
 
-            _depValue = new Dependent(UpdateValue);
+            _depValue = new Computed(UpdateValue);
             _depValue.Invalidated += ValueInvalidated;
             UpdateNow();
         }

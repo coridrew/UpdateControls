@@ -44,8 +44,8 @@ namespace KnockoutCS.Forms
         [Description("Event fired to determine whether the control is enabled."), Category("Update")]
 		public event GetBoolDelegate GetEnabled;
 
-		private Dependent _depChecked;
-		private Dependent _depEnabled;
+		private Computed _depChecked;
+		private Computed _depEnabled;
 
 		/// <summary>
 		/// Creates a new dependent radio button.
@@ -53,8 +53,8 @@ namespace KnockoutCS.Forms
 		public UpdateRadioButton()
 		{
             // Create all dependent sentries.
-			_depChecked = Dependent.New("UpdateRadioButton.Checked", UpdateChecked);
-			_depEnabled = Dependent.New("UpdateRadioButton.Enabled", UpdateEnabled);
+			_depChecked = Computed.New("UpdateRadioButton.Checked", UpdateChecked);
+			_depEnabled = Computed.New("UpdateRadioButton.Enabled", UpdateEnabled);
 
 			// Turn off AutoCheck by default.
 			base.AutoCheck = false;

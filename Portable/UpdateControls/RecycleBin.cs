@@ -36,7 +36,7 @@ namespace KnockoutCS
 	/// used to keep the set of ViewModels synchronized with the set of Models. 
 	/// RecycleBin plays an important role in this paradigm. If you use a class 
 	/// such as <see cref="DependentList{T}"/>, it will use a RecycleBin for you,
-	/// but if you use <see cref="Dependent"/> directly then you may need to 
+	/// but if you use <see cref="Computed"/> directly then you may need to 
 	/// create a RecycleBin yourself.
 	/// <para/>
 	/// RecycleBin has two purposes: (1) it disposes old objects that are no 
@@ -44,7 +44,7 @@ namespace KnockoutCS
 	/// information in the ViewModel wrappers.
 	/// <para/>
 	/// Typical usage is as follows: you first construct a RecycleBin within a 
-	/// <see cref="Dependent"/>'s update function (assuming that the Dependent 
+	/// <see cref="Computed"/>'s update function (assuming that the Dependent 
 	/// controls a collection.) You fill the recycle bin with the old contents 
 	/// of your collection of ViewModels, then construct a new collection of 
 	/// ViewModels (from scratch, e.g. using a LINQ query over your models), and 

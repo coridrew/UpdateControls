@@ -20,7 +20,7 @@ namespace KnockoutCS.XAML.Wrapper
 	internal abstract class ObjectPropertyCollection : ObjectProperty
 	{
 		private ObservableCollection<object> _collection = new ObservableCollection<object>();
-        private Dependent _depCollection;
+        private Computed _depCollection;
         private Action _delay;
 
         public ObjectPropertyCollection(IObjectInstance objectInstance, ClassProperty classProperty)
@@ -29,7 +29,7 @@ namespace KnockoutCS.XAML.Wrapper
             if (ClassProperty.CanRead)
             {
                 // When the collection is out of date, update it from the wrapped object.
-                _depCollection = new Dependent(OnUpdateCollection);
+                _depCollection = new Computed(OnUpdateCollection);
 
                 // When the property becomes out of date, trigger an update.
                 _depCollection.Invalidated += TriggerUpdate;

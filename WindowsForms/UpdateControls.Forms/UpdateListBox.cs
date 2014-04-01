@@ -33,8 +33,8 @@ namespace KnockoutCS.Forms
 			private object _tag;
 			private string _text;
 			private bool _selected;
-			private Dependent _depText;
-			private Dependent _depSelected;
+			private Computed _depText;
+			private Computed _depSelected;
 			private GetObjectStringDelegate _getItemText;
 			private GetObjectBoolDelegate _getItemSelected;
 			private SetObjectBoolDelegate _setItemSelected;
@@ -45,8 +45,8 @@ namespace KnockoutCS.Forms
 				_getItemText = getItemText;
 				_getItemSelected = getItemSelected;
 				_setItemSelected = setItemSelected;
-				_depText = Dependent.New("ListBoxItem.Text", UpdateText);
-				_depSelected = Dependent.New("ListBoxItem.Selected", UpdateSelected);
+				_depText = Computed.New("ListBoxItem.Text", UpdateText);
+				_depSelected = Computed.New("ListBoxItem.Selected", UpdateSelected);
 			}
 
 			public void Dispose()
@@ -157,9 +157,9 @@ namespace KnockoutCS.Forms
 		[Description("Event fired when the user selects items of a multi-select list box."),Category("Update")]
 		public event SetObjectBoolDelegate SetItemSelected;
 
-		private Dependent _depEnabled;
-		private Dependent _depItems;
-		private Dependent _depSelectedItem;
+		private Computed _depEnabled;
+		private Computed _depItems;
+		private Computed _depSelectedItem;
 
 		private Observable _dynSelectedItem = Observable.New("UpdateListBox.SelectedItem");
 
@@ -171,9 +171,9 @@ namespace KnockoutCS.Forms
 		public UpdateListBox()
 		{
             // Create all dependent sentries.
-			_depEnabled = Dependent.New("UpdateListBox.Enabled", UpdateEnabled );
-			_depItems = Dependent.New("UpdateListBox.Items", UpdateItems );
-			_depSelectedItem = Dependent.New("UpdateListBox.SelectedItem", UpdateSelectedItem );
+			_depEnabled = Computed.New("UpdateListBox.Enabled", UpdateEnabled );
+			_depItems = Computed.New("UpdateListBox.Items", UpdateItems );
+			_depSelectedItem = Computed.New("UpdateListBox.SelectedItem", UpdateSelectedItem );
 		}
 
 		private void UpdateEnabled()

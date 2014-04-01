@@ -44,10 +44,10 @@ namespace KnockoutCS.Forms
 		{
 			private ItemDelegates _itemDelegates;
 
-			private Dependent _depText;
-			private Dependent _depImageIndex;
-			private Dependent _depNodes;
-			private Dependent _depRecursive;
+			private Computed _depText;
+			private Computed _depImageIndex;
+			private Computed _depNodes;
+			private Computed _depRecursive;
 
 			private Observable _dynWasExpanded = Observable.New("UpdateTreeView.WasExpanded");
             private bool _wasExpanded = false;
@@ -58,10 +58,10 @@ namespace KnockoutCS.Forms
 			{
 				base.Tag = tag;
 				_itemDelegates = itemDelegates;
-				_depText = Dependent.New("UpdateTreeView.Text", UpdateText);
-				_depImageIndex = Dependent.New("UpdateTreeView.ImageIndex", UpdateImageIndex);
-				_depNodes = Dependent.New("UpdateTreeView.Nodes", UpdateNodes);
-				_depRecursive = Dependent.New("UpdateTreeView.Recursive", UpdateRecursive);
+				_depText = Computed.New("UpdateTreeView.Text", UpdateText);
+				_depImageIndex = Computed.New("UpdateTreeView.ImageIndex", UpdateImageIndex);
+				_depNodes = Computed.New("UpdateTreeView.Nodes", UpdateNodes);
+				_depRecursive = Computed.New("UpdateTreeView.Recursive", UpdateRecursive);
 			}
 
 			public void Dispose()
@@ -265,10 +265,10 @@ namespace KnockoutCS.Forms
 		[Description("Event fired when the user selects a node in a tree view."),Category("Update")]
 		public event SetObjectDelegate SetSelectedNode;
 
-		private Dependent _depEnabled;
-		private Dependent _depNodes;
-		private Dependent _depRecursive;
-		private Dependent _depSelectedNode;
+		private Computed _depEnabled;
+		private Computed _depNodes;
+		private Computed _depRecursive;
+		private Computed _depSelectedNode;
 
 		private Observable _dynSelectedNode = new Observable();
 
@@ -282,10 +282,10 @@ namespace KnockoutCS.Forms
 		public UpdateTreeView()
 		{
             // Create all dependent sentries.
-			_depEnabled = new Dependent( UpdateEnabled );
-			_depNodes = new Dependent( UpdateNodes );
-			_depRecursive = new Dependent( UpdateRecursive );
-			_depSelectedNode = new Dependent( UpdateSelectedNode );
+			_depEnabled = new Computed( UpdateEnabled );
+			_depNodes = new Computed( UpdateNodes );
+			_depRecursive = new Computed( UpdateRecursive );
+			_depSelectedNode = new Computed( UpdateSelectedNode );
 		}
 
 		/// <summary>

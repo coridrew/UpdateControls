@@ -138,7 +138,7 @@ namespace KnockoutCS
 		{
 			// Verify that dependents are not changing observables, as that
 			// could be a logical circular dependency.
-			if (Dependent.GetCurrentUpdate() != null)
+			if (Computed.GetCurrentUpdate() != null)
 				Debug.Assert(false, "An observable was changed while updating a dependent.");
 
 			// When an observable field changes,

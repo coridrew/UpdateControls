@@ -157,7 +157,7 @@ namespace KnockoutCS.Forms
             private UpdateController _updateController;
             private DataRow _dataRow;
 
-            private Dependent _depValue;
+            private Computed _depValue;
 
             public DependentDataRow(UpdateGrid grid, DataTable table, object tag, UpdateController updateController)
 			{
@@ -165,7 +165,7 @@ namespace KnockoutCS.Forms
                 _table = table;
                 _tag = tag;
                 _updateController = updateController;
-                _depValue = Dependent.New("UpdateDataRow.Value", UpdateValue);
+                _depValue = Computed.New("UpdateDataRow.Value", UpdateValue);
             }
 
 			public void Dispose()
@@ -429,10 +429,10 @@ namespace KnockoutCS.Forms
         [Description("Event fired when the user deletes a row."), Category("Update")]
         public event ObjectActionDelegate RowDeleted;
 
-		private Dependent _depEnabled;
-		private Dependent _depColumns;
-		private Dependent _depItems;
-		private Dependent _depItemValue;
+		private Computed _depEnabled;
+		private Computed _depColumns;
+		private Computed _depItems;
+		private Computed _depItemValue;
         private Observable _dynSelection = new Observable();
 
         private ColumnDefinitions _columnDefinitions;
@@ -453,10 +453,10 @@ namespace KnockoutCS.Forms
             _table.RowDeleting += new DataRowChangeEventHandler(OnRowDeleting);
 
 			// Create all dependent sentries.
-			_depEnabled = Dependent.New("UpdateGrid.Enabled", UpdateEnabled );
-			_depColumns = Dependent.New("UpdateGrid.Columns", UpdateColumns);
-			_depItems = Dependent.New("UpdateGrid.Items", UpdateItems);
-			_depItemValue = Dependent.New("UpdateGrid.ItemValue", UpdateItemValue);
+			_depEnabled = Computed.New("UpdateGrid.Enabled", UpdateEnabled );
+			_depColumns = Computed.New("UpdateGrid.Columns", UpdateColumns);
+			_depItems = Computed.New("UpdateGrid.Items", UpdateItems);
+			_depItemValue = Computed.New("UpdateGrid.ItemValue", UpdateItemValue);
 		}
 
         private void OnColumnChanged(object sender, DataColumnChangeEventArgs e)

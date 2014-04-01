@@ -16,7 +16,7 @@ namespace KnockoutCS.XAML.Wrapper
 {
     internal abstract class ObjectPropertyAtom : ObjectProperty, IUpdatable
     {
-        private Dependent _depProperty;
+        private Computed _depProperty;
         private object _value;
 		private bool _firePropertyChanged = false;
 
@@ -26,7 +26,7 @@ namespace KnockoutCS.XAML.Wrapper
 			if (ClassProperty.CanRead)
 			{
 				// When the property is out of date, update it from the wrapped object.
-				_depProperty = new Dependent(delegate
+				_depProperty = new Computed(delegate
 				{
 					object value = ClassProperty.GetObjectValue(ObjectInstance.WrappedObject);
                     value = TranslateOutgoingValue(value);

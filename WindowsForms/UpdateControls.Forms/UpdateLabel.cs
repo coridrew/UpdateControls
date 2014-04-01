@@ -39,8 +39,8 @@ namespace KnockoutCS.Forms
         [Description("Event fired to determine whether the control is enabled."), Category("Update")]
 		public event GetBoolDelegate GetEnabled;
 
-		private Dependent _depText;
-		private Dependent _depEnabled;
+		private Computed _depText;
+		private Computed _depEnabled;
 
         private int _updating = 0;
 
@@ -50,8 +50,8 @@ namespace KnockoutCS.Forms
 		public UpdateLabel()
 		{
             // Create all dependent sentries.
-			_depText = Dependent.New("UpdateLabel.Text", UpdateText);
-			_depEnabled = Dependent.New("UpdateLabel.Enabled", UpdateEnabled);
+			_depText = Computed.New("UpdateLabel.Text", UpdateText);
+			_depEnabled = Computed.New("UpdateLabel.Enabled", UpdateEnabled);
 		}
 
 		private void UpdateText()

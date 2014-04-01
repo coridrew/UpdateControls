@@ -71,11 +71,11 @@ namespace KnockoutCS.Forms
 		[Description("Event fired to display the bolded dates."),Category("Update")]
 		public event GetDateTimeArrayDelegate GetBoldedDates;
 
-		private Dependent _depEnabled;
-		private Dependent _depSelection;
-		private Dependent _depAnnuallyBoldedDates;
-		private Dependent _depMonthlyBoldedDates;
-		private Dependent _depBoldedDates;
+		private Computed _depEnabled;
+		private Computed _depSelection;
+		private Computed _depAnnuallyBoldedDates;
+		private Computed _depMonthlyBoldedDates;
+		private Computed _depBoldedDates;
 
 		private Observable _dynSelection = new Observable();
 
@@ -87,11 +87,11 @@ namespace KnockoutCS.Forms
 		public UpdateMonthCalendar()
 		{
             // Create all dependent sentries.
-			_depEnabled = Dependent.New("UpdateMonthCalendar.Enabled", UpdateEnabled);
-			_depSelection = Dependent.New("UpdateMonthCalendar.Selection", UpdateSelection);
-			_depAnnuallyBoldedDates = Dependent.New("UpdateMonthCalendar.AnuallyBoldedDates", UpdateAnnuallyBoldedDates);
-			_depMonthlyBoldedDates = Dependent.New("UpdateMonthCalendar.MonthlyBoldedDates", UpdateMonthlyBoldedDates);
-			_depBoldedDates = Dependent.New("UpdateMonthCalendar.BoldedDates", UpdateBoldedDates);
+			_depEnabled = Computed.New("UpdateMonthCalendar.Enabled", UpdateEnabled);
+			_depSelection = Computed.New("UpdateMonthCalendar.Selection", UpdateSelection);
+			_depAnnuallyBoldedDates = Computed.New("UpdateMonthCalendar.AnuallyBoldedDates", UpdateAnnuallyBoldedDates);
+			_depMonthlyBoldedDates = Computed.New("UpdateMonthCalendar.MonthlyBoldedDates", UpdateMonthlyBoldedDates);
+			_depBoldedDates = Computed.New("UpdateMonthCalendar.BoldedDates", UpdateBoldedDates);
 		}
 
 		private void UpdateEnabled()

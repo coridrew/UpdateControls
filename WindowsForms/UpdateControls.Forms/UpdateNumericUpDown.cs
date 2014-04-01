@@ -40,16 +40,16 @@ namespace KnockoutCS.Forms
 
 		private GuiUpdateHelper _helper;
 		private int _updating = 0;
-		private Dependent _depEnabled, _depValueAndRange, _depIncrement;
+		private Computed _depEnabled, _depValueAndRange, _depIncrement;
 
 		/// <summary>
 		/// Creates a new dependent trackbar.
 		/// </summary>
 		public UpdateNumericUpDown()
 		{
-			_depEnabled = Dependent.New("UpdateNumericUpDown.Enabled", UpdateEnabled);
-			_depValueAndRange = Dependent.New("UpdateNumericUpDown.ValueAndRange", UpdateValueAndRange);
-			_depIncrement = Dependent.New("UpdateNumericUpDown.Increment", UpdateIncrement);
+			_depEnabled = Computed.New("UpdateNumericUpDown.Enabled", UpdateEnabled);
+			_depValueAndRange = Computed.New("UpdateNumericUpDown.ValueAndRange", UpdateValueAndRange);
+			_depIncrement = Computed.New("UpdateNumericUpDown.Increment", UpdateIncrement);
 			_helper = new GuiUpdateHelper(this, _depEnabled, _depValueAndRange, _depIncrement);
 		}
 

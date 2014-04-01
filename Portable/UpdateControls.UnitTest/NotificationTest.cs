@@ -27,8 +27,8 @@ namespace KnockoutCS.UnitTest
         private bool _gained;
         private bool _lost;
         private NotifyingObservable _observable;
-        private Dependent _dependent;
-        private Dependent _secondDependent;
+        private Computed _dependent;
+        private Computed _secondDependent;
 
         [TestInitialize]
         public void Initialize()
@@ -37,8 +37,8 @@ namespace KnockoutCS.UnitTest
             _observable = new NotifyingObservable();
             _observable.OnGainDependent += () => { _gained = true; };
             _observable.OnLoseDependent += () => { _lost = true; };
-            _dependent = new Dependent(() => { _observable.OnGet(); });
-            _secondDependent = new Dependent(() => { _observable.OnGet(); });
+            _dependent = new Computed(() => { _observable.OnGet(); });
+            _secondDependent = new Computed(() => { _observable.OnGet(); });
         }
 
         [TestMethod]

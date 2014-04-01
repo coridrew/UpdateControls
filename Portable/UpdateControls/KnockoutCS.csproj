@@ -71,7 +71,7 @@
     <Compile Include="Collections\Impl\UpdateCollectionHelper.cs" />
     <Compile Include="Collections\IndependentDictionary.cs" />
     <Compile Include="Collections\IndependentList.cs" />
-    <Compile Include="Dependent.cs" />
+    <Compile Include="Computed.cs" />
     <Compile Include="Fields\Computed.cs" />
     <Compile Include="Fields\Observable.cs" />
     <Compile Include="Observable.cs" />
