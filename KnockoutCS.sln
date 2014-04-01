@@ -27,7 +27,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpdateControls.XAML", "WPF\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpdateControls.Forms", "WindowsForms\UpdateControls.Forms\UpdateControls.Forms.csproj", "{A559D316-B196-4469-9B83-83682CB5F55D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpdateControls.XAML", "Silverlight\UpdateControls.XAML\UpdateControls.XAML.csproj", "{A618A92D-ADE7-4E18-9AA7-CEA45B5C322E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnockoutCS.XAML", "Silverlight\UpdateControls.XAML\KnockoutCS.XAML.csproj", "{A618A92D-ADE7-4E18-9AA7-CEA45B5C322E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpdateControls.XAML", "WindowsPhone\UpdateControls.XAML\UpdateControls.XAML.csproj", "{97025838-8BB3-46DF-8058-4E890CAFFB63}"
 EndProject
