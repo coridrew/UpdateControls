@@ -92,7 +92,7 @@ namespace KnockoutCS
 
         internal void RemoveComputed(Computed computed)
         {
-            if (Delete(dependent))
+            if (Delete(computed))
                 LoseComputed();
         }
 
@@ -181,7 +181,7 @@ namespace KnockoutCS
                 while (_firstComputed != null)
                 {
                     Computed computed = (Computed)_firstComputed.Computed.Target;
-                    if (dependent != null)
+                    if (computed != null)
                         return computed;
                     else
                         _firstComputed = _firstComputed.Next;

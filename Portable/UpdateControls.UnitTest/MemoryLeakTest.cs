@@ -131,7 +131,7 @@ namespace KnockoutCS.UnitTest
             DirectComputed computed = new DirectComputed(observable);
             observable.SourceProperty = 42;
             Assert.AreEqual(42, computed.ComputedProperty);
-            WeakReference weakComputed = new WeakReference(dependent);
+            WeakReference weakComputed = new WeakReference(computed);
 
             GC.Collect();
             Assert.IsTrue(weakComputed.IsAlive, "Since we hold a strong reference to the computed, the object should still be alive.");

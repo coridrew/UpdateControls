@@ -560,10 +560,10 @@ namespace KnockoutCS.Forms
                         {
                             ComputedDataRow computedDataRow = recycleBin.Extract(
                                 new ComputedDataRow(this, _table, item, _updateController));
-                            _rows.Add(dependentDataRow);
-                            if (dependentDataRow.DataRow == null)
+                            _rows.Add(computedDataRow);
+                            if (computedDataRow.DataRow == null)
                             {
-                                if (Object.Equals(dependentDataRow.Tag, _newTag))
+                                if (Object.Equals(computedDataRow.Tag, _newTag))
                                 {
                                     // The user just added this row.
                                     computedDataRow.DataRow = _newRow;
@@ -574,12 +574,12 @@ namespace KnockoutCS.Forms
                                 {
                                     // Add the new row at this position.
                                     computedDataRow.DataRow = _table.NewRow();
-                                    _table.Rows.InsertAt(dependentDataRow.DataRow, rowIndex);
+                                    _table.Rows.InsertAt(computedDataRow.DataRow, rowIndex);
                                 }
                             }
                             else if (_table.Rows[rowIndex] != computedDataRow.DataRow)
                             {
-                                int priorIndex = _table.Rows.IndexOf(dependentDataRow.DataRow);
+                                int priorIndex = _table.Rows.IndexOf(computedDataRow.DataRow);
                                 if (priorIndex >= 0)
                                 {
                                     // Save the data.
@@ -590,7 +590,7 @@ namespace KnockoutCS.Forms
                                     // Move the existing row up to this position.
                                     _table.Rows.RemoveAt(priorIndex);
                                     computedDataRow.DataRow = _table.NewRow();
-                                    _table.Rows.InsertAt(dependentDataRow.DataRow, rowIndex);
+                                    _table.Rows.InsertAt(computedDataRow.DataRow, rowIndex);
 
                                     // Restore the data.
                                     for (int columnIndex = 0; columnIndex < _table.Columns.Count; ++columnIndex)
@@ -710,8 +710,8 @@ namespace KnockoutCS.Forms
                 foreach (DataGridViewRow row in base.SelectedRows)
                 {
                     ComputedDataRow computedRow = (ComputedDataRow)row.Cells[TAG_COLUMN_NAME].Value;
-                    if (dependentRow != null)
-                        items.Add(dependentRow.Tag);
+                    if (computedRow != null)
+                        items.Add(computedRow.Tag);
                 }
                 return items;
             }
