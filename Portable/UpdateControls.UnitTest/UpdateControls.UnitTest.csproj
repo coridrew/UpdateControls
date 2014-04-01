@@ -77,9 +77,9 @@
     <Compile Include="SourceData.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\UpdateControls\UpdateControls.csproj">
+    <ProjectReference Include="..\UpdateControls\KnockoutCS.csproj">
       <Project>{0f197cdb-cf38-438b-90ad-1b4f0976061e}</Project>
-      <Name>UpdateControls</Name>
+      <Name>KnockoutCS</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

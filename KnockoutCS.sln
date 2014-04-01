@@ -15,7 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WindowsPhone", "WindowsPhon
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WindowsForms", "WindowsForms", "{9642FAB5-5A0E-43D1-B212-D3EBA2940FB2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpdateControls", "Portable\UpdateControls\UpdateControls.csproj", "{0F197CDB-CF38-438B-90AD-1B4F0976061E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnockoutCS", "Portable\UpdateControls\KnockoutCS.csproj", "{0F197CDB-CF38-438B-90AD-1B4F0976061E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpdateControls.Test", "Portable\UpdateControls.Test\UpdateControls.Test.csproj", "{B107C9D8-0F56-4923-BDDD-92653EC82E5A}"
 EndProject

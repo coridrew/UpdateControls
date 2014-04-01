@@ -8,8 +8,8 @@
     <ProjectGuid>{0F197CDB-CF38-438B-90AD-1B4F0976061E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>UpdateControls</RootNamespace>
-    <AssemblyName>UpdateControls</AssemblyName>
+    <RootNamespace>KnockoutCS</RootNamespace>
+    <AssemblyName>KnockoutCS</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Profile158</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
