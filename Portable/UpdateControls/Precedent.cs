@@ -100,7 +100,7 @@ namespace KnockoutCS
         /// True if any other fields depend upon this one.
         /// </summary>
         /// <remarks>
-        /// If any dependent field has used this independent field while updating,
+        /// If any dependent field has used this observable field while updating,
         /// then HasDependents is true. When that dependent becomes out-of-date,
         /// however, it no longer depends upon this field.
         /// <para/>
@@ -211,7 +211,7 @@ namespace KnockoutCS
 		/// having a name.
 		/// <para/>
 		/// DebugMode may slow down your program. In particular, if you use named 
-		/// independents (or <see cref="Observable{T}"/>) but do not explicitly 
+		/// observables (or <see cref="Observable{T}"/>) but do not explicitly 
 		/// specify a name, DebugMode will cause them to compute their names based 
 		/// on a stack trace the first time OnGet() is called; this process is
 		/// expensive if it is repeated for a large number of Observables.

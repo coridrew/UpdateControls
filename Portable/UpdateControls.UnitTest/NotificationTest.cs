@@ -26,7 +26,7 @@ namespace KnockoutCS.UnitTest
     {
         private bool _gained;
         private bool _lost;
-        private NotifyingObservable _independent;
+        private NotifyingObservable _observable;
         private Dependent _dependent;
         private Dependent _secondDependent;
 
@@ -34,24 +34,24 @@ namespace KnockoutCS.UnitTest
         public void Initialize()
         {
             _gained = false;
-            _independent = new NotifyingObservable();
-            _independent.OnGainDependent += () => { _gained = true; };
-            _independent.OnLoseDependent += () => { _lost = true; };
-            _dependent = new Dependent(() => { _independent.OnGet(); });
-            _secondDependent = new Dependent(() => { _independent.OnGet(); });
+            _observable = new NotifyingObservable();
+            _observable.OnGainDependent += () => { _gained = true; };
+            _observable.OnLoseDependent += () => { _lost = true; };
+            _dependent = new Dependent(() => { _observable.OnGet(); });
+            _secondDependent = new Dependent(() => { _observable.OnGet(); });
         }
 
         [TestMethod]
         public void DoesNotGainDependentOnCreation()
         {
-            Assert.IsFalse(_gained, "The independent should not have gained a dependent.");
+            Assert.IsFalse(_gained, "The observable should not have gained a dependent.");
         }
 
         [TestMethod]
         public void GainsDependentOnFirstUse()
         {
             _dependent.OnGet();
-            Assert.IsTrue(_gained, "The independent should have gained a dependent.");
+            Assert.IsTrue(_gained, "The observable should have gained a dependent.");
         }
 
         [TestMethod]
@@ -60,28 +60,28 @@ namespace KnockoutCS.UnitTest
             _dependent.OnGet();
             _gained = false;
             _secondDependent.OnGet();
-            Assert.IsFalse(_gained, "The independent should not have gained a dependent.");
+            Assert.IsFalse(_gained, "The observable should not have gained a dependent.");
         }
 
         [TestMethod]
         public void DoesNotLoseDependentOnCreation()
         {
-            Assert.IsFalse(_lost, "The independent should not have lost a dependent.");
+            Assert.IsFalse(_lost, "The observable should not have lost a dependent.");
         }
 
         [TestMethod]
         public void DoesNotLoseDependentOnFirstUse()
         {
             _dependent.OnGet();
-            Assert.IsFalse(_lost, "The independent should not have lost a dependent.");
+            Assert.IsFalse(_lost, "The observable should not have lost a dependent.");
         }
 
         [TestMethod]
         public void LosesDependentWhenChanging()
         {
             _dependent.OnGet();
-            _independent.OnSet();
-            Assert.IsTrue(_lost, "The independent should have lost a dependent.");
+            _observable.OnSet();
+            Assert.IsTrue(_lost, "The observable should have lost a dependent.");
         }
     }
 }

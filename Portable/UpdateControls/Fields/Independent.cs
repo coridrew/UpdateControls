@@ -42,9 +42,9 @@ namespace KnockoutCS.Fields
 				}
 			}
 		}
-		public static implicit operator T(Observable<T> independent)
+		public static implicit operator T(Observable<T> observable)
 		{
-			return independent.Value;
+			return observable.Value;
 		}
 
 		public override string VisualizerName(bool withValue)

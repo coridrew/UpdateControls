@@ -127,9 +127,9 @@ namespace KnockoutCS.UnitTest
         public void DirectDependentObjectCanBeGarbageCollected()
         {
             GC.Collect();
-            SourceData independent = new SourceData();
-            DirectDependent dependent = new DirectDependent(independent);
-            independent.SourceProperty = 42;
+            SourceData observable = new SourceData();
+            DirectDependent dependent = new DirectDependent(observable);
+            observable.SourceProperty = 42;
             Assert.AreEqual(42, dependent.DependentProperty);
             WeakReference weakDependent = new WeakReference(dependent);
 
@@ -142,19 +142,19 @@ namespace KnockoutCS.UnitTest
             GC.Collect();
             Assert.IsFalse(weakDependent.IsAlive, "Since we released the strong reference to the dependent, the object should not be alive.");
 
-            // Make sure we can still modify the independent.
-            independent.SourceProperty = 32;
-            Assert.AreEqual(32, independent.SourceProperty);
+            // Make sure we can still modify the observable.
+            observable.SourceProperty = 32;
+            Assert.AreEqual(32, observable.SourceProperty);
         }
 
         [TestMethod]
         public void IndirectDependentObjectCanBeGarbageCollected()
         {
             GC.Collect();
-            SourceData independent = new SourceData();
-            DirectDependent intermediate = new DirectDependent(independent);
+            SourceData observable = new SourceData();
+            DirectDependent intermediate = new DirectDependent(observable);
             IndirectDependent indirectDependent = new IndirectDependent(intermediate);
-            independent.SourceProperty = 42;
+            observable.SourceProperty = 42;
             Assert.AreEqual(42, indirectDependent.DependentProperty);
             WeakReference weakIndirectDependent = new WeakReference(indirectDependent);
 
@@ -167,9 +167,9 @@ namespace KnockoutCS.UnitTest
             GC.Collect();
             Assert.IsFalse(weakIndirectDependent.IsAlive, "Since we released the strong reference to the dependent, the object should not be alive.");
 
-            // Make sure we can still modify the independent, and that the intermediate still depends upon it.
-            independent.SourceProperty = 32;
-            Assert.AreEqual(32, independent.SourceProperty);
+            // Make sure we can still modify the observable, and that the intermediate still depends upon it.
+            observable.SourceProperty = 32;
+            Assert.AreEqual(32, observable.SourceProperty);
             Assert.AreEqual(32, intermediate.DependentProperty);
         }
     }

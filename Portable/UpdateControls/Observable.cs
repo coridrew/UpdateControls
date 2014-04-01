@@ -16,12 +16,12 @@ using KnockoutCS.Fields;
 namespace KnockoutCS
 {
 	/// <summary>
-	/// A sentry that controls an independent field.
+	/// A sentry that controls an observable field.
 	/// </summary>
 	/// <threadsafety static="true" instance="true"/>
 	/// <remarks>
-	/// An independent field is one whose value can be changed externally at
-	/// any time. Create one Observable sentry for each independent field in
+	/// An observable field is one whose value can be changed externally at
+	/// any time. Create one Observable sentry for each observable field in
 	/// your object.
 	/// </remarks>
 	/// <example>A class using Observable sentries.
@@ -136,12 +136,12 @@ namespace KnockoutCS
 		/// </remarks>
 		public void OnSet()
 		{
-			// Verify that dependents are not changing independents, as that
+			// Verify that dependents are not changing observables, as that
 			// could be a logical circular dependency.
 			if (Dependent.GetCurrentUpdate() != null)
-				Debug.Assert(false, "An independent was changed while updating a dependent.");
+				Debug.Assert(false, "An observable was changed while updating a dependent.");
 
-			// When an independent field changes,
+			// When an observable field changes,
 			// its dependents become out-of-date.
 			MakeDependentsOutOfDate();
 		}

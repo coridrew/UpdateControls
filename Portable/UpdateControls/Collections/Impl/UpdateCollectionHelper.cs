@@ -9,7 +9,7 @@ namespace KnockoutCS.Collections.Impl
 	/// ObservableDictionary to represent the "Keys" and "Values" members.</summary>
 	/// <remarks>
 	/// If you save a reference to the Keys or Values property of <see cref="ObservableDictionary{TKey,TValue}"/>,
-	/// the independent sentry should be informed when that collection is accessed. 
+	/// the observable sentry should be informed when that collection is accessed. 
 	/// This helper class ensures that the sentry is notified.
 	/// <para/>
 	/// For <see cref="DependentDictionary{TKey,TValue}"/>, this class is even more 
