@@ -66,11 +66,11 @@
     <Compile Include="..\..\Common\CommonProperties.cs">
       <Link>Properties\CommonProperties.cs</Link>
     </Compile>
-    <Compile Include="Collections\DependentDictionary.cs" />
-    <Compile Include="Collections\DependentList.cs" />
+    <Compile Include="Collections\ComputedDictionary.cs" />
+    <Compile Include="Collections\ComputedList.cs" />
     <Compile Include="Collections\Impl\UpdateCollectionHelper.cs" />
-    <Compile Include="Collections\IndependentDictionary.cs" />
-    <Compile Include="Collections\IndependentList.cs" />
+    <Compile Include="Collections\ObservableDictionary.cs" />
+    <Compile Include="Collections\ObservableList.cs" />
     <Compile Include="Computed.cs" />
     <Compile Include="Fields\Computed.cs" />
     <Compile Include="Fields\Observable.cs" />
