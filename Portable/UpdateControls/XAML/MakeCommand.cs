@@ -28,7 +28,7 @@ namespace KnockoutCS.XAML
             private Func<bool> _canExecuteFunction;
             private Action _execute;
 
-            // A dependent flag, true when the command can be executed.
+            // A computed flag, true when the command can be executed.
             private bool _canExecute = false;
             private Computed _depCanExecute;
 
@@ -37,7 +37,7 @@ namespace KnockoutCS.XAML
                 _canExecuteFunction = canExecute;
                 _execute = execute;
 
-                // Create a dependent sentry to control the "can execute" flag.
+                // Create a computed sentry to control the "can execute" flag.
                 _depCanExecute = new Computed(UpdateCanExecute);
                 _depCanExecute.Invalidated += new Action(Invalidated);
 
@@ -77,7 +77,7 @@ namespace KnockoutCS.XAML
             {
                 // Here is where the flag gets updated. The update function
                 // is executed, and the result is stored in the "can execute"
-                // flag. I become dependent upon anything that the update
+                // flag. I become computed upon anything that the update
                 // function touches.
                 _canExecute = _canExecuteFunction();
             }

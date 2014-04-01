@@ -22,7 +22,7 @@ namespace KnockoutCS.Forms.Util
     /// changes. A user change should cause a property to be set, but a
     /// programmatic change should not.
     /// <para/>
-    /// Create an UpdateController to manage the corresponding dependent
+    /// Create an UpdateController to manage the corresponding computed
     /// property. Enclose the update method within using (<see cref="BeginUpdate"/>).
     /// Then in the change event, use if (<see cref="NotUpdating"/>) to
     /// ensure that reentrancy has not occurred.

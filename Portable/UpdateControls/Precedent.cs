@@ -34,18 +34,18 @@ namespace KnockoutCS
         internal ComputedNode _firstComputed = null;
 
         /// <summary>
-        /// Method called when the first dependent references this field. This event only
+        /// Method called when the first computed references this field. This event only
         /// fires when HasComputeds goes from false to true. If the field already
-        /// has dependents, then this event does not fire.
+        /// has computeds, then this event does not fire.
         /// </summary>
         protected virtual void GainComputed()
         {
         }
 
         /// <summary>
-        /// Method called when the last dependent goes out-of-date. This event
+        /// Method called when the last computed goes out-of-date. This event
         /// only fires when HasComputeds goes from true to false. If the field has
-        /// other dependents, then this event does not fire. If the dependent is
+        /// other computeds, then this event does not fire. If the computed is
         /// currently updating and it still depends upon this field, then the
         /// GainComputed event will be fired immediately.
         /// </summary>
@@ -55,11 +55,11 @@ namespace KnockoutCS
 
         /// <summary>
         /// Establishes a relationship between this precedent and the currently
-        /// updating dependent.
+        /// updating computed.
         /// </summary>
         internal void RecordComputed()
         {
-            // Get the current dependent.
+            // Get the current computed.
             Computed update = Computed.GetCurrentUpdate();
             if (update != null && !Contains(update) && update.AddPrecedent(this))
             {
@@ -76,11 +76,11 @@ namespace KnockoutCS
         }
 
         /// <summary>
-        /// Makes all direct and indirect dependents out of date.
+        /// Makes all direct and indirect computeds out of date.
         /// </summary>
         internal void MakeComputedsOutOfDate()
         {
-            // When I make a dependent out-of-date, it will
+            // When I make a computed out-of-date, it will
             // call RemoveComputed, thereby removing it from
             // the list.
             Computed first;
@@ -90,7 +90,7 @@ namespace KnockoutCS
             }
         }
 
-        internal void RemoveComputed(Computed dependent)
+        internal void RemoveComputed(Computed computed)
         {
             if (Delete(dependent))
                 LoseComputed();
@@ -100,15 +100,15 @@ namespace KnockoutCS
         /// True if any other fields depend upon this one.
         /// </summary>
         /// <remarks>
-        /// If any dependent field has used this observable field while updating,
-        /// then HasComputeds is true. When that dependent becomes out-of-date,
+        /// If any computed field has used this observable field while updating,
+        /// then HasComputeds is true. When that computed becomes out-of-date,
         /// however, it no longer depends upon this field.
         /// <para/>
-        /// This property is useful for caching. When all dependents are up-to-date,
+        /// This property is useful for caching. When all computeds are up-to-date,
         /// check this property for cached fields. If it is false, then nothing
         /// depends upon the field, and it can be unloaded. Be careful not to
-        /// unload the cache while dependents are still out-of-date, since
-        /// those dependents may in fact need the field when they update.
+        /// unload the cache while computeds are still out-of-date, since
+        /// those computeds may in fact need the field when they update.
         /// </remarks>
         public bool HasComputeds
 		{
@@ -127,7 +127,7 @@ namespace KnockoutCS
 
         private static int _referenceCount = 0;
 
-        private bool Delete(Computed dependent)
+        private bool Delete(Computed computed)
         {
             lock (this)
             {
@@ -136,11 +136,11 @@ namespace KnockoutCS
                 for (ComputedNode current = _firstComputed; current != null; current = current.Next)
                 {
                     object target = current.Computed.Target;
-                    if (target == null || target == dependent)
+                    if (target == null || target == computed)
                     {
                         if (target == null)
                             System.Diagnostics.Debug.WriteLine(String.Format("Dead reference {0}", _referenceCount++));
-                        if (target == dependent)
+                        if (target == computed)
                             ++count;
                         if (prior == null)
                             _firstComputed = current.Next;
@@ -150,7 +150,7 @@ namespace KnockoutCS
                     else
                         prior = current;
                 }
-				if (count != 1) Debug.Assert(false, String.Format("Expected 1 dependent, found {0}.", count));
+				if (count != 1) Debug.Assert(false, String.Format("Expected 1 computed, found {0}.", count));
                 return _firstComputed == null;
             }
         }
@@ -180,9 +180,9 @@ namespace KnockoutCS
             {
                 while (_firstComputed != null)
                 {
-                    Computed dependent = (Computed)_firstComputed.Computed.Target;
+                    Computed computed = (Computed)_firstComputed.Computed.Target;
                     if (dependent != null)
-                        return dependent;
+                        return computed;
                     else
                         _firstComputed = _firstComputed.Next;
                 }
@@ -202,7 +202,7 @@ namespace KnockoutCS
 		/// This flag currently just controls automatic name detection for untitled
 		/// NamedObservables, and other precedents that were created without a name 
 		/// by calling <see cref="Observable.New"/>() or <see cref="Computed.New"/>(),
-		/// including dependents created implicitly by <see cref="GuiUpdateHelper"/>.
+		/// including computeds created implicitly by <see cref="GuiUpdateHelper"/>.
 		/// <para/>
 		/// DebugMode should be enabled before creating any UpdateControls sentries,
 		/// otherwise some of them may never get a name. For example, if 

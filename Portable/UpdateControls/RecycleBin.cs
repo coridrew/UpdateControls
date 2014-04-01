@@ -32,7 +32,7 @@ namespace KnockoutCS
 	/// a ListBox.
 	/// <para/>
 	/// In the UpdateControls paradigm, you will typically create (at most) one
-	/// ViewModel object for each Model, and some kind of dependent collection is 
+	/// ViewModel object for each Model, and some kind of computed collection is 
 	/// used to keep the set of ViewModels synchronized with the set of Models. 
 	/// RecycleBin plays an important role in this paradigm. If you use a class 
 	/// such as <see cref="ComputedList{T}"/>, it will use a RecycleBin for you,
@@ -70,7 +70,7 @@ namespace KnockoutCS
 	/// <para/>
 	/// In general, your implementation of GetHashCode and Equals must only 
 	/// consider fields that do not change. If a field can be changed, or is
-	/// itself dependent, then it must not be used either as part of the
+	/// itself computed, then it must not be used either as part of the
 	/// hash code, or to determine equality. The best practice is to
 	/// implement GetHashCode and Equals in terms of fields that are
 	/// initialized by the constructor, and are thereafter immutable.
@@ -78,7 +78,7 @@ namespace KnockoutCS
 	/// The advantage of RecycleBin is not found in any time or memory savings.
 	/// In fact, using RecycleBin in most cases adds a small amount of overhead.
 	/// However, the advantage comes from preserving the dynamic and
-	/// dependent state of the recycled objects. If your depenent collection
+	/// computed state of the recycled objects. If your depenent collection
 	/// contains only immutable objects (such as strings), there is no
 	/// advantage to using a RecycleBin.
 	/// </remarks>
@@ -97,7 +97,7 @@ namespace KnockoutCS
 		/// Creates an empty recycle bin.
 		/// </summary>
 		/// <remarks>
-		/// The recycle bin should be filled with objects from a dependent
+		/// The recycle bin should be filled with objects from a computed
 		/// collection, and the collection should be emptied. Then it can be
 		/// repopulated by extraction from the bin.
 		/// </remarks>

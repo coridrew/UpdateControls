@@ -61,7 +61,7 @@ namespace KnockoutCS.UnitTest
 
             _model.AddContact(new Contact() { FirstName = "Bertrand", LastName = "Meyer" });
 
-            Assert.IsTrue(wasInvalidated, "The dependent list should be invalidated.");
+            Assert.IsTrue(wasInvalidated, "The computed list should be invalidated.");
         }
 
         [TestMethod]
@@ -76,7 +76,7 @@ namespace KnockoutCS.UnitTest
 
             _model.Contacts.First().FirstName = "George";
 
-            Assert.IsFalse(wasInvalidated, "The dependent list should not be invalidated.");
+            Assert.IsFalse(wasInvalidated, "The computed list should not be invalidated.");
         }
     }
 }

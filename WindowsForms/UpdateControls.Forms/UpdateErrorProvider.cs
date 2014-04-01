@@ -267,7 +267,7 @@ namespace KnockoutCS.Forms
 
         private void Application_Idle(object sender, EventArgs e)
         {
-            // Update all dependent sentries.
+            // Update all computed sentries.
             _visErrorText.OnGet();
         }
 

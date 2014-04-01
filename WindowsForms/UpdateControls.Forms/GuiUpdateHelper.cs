@@ -8,7 +8,7 @@ namespace KnockoutCS.Forms
 {
 	/// <summary>
 	/// Helps implement WinForms Update Controls and other user-facing properties
-	/// by automatically updating a list of dependents (which usually correspond 
+	/// by automatically updating a list of computeds (which usually correspond 
 	/// to actual properties of a control) when an Application.Idle event arrives.
 	/// </summary>
 	/// <remarks>
@@ -24,14 +24,14 @@ namespace KnockoutCS.Forms
 		/// <summary>Initializes GuiUpdateHelper.</summary>
 		/// <param name="updaters">A list of methods that perform updates.</param>
 		/// <remarks>This constructor immediately subscribes to Application.Idle,
-		/// and creates a series of dependents (one for each updater method) whose
+		/// and creates a series of computeds (one for each updater method) whose
 		/// OnGet() method is called during the Idle event.</remarks>
 		public GuiUpdateHelper(params Action[] updaters) : this(true, updaters) { }
 		
 		/// <summary>Initializes GuiUpdateHelper.</summary>
-		/// <param name="updaters">A list of dependents whose OnGet() method needs to be called during every Application.Idle event.</param>
+		/// <param name="updaters">A list of computeds whose OnGet() method needs to be called during every Application.Idle event.</param>
 		/// <remarks>This constructor immediately subscribes to Application.Idle.</remarks>
-		public GuiUpdateHelper(params Computed[] dependents) : this(true, dependents) { }
+		public GuiUpdateHelper(params Computed[] computeds) : this(true, computeds) { }
 
 		/// <summary>Initializes a GuiUpdateHelper and associates it with a Windows 
 		/// Forms control.</summary>
@@ -53,7 +53,7 @@ namespace KnockoutCS.Forms
 		/// <summary>Initializes a GuiUpdateHelper and associates it with a Windows 
 		/// Forms control.</summary>
 		/// <param name="control">A control.</param>
-		/// <param name="updaters">A list of dependents whose OnGet() method needs to be called during every Application.Idle event.</param>
+		/// <param name="updaters">A list of computeds whose OnGet() method needs to be called during every Application.Idle event.</param>
 		/// <remarks>The constructors that take a "control" parameter do not handle 
 		/// the Application.Idle event immediately. Instead, they wait until the 
 		/// control fires the HandleCreated event. This ensures that GuiUpdateHelper
@@ -61,15 +61,15 @@ namespace KnockoutCS.Forms
 		/// case the control is not constructed in the GUI thread. Also, these 
 		/// constructors avoid calling OnGet when the control does not physically 
 		/// exist yet.</remarks>
-		public GuiUpdateHelper(Control control, params Computed[] dependents)
-			: this(false, dependents)
+		public GuiUpdateHelper(Control control, params Computed[] computeds)
+			: this(false, computeds)
 		{
 			InitEvents(control);
 		}
 
-		private GuiUpdateHelper(bool startNow, params Computed[] dependents)
+		private GuiUpdateHelper(bool startNow, params Computed[] computeds)
 		{
-			_computeds = dependents;
+			_computeds = computeds;
 			if (startNow)
 				StartOnCurrentThread();
 		}
@@ -92,7 +92,7 @@ namespace KnockoutCS.Forms
 		Computed[] _computeds;
 		bool _started;
 
-		/// <summary>Finds the dependent associated with the specified updater 
+		/// <summary>Finds the computed associated with the specified updater 
 		/// method and calls its <see cref="Computed.OnGet"/> method.</summary>
 		public void OnGet(Action updater)
 		{
@@ -101,13 +101,13 @@ namespace KnockoutCS.Forms
 					_computeds[i].OnGet();
 		}
 
-		/// <summary>This method is called after updating all dependents,
+		/// <summary>This method is called after updating all computeds,
 		/// regardless of whether anything changed.</summary>
-		/// <remarks>The boolean is true if any of the dependents were
+		/// <remarks>The boolean is true if any of the computeds were
 		/// out-of-date.</remarks>
 		public event Action<bool> OnUpdate;
 
-		/// <summary>Forces any out-of-date dependents to update, and 
+		/// <summary>Forces any out-of-date computeds to update, and 
 		/// fires the OnUpdate event.</summary>
 		virtual public void UpdateNow()
 		{

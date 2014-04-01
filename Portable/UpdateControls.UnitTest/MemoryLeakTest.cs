@@ -36,7 +36,7 @@ namespace KnockoutCS.UnitTest
             // Started at 92.
             // Making Precedent a base class: 80.
             // Removing Gain/LoseComputed events: 72.
-            // Custom linked list implementation for dependents: 48.
+            // Custom linked list implementation for computeds: 48.
             // Other optimizations: 40.
             // Removed WeakReferenceToSelf: 20.
             Assert.AreEqual(20 + ObservablePlatformOffset, end - start);
@@ -58,7 +58,7 @@ namespace KnockoutCS.UnitTest
             // Making Precedent a base class: 248.
             // Removing Gain/LoseComputed events: 232.
             // Making IsUpToDate no longer a precident: 192.
-            // Custom linked list implementation for dependents: 152.
+            // Custom linked list implementation for computeds: 152.
             // Custom linked list implementation for precedents: 112.
             // Other optimizations: 104.
 			// Added WeakReferenceToSelf: 108.
@@ -84,7 +84,7 @@ namespace KnockoutCS.UnitTest
             // Making Precedent a base class: 312.
             // Removing Gain/LoseComputed events: 288.
             // Making IsUpToDate no longer a precident: 248.
-            // Custom linked list implementation for dependents: 200.
+            // Custom linked list implementation for computeds: 200.
             // Custom linked list implementation for precedents: 160.
             // Other optimizations: 144.
 			// Added WeakReferenceToSelf: 148.
@@ -111,9 +111,9 @@ namespace KnockoutCS.UnitTest
             // Making Precedent a base class: 436.
             // Removing Gain/LoseComputed events: 412.
             // Making IsUpToDate no longer a precident: 372.
-            // Custom linked list implementation for dependents: 308.
+            // Custom linked list implementation for computeds: 308.
             // Custom linked list implementation for precedents: 192.
-            // Weak reference to dependents: 208.
+            // Weak reference to computeds: 208.
             // Other optimizations: 192.
 			// Added WeakReferenceToSelf: 196.
             // Removed WeakReferenceToSelf: 168 - 324.
@@ -128,19 +128,19 @@ namespace KnockoutCS.UnitTest
         {
             GC.Collect();
             SourceData observable = new SourceData();
-            DirectComputed dependent = new DirectComputed(observable);
+            DirectComputed computed = new DirectComputed(observable);
             observable.SourceProperty = 42;
-            Assert.AreEqual(42, dependent.ComputedProperty);
+            Assert.AreEqual(42, computed.ComputedProperty);
             WeakReference weakComputed = new WeakReference(dependent);
 
             GC.Collect();
-            Assert.IsTrue(weakComputed.IsAlive, "Since we hold a strong reference to the dependent, the object should still be alive.");
-            // This assertion here to make sure the dependent is not optimized away.
-            Assert.AreEqual(42, dependent.ComputedProperty);
+            Assert.IsTrue(weakComputed.IsAlive, "Since we hold a strong reference to the computed, the object should still be alive.");
+            // This assertion here to make sure the computed is not optimized away.
+            Assert.AreEqual(42, computed.ComputedProperty);
 
-            dependent = null;
+            computed = null;
             GC.Collect();
-            Assert.IsFalse(weakComputed.IsAlive, "Since we released the strong reference to the dependent, the object should not be alive.");
+            Assert.IsFalse(weakComputed.IsAlive, "Since we released the strong reference to the computed, the object should not be alive.");
 
             // Make sure we can still modify the observable.
             observable.SourceProperty = 32;
@@ -159,13 +159,13 @@ namespace KnockoutCS.UnitTest
             WeakReference weakIndirectComputed = new WeakReference(indirectComputed);
 
             GC.Collect();
-            Assert.IsTrue(weakIndirectComputed.IsAlive, "Since we hold a strong reference to the dependent, the object should still be alive.");
-            // This assertion here to make sure the dependent is not optimized away.
+            Assert.IsTrue(weakIndirectComputed.IsAlive, "Since we hold a strong reference to the computed, the object should still be alive.");
+            // This assertion here to make sure the computed is not optimized away.
             Assert.AreEqual(42, indirectComputed.ComputedProperty);
 
             indirectComputed = null;
             GC.Collect();
-            Assert.IsFalse(weakIndirectComputed.IsAlive, "Since we released the strong reference to the dependent, the object should not be alive.");
+            Assert.IsFalse(weakIndirectComputed.IsAlive, "Since we released the strong reference to the computed, the object should not be alive.");
 
             // Make sure we can still modify the observable, and that the intermediate still depends upon it.
             observable.SourceProperty = 32;

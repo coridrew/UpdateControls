@@ -18,35 +18,35 @@ using KnockoutCS.Fields;
 namespace KnockoutCS
 {
 	/// <summary>
-	/// A sentry that controls a dependent field.
+	/// A sentry that controls a computed field.
 	/// <seealso cref="UpdateProcedure"/>
 	/// <seealso cref="RecycleBin{T}"/>
 	/// </summary>
 	/// <threadsafety static="true" instance="true"/>
 	/// <remarks>
 	/// <para>
-	/// A dependent field is one whose value is determined by an update
+	/// A computed field is one whose value is determined by an update
 	/// procedure. Use a Computed sentry to control such a field.
 	/// </para><para>
-	/// Define a field of type Computed in the same class as the dependent
+	/// Define a field of type Computed in the same class as the computed
 	/// field, and initialize it with an update procedure, also defined
 	/// within the class.
 	/// </para><para>
-	/// Calculate and set the dependent field within
-	/// the update procedure. No other code should modify the dependent
+	/// Calculate and set the computed field within
+	/// the update procedure. No other code should modify the computed
 	/// field.
 	/// </para><para>
-	/// Before each line of code that gets the dependent field, call
+	/// Before each line of code that gets the computed field, call
 	/// the sentry's <see cref="Computed.OnGet"/>. This will ensure
 	/// that the field is up-to-date, and will record any dependencies
 	/// upon the field.
 	/// </para><para>
-	/// If the dependent field is a collection, consider using a
+	/// If the computed field is a collection, consider using a
 	/// <see cref="RecycleBin{T}"/> to prevent complete destruction and
 	/// recreation of the contents of the collection.
 	/// </para>
 	/// </remarks>
-	/// <example>A class with a dependent field.
+	/// <example>A class with a computed field.
 	/// <code language="C#">
 	/// 	public class MyCalculatedObject
 	/// 	{
@@ -114,7 +114,7 @@ namespace KnockoutCS
         }
 
         /// <summary>
-        /// Event fired when the dependent becomes out-of-date.
+        /// Event fired when the computed becomes out-of-date.
         /// <remarks>
         /// This event should not call <see cref="OnGet"/>. However, it should
         /// set up the conditions for OnGet to be called. For example, it could
@@ -151,7 +151,7 @@ namespace KnockoutCS
 		private PrecedentNode _firstPrecedent = null;
 
 		/// <summary>
-		/// Creates a new dependent sentry with a given update procedure.
+		/// Creates a new computed sentry with a given update procedure.
 		/// <seealso cref="UpdateProcedure"/>
 		/// </summary>
 		/// <param name="update">The procedure that updates the value of the controled field.</param>
@@ -173,9 +173,9 @@ namespace KnockoutCS
 		/// </summary>
 		/// <remarks>
 		/// If the controlled field is out-of-date, this function calls the
-		/// update procedure to bring it back up-to-date. If another dependent
-		/// is currently updating, that dependent depends upon this one; when this
-		/// dependent goes out-of-date again, that one does as well.
+		/// update procedure to bring it back up-to-date. If another computed
+		/// is currently updating, that computed depends upon this one; when this
+		/// computed goes out-of-date again, that one does as well.
 		/// </remarks>
 		public void OnGet()
 		{
@@ -198,14 +198,14 @@ namespace KnockoutCS
 
 		/// <summary>
 		/// Call this method to tear down dependencies prior to destroying
-		/// the dependent.
+		/// the computed.
 		/// </summary>
 		/// <remarks>
 		/// While it is not absolutely necessary to call this method, doing
 		/// so can help the garbage collector to reclaim the object. While
-		/// the dependent is up-to-date, all of its precedents maintain
+		/// the computed is up-to-date, all of its precedents maintain
 		/// pointers. Calling this method destroys those pointers so that
-		/// the dependent can be removed from memory.
+		/// the computed can be removed from memory.
 		/// </remarks>
 		public void Dispose()
 		{
@@ -214,7 +214,7 @@ namespace KnockoutCS
 		}
 
         /// <summary>
-        /// Read only property that is true when the dependent is up-to-date.
+        /// Read only property that is true when the computed is up-to-date.
         /// </summary>
         public bool IsUpToDate
         {
@@ -229,7 +229,7 @@ namespace KnockoutCS
         }
 
         /// <summary>
-        /// Read only property that is true when the dependent is not updating.
+        /// Read only property that is true when the computed is not updating.
         /// </summary>
         public bool IsNotUpdating
         {
@@ -245,7 +245,7 @@ namespace KnockoutCS
         }
 
         /// <summary>
-        /// Bring the dependent up-to-date, but don't take a dependency on it. This is
+        /// Bring the computed up-to-date, but don't take a dependency on it. This is
         /// useful for pre-loading properties of an object as it is created. It avoids
         /// the appearance of a list populated with empty objects while properties
         /// of that object are loaded.
@@ -282,7 +282,7 @@ namespace KnockoutCS
 			}
 
             if (wasUpToDate)
-                // Make all indirect dependents out-of-date, too.
+                // Make all indirect computeds out-of-date, too.
                 MakeComputedsOutOfDate();
         }
 

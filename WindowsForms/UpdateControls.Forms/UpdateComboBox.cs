@@ -142,11 +142,11 @@ namespace KnockoutCS.Forms
         private string _errorText = string.Empty;
 
 		/// <summary>
-		/// Creates a new dependent combo box.
+		/// Creates a new computed combo box.
 		/// </summary>
 		public UpdateComboBox()
 		{
-            // Create all dependent sentries.
+            // Create all computed sentries.
 			_depText = Computed.New("UpdateComboBox.Text", UpdateText );
 			_depEnabled = Computed.New("UpdateComboBox.Enabled", UpdateEnabled);
 			_depItems = Computed.New("UpdateComboBox.Items", UpdateItems);
@@ -341,7 +341,7 @@ namespace KnockoutCS.Forms
 
 		private void Application_Idle(object sender, EventArgs e)
 		{
-			// Update all dependent sentries.
+			// Update all computed sentries.
 			_depText.OnGet();
 			_depEnabled.OnGet();
 			_depItems.OnGet();

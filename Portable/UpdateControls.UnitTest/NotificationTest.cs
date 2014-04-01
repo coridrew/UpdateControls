@@ -44,14 +44,14 @@ namespace KnockoutCS.UnitTest
         [TestMethod]
         public void DoesNotGainComputedOnCreation()
         {
-            Assert.IsFalse(_gained, "The observable should not have gained a dependent.");
+            Assert.IsFalse(_gained, "The observable should not have gained a computed.");
         }
 
         [TestMethod]
         public void GainsComputedOnFirstUse()
         {
             _computed.OnGet();
-            Assert.IsTrue(_gained, "The observable should have gained a dependent.");
+            Assert.IsTrue(_gained, "The observable should have gained a computed.");
         }
 
         [TestMethod]
@@ -60,20 +60,20 @@ namespace KnockoutCS.UnitTest
             _computed.OnGet();
             _gained = false;
             _secondComputed.OnGet();
-            Assert.IsFalse(_gained, "The observable should not have gained a dependent.");
+            Assert.IsFalse(_gained, "The observable should not have gained a computed.");
         }
 
         [TestMethod]
         public void DoesNotLoseComputedOnCreation()
         {
-            Assert.IsFalse(_lost, "The observable should not have lost a dependent.");
+            Assert.IsFalse(_lost, "The observable should not have lost a computed.");
         }
 
         [TestMethod]
         public void DoesNotLoseComputedOnFirstUse()
         {
             _computed.OnGet();
-            Assert.IsFalse(_lost, "The observable should not have lost a dependent.");
+            Assert.IsFalse(_lost, "The observable should not have lost a computed.");
         }
 
         [TestMethod]
@@ -81,7 +81,7 @@ namespace KnockoutCS.UnitTest
         {
             _computed.OnGet();
             _observable.OnSet();
-            Assert.IsTrue(_lost, "The observable should have lost a dependent.");
+            Assert.IsTrue(_lost, "The observable should have lost a computed.");
         }
     }
 }

@@ -26,7 +26,7 @@ namespace KnockoutCS.UnitTest
 			_source.SourceProperty = 3;
 			int fetch = _computed.ComputedProperty;
 
-			Assert.IsFalse(_computed.IsUpToDate, "The dependent is up to date after a concurrent change");
+			Assert.IsFalse(_computed.IsUpToDate, "The computed is up to date after a concurrent change");
 		}
 
 		[TestMethod]
@@ -51,7 +51,7 @@ namespace KnockoutCS.UnitTest
 
 			fetch = _computed.ComputedProperty;
 
-			Assert.IsTrue(_computed.IsUpToDate, "The dependent is not up to date after the second get");
+			Assert.IsTrue(_computed.IsUpToDate, "The computed is not up to date after the second get");
 		}
 
 		[TestMethod]
@@ -82,7 +82,7 @@ namespace KnockoutCS.UnitTest
 			fetch = _computed.ComputedProperty;
 			_source.SourceProperty = 5;
 
-			Assert.IsFalse(_computed.IsUpToDate, "The dependent no longer depends upon the precedent");
+			Assert.IsFalse(_computed.IsUpToDate, "The computed no longer depends upon the precedent");
 		}
 
 		[TestMethod]

@@ -115,8 +115,8 @@ namespace KnockoutCS
 		/// sentry controls.
 		/// </summary>
 		/// <remarks>
-		/// Any dependent fields that are currently updating will depend upon
-		/// this field; when the field changes, the dependent becomes
+		/// Any computed fields that are currently updating will depend upon
+		/// this field; when the field changes, the computed becomes
 		/// out-of-date.
 		/// </remarks>
 		public virtual void OnGet()
@@ -131,18 +131,18 @@ namespace KnockoutCS
 		/// sentry controls.
 		/// </summary>
 		/// <remarks>
-		/// Any dependent fields that depend upon this field will become
+		/// Any computed fields that depend upon this field will become
 		/// out-of-date.
 		/// </remarks>
 		public void OnSet()
 		{
-			// Verify that dependents are not changing observables, as that
+			// Verify that computeds are not changing observables, as that
 			// could be a logical circular dependency.
 			if (Computed.GetCurrentUpdate() != null)
-				Debug.Assert(false, "An observable was changed while updating a dependent.");
+				Debug.Assert(false, "An observable was changed while updating a computed.");
 
 			// When an observable field changes,
-			// its dependents become out-of-date.
+			// its computeds become out-of-date.
 			MakeComputedsOutOfDate();
 		}
 

@@ -103,15 +103,15 @@ namespace KnockoutCS.Forms
 		private Observable _dynFormTable = new Observable();
 
 		/// <summary>
-		/// Creates a new dependent form map inside a container.
+		/// Creates a new computed form map inside a container.
 		/// </summary>
-		/// <param name="container">The container to which to add the dependent form map.</param>
+		/// <param name="container">The container to which to add the computed form map.</param>
 		public UpdateFormMap(System.ComponentModel.IContainer container)
 		{
             container.Add(this);
 			InitializeComponent();
 
-			// Create all dependent sentries.
+			// Create all computed sentries.
 			_depForms = new Computed( UpdateForms );
 
 			// Register idle-time updates.
@@ -119,13 +119,13 @@ namespace KnockoutCS.Forms
 		}
 
 		/// <summary>
-		/// Creates a new dependent form map without adding it to a container.
+		/// Creates a new computed form map without adding it to a container.
 		/// </summary>
 		public UpdateFormMap()
 		{
 			InitializeComponent();
 
-			// Create all dependent sentries.
+			// Create all computed sentries.
 			_depForms = new Computed( UpdateForms );
 
 			// Register idle-time updates.

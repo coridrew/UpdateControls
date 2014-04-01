@@ -43,7 +43,7 @@ namespace KnockoutCS.Forms
 		private Computed _depEnabled, _depValueAndRange, _depIncrement;
 
 		/// <summary>
-		/// Creates a new dependent trackbar.
+		/// Creates a new computed trackbar.
 		/// </summary>
 		public UpdateNumericUpDown()
 		{

@@ -7,7 +7,7 @@ namespace KnockoutCS.Collections
 {
 	using KnockoutCS.Collections.Impl;
 
-	/// <summary>A dictionary tied to a dependent sentry.</summary>
+	/// <summary>A dictionary tied to a computed sentry.</summary>
 	/// <remarks>
 	/// To use ComputedDictionary, you must pass a method to the constructor whose 
 	/// job is to choose the contents of the dictionary (either as a list of key-

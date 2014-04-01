@@ -22,21 +22,21 @@ namespace KnockoutCS.UnitTest
 		[TestMethod]
 		public void ComputedIsInitiallyOutOfDate()
 		{
-			Assert.IsFalse(_computed.IsUpToDate, "The dependent is initially up to date");
+			Assert.IsFalse(_computed.IsUpToDate, "The computed is initially up to date");
 		}
 
 		[TestMethod]
 		public void ComputedRemainsOutOfDateOnChange()
 		{
 			_source.SourceProperty = 3;
-			Assert.IsFalse(_computed.IsUpToDate, "The dependent is up to date after change");
+			Assert.IsFalse(_computed.IsUpToDate, "The computed is up to date after change");
 		}
 
 		[TestMethod]
 		public void ComputedIsUpdatedOnGet()
 		{
 			int fetch = _computed.ComputedProperty;
-			Assert.IsTrue(_computed.IsUpToDate, "The dependent has not been updated");
+			Assert.IsTrue(_computed.IsUpToDate, "The computed has not been updated");
 		}
 
 		[TestMethod]
@@ -44,7 +44,7 @@ namespace KnockoutCS.UnitTest
 		{
 			_source.SourceProperty = 3;
 			int fetch = _computed.ComputedProperty;
-			Assert.IsTrue(_computed.IsUpToDate, "The dependent has not been updated");
+			Assert.IsTrue(_computed.IsUpToDate, "The computed has not been updated");
 		}
 
 		[TestMethod]
@@ -60,7 +60,7 @@ namespace KnockoutCS.UnitTest
 			_source.SourceProperty = 3;
 			int fetch = _computed.ComputedProperty;
 			_source.SourceProperty = 4;
-			Assert.IsFalse(_computed.IsUpToDate, "The dependent did not go out of date");
+			Assert.IsFalse(_computed.IsUpToDate, "The computed did not go out of date");
 		}
 
 		[TestMethod]
@@ -70,7 +70,7 @@ namespace KnockoutCS.UnitTest
 			int fetch = _computed.ComputedProperty;
 			_source.SourceProperty = 4;
 			fetch = _computed.ComputedProperty;
-			Assert.IsTrue(_computed.IsUpToDate, "The dependent did not get udpated");
+			Assert.IsTrue(_computed.IsUpToDate, "The computed did not get udpated");
 		}
 
 		[TestMethod]

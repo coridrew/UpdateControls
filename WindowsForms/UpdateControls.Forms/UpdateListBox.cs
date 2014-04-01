@@ -166,11 +166,11 @@ namespace KnockoutCS.Forms
         private int _updating = 0;
 
 		/// <summary>
-		/// Creates a new dependent list box.
+		/// Creates a new computed list box.
 		/// </summary>
 		public UpdateListBox()
 		{
-            // Create all dependent sentries.
+            // Create all computed sentries.
 			_depEnabled = Computed.New("UpdateListBox.Enabled", UpdateEnabled );
 			_depItems = Computed.New("UpdateListBox.Items", UpdateItems );
 			_depSelectedItem = Computed.New("UpdateListBox.SelectedItem", UpdateSelectedItem );
@@ -319,7 +319,7 @@ namespace KnockoutCS.Forms
 
         private void Application_Idle(object sender, EventArgs e)
         {
-            // Update all dependent sentries.
+            // Update all computed sentries.
             if (!this.Capture)
             {
                 _depEnabled.OnGet();

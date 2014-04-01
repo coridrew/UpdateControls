@@ -443,7 +443,7 @@ namespace KnockoutCS.Forms
         private UpdateController _updateController = new UpdateController();
 
 		/// <summary>
-		/// Creates a new dependent grid.
+		/// Creates a new computed grid.
 		/// </summary>
 		public UpdateGrid()
 		{
@@ -452,7 +452,7 @@ namespace KnockoutCS.Forms
             _table.ColumnChanged += new DataColumnChangeEventHandler(OnColumnChanged);
             _table.RowDeleting += new DataRowChangeEventHandler(OnRowDeleting);
 
-			// Create all dependent sentries.
+			// Create all computed sentries.
 			_depEnabled = Computed.New("UpdateGrid.Enabled", UpdateEnabled );
 			_depColumns = Computed.New("UpdateGrid.Columns", UpdateColumns);
 			_depItems = Computed.New("UpdateGrid.Items", UpdateItems);
@@ -558,7 +558,7 @@ namespace KnockoutCS.Forms
                         // Extract each item from the recycle bin.
                         foreach (object item in GetItems())
                         {
-                            ComputedDataRow dependentDataRow = recycleBin.Extract(
+                            ComputedDataRow computedDataRow = recycleBin.Extract(
                                 new ComputedDataRow(this, _table, item, _updateController));
                             _rows.Add(dependentDataRow);
                             if (dependentDataRow.DataRow == null)
@@ -566,18 +566,18 @@ namespace KnockoutCS.Forms
                                 if (Object.Equals(dependentDataRow.Tag, _newTag))
                                 {
                                     // The user just added this row.
-                                    dependentDataRow.DataRow = _newRow;
+                                    computedDataRow.DataRow = _newRow;
                                     _newTag = null;
                                     _newRow = null;
                                 }
                                 else
                                 {
                                     // Add the new row at this position.
-                                    dependentDataRow.DataRow = _table.NewRow();
+                                    computedDataRow.DataRow = _table.NewRow();
                                     _table.Rows.InsertAt(dependentDataRow.DataRow, rowIndex);
                                 }
                             }
-                            else if (_table.Rows[rowIndex] != dependentDataRow.DataRow)
+                            else if (_table.Rows[rowIndex] != computedDataRow.DataRow)
                             {
                                 int priorIndex = _table.Rows.IndexOf(dependentDataRow.DataRow);
                                 if (priorIndex >= 0)
@@ -585,16 +585,16 @@ namespace KnockoutCS.Forms
                                     // Save the data.
                                     object[] data = new object[_table.Columns.Count];
                                     for (int columnIndex = 0; columnIndex < _table.Columns.Count; ++columnIndex)
-                                        data[columnIndex] = dependentDataRow.DataRow[columnIndex];
+                                        data[columnIndex] = computedDataRow.DataRow[columnIndex];
 
                                     // Move the existing row up to this position.
                                     _table.Rows.RemoveAt(priorIndex);
-                                    dependentDataRow.DataRow = _table.NewRow();
+                                    computedDataRow.DataRow = _table.NewRow();
                                     _table.Rows.InsertAt(dependentDataRow.DataRow, rowIndex);
 
                                     // Restore the data.
                                     for (int columnIndex = 0; columnIndex < _table.Columns.Count; ++columnIndex)
-                                        dependentDataRow.DataRow[columnIndex] = data[columnIndex];
+                                        computedDataRow.DataRow[columnIndex] = data[columnIndex];
                                 }
                             }
                             ++rowIndex;
@@ -615,8 +615,8 @@ namespace KnockoutCS.Forms
 		private void UpdateItemValue()
 		{
 			_depItems.OnGet();
-            foreach (ComputedDataRow dependentDataRow in _rows)
-                dependentDataRow.OnGetValue();
+            foreach (ComputedDataRow computedDataRow in _rows)
+                computedDataRow.OnGetValue();
 		}
 
 		/// <summary>
@@ -642,8 +642,8 @@ namespace KnockoutCS.Forms
 			_depColumns.Dispose();
 			_depItems.Dispose();
 			_depItemValue.Dispose();
-            foreach (ComputedDataRow dependentDataRow in _rows)
-                dependentDataRow.Dispose();
+            foreach (ComputedDataRow computedDataRow in _rows)
+                computedDataRow.Dispose();
 			base.OnHandleDestroyed (e);
 		}
 
@@ -657,7 +657,7 @@ namespace KnockoutCS.Forms
 
 		private void Application_Idle(object sender, EventArgs e)
 		{
-			// Update all dependent sentries.
+			// Update all computed sentries.
 			_depEnabled.OnGet();
 			_depColumns.OnGet();
 			_depItems.OnGet();
@@ -709,7 +709,7 @@ namespace KnockoutCS.Forms
                 ArrayList items = new ArrayList();
                 foreach (DataGridViewRow row in base.SelectedRows)
                 {
-                    ComputedDataRow dependentRow = (ComputedDataRow)row.Cells[TAG_COLUMN_NAME].Value;
+                    ComputedDataRow computedRow = (ComputedDataRow)row.Cells[TAG_COLUMN_NAME].Value;
                     if (dependentRow != null)
                         items.Add(dependentRow.Tag);
                 }

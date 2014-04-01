@@ -165,11 +165,11 @@ namespace KnockoutCS.Forms
 		private int _updating = 0;
 
 		/// <summary>
-		/// Creates a new dependent checked list box.
+		/// Creates a new computed checked list box.
 		/// </summary>
 		public UpdateCheckedListBox()
 		{
-            // Create all dependent sentries.
+            // Create all computed sentries.
 			_depEnabled = Computed.New("UpdateCheckedListBox.Enabled", UpdateEnabled);
 			_depItems = Computed.New("UpdateCheckedListBox.Items", UpdateItems);
 			_depItemCheckState = Computed.New("UpdateCheckedListBox.ItemCheckState", UpdateItemCheckState);
@@ -328,7 +328,7 @@ namespace KnockoutCS.Forms
 
 		private void Application_Idle(object sender, EventArgs e)
 		{
-			// Update all dependent sentries.
+			// Update all computed sentries.
 			_depEnabled.OnGet();
 			_depItems.OnGet();
 			_depItemCheckState.OnGet();

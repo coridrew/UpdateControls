@@ -42,7 +42,7 @@ namespace KnockoutCS.Forms
 		private Computed _depUpdate;
 
 		/// <summary>
-		/// Creates a new dependent component inside a container.
+		/// Creates a new computed component inside a container.
 		/// </summary>
 		/// <param name="container">The container to which to add the component.</param>
 		public UpdateComponent(System.ComponentModel.IContainer container)
@@ -50,7 +50,7 @@ namespace KnockoutCS.Forms
 			container.Add(this);
 			InitializeComponent();
 
-			// Create all dependent sentries.
+			// Create all computed sentries.
 			_depUpdate = new Computed( DoUpdate );
 
 			// Register idle-time updates.
@@ -58,13 +58,13 @@ namespace KnockoutCS.Forms
 		}
 
 		/// <summary>
-		/// Creates a new dependent component without adding it to a container.
+		/// Creates a new computed component without adding it to a container.
 		/// </summary>
 		public UpdateComponent()
 		{
             InitializeComponent();
 
-			// Create all dependent sentries.
+			// Create all computed sentries.
 			_depUpdate = new Computed( DoUpdate );
 
 			// Register idle-time updates.
@@ -100,7 +100,7 @@ namespace KnockoutCS.Forms
 
 		private void Application_Idle(object sender, EventArgs e)
 		{
-			// Update all dependent sentries.
+			// Update all computed sentries.
 			_depUpdate.OnGet();
 		}
 

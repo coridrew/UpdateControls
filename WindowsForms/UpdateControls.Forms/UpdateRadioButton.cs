@@ -48,11 +48,11 @@ namespace KnockoutCS.Forms
 		private Computed _depEnabled;
 
 		/// <summary>
-		/// Creates a new dependent radio button.
+		/// Creates a new computed radio button.
 		/// </summary>
 		public UpdateRadioButton()
 		{
-            // Create all dependent sentries.
+            // Create all computed sentries.
 			_depChecked = Computed.New("UpdateRadioButton.Checked", UpdateChecked);
 			_depEnabled = Computed.New("UpdateRadioButton.Enabled", UpdateEnabled);
 
@@ -104,7 +104,7 @@ namespace KnockoutCS.Forms
 
 		private void Application_Idle(object sender, EventArgs e)
 		{
-			// Update all dependent sentries.
+			// Update all computed sentries.
 			_depChecked.OnGet();
 			_depEnabled.OnGet();
 		}

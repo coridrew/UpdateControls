@@ -37,11 +37,11 @@ namespace KnockoutCS.Forms
 		private Computed _depEnabled;
 
 		/// <summary>
-		/// Constructs a new dependent button.
+		/// Constructs a new computed button.
 		/// </summary>
 		public UpdateButton()
 		{
-            // Create all dependent sentries.
+            // Create all computed sentries.
 			_depEnabled = Computed.New("UpdateButton.Enabled", UpdateEnabled);
 		}
 
@@ -85,7 +85,7 @@ namespace KnockoutCS.Forms
 
 		private void Application_Idle(object sender, EventArgs e)
 		{
-			// Update all dependent sentries.
+			// Update all computed sentries.
 			_depEnabled.OnGet();
 		}
 

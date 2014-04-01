@@ -63,17 +63,17 @@ namespace KnockoutCS.XAML.Wrapper
 
         public ObjectProperty LookupProperty(CustomMemberProvider provider)
         {
-            ObjectProperty dependentProperty;
-            if (!_propertyByName.TryGetValue(provider, out dependentProperty))
+            ObjectProperty computedProperty;
+            if (!_propertyByName.TryGetValue(provider, out computedProperty))
             {
                 PropertyInfo propertyInfo = _wrappedObject.GetType().GetRuntimeProperty(provider.Name);
                 if (propertyInfo == null)
                     return null;
 
-                dependentProperty = new ObjectProperty(this, _wrappedObject, propertyInfo, provider);
-                _propertyByName.Add(provider, dependentProperty);
+                computedProperty = new ObjectProperty(this, _wrappedObject, propertyInfo, provider);
+                _propertyByName.Add(provider, computedProperty);
             }
-            return dependentProperty;
+            return computedProperty;
         }
 
         public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;

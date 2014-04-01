@@ -794,10 +794,10 @@ namespace KnockoutCS.Forms
         private GroupDelegates _groupDelegates;
         private IDictionary<object, ListViewGroup> _groupsByTag = new Dictionary<object, ListViewGroup>();
 
-		/// <summary>Creates a new dependent list view.</summary>
+		/// <summary>Creates a new computed list view.</summary>
 		public UpdateListView()
 		{
-            // Create all dependent sentries.
+            // Create all computed sentries.
 			_depEnabled = Computed.New("UpdateListView.Enabled", UpdateEnabled);
 			_depGroups = Computed.New("UpdateListView.Groups", UpdateGroups);
 			_depGroupProperties = Computed.New("UpdateListView.GroupProperties", UpdateGroupProperties);
@@ -1088,7 +1088,7 @@ namespace KnockoutCS.Forms
 		{
             if (!this.Capture)
             {
-                // Update all dependent sentries.
+                // Update all computed sentries.
                 _depEnabled.OnGet();
                 _depGroups.OnGet();
                 _depGroupProperties.OnGet();

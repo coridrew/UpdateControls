@@ -45,11 +45,11 @@ namespace KnockoutCS.Forms
         private int _updating = 0;
 
 		/// <summary>
-		/// Creates a new dependent label.
+		/// Creates a new computed label.
 		/// </summary>
 		public UpdateLabel()
 		{
-            // Create all dependent sentries.
+            // Create all computed sentries.
 			_depText = Computed.New("UpdateLabel.Text", UpdateText);
 			_depEnabled = Computed.New("UpdateLabel.Enabled", UpdateEnabled);
 		}
@@ -102,7 +102,7 @@ namespace KnockoutCS.Forms
 
 		private void Application_Idle(object sender, EventArgs e)
 		{
-			// Update all dependent sentries.
+			// Update all computed sentries.
 			_depText.OnGet();
 			_depEnabled.OnGet();
 		}

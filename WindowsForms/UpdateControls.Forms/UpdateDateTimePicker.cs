@@ -53,11 +53,11 @@ namespace KnockoutCS.Forms
 		private int _updating = 0;
 
 		/// <summary>
-		/// Creates a new dependent date/time picker.
+		/// Creates a new computed date/time picker.
 		/// </summary>
 		public UpdateDateTimePicker()
 		{
-            // Create all dependent sentries.
+            // Create all computed sentries.
 			_depEnabled = Computed.New("UpdateDateTimePicker.Enabled", UpdateEnabled);
 			_depValue = Computed.New("UpdateDateTimePicker.Value", UpdateValue);
 		}
@@ -112,7 +112,7 @@ namespace KnockoutCS.Forms
 
 		private void Application_Idle(object sender, EventArgs e)
 		{
-			// Update all dependent sentries.
+			// Update all computed sentries.
 			_depEnabled.OnGet();
 			_depValue.OnGet();
 		}

@@ -277,11 +277,11 @@ namespace KnockoutCS.Forms
 		private ItemDelegates _itemDelegates;
 
 		/// <summary>
-		/// Creates a new dependent tree view.
+		/// Creates a new computed tree view.
 		/// </summary>
 		public UpdateTreeView()
 		{
-            // Create all dependent sentries.
+            // Create all computed sentries.
 			_depEnabled = new Computed( UpdateEnabled );
 			_depNodes = new Computed( UpdateNodes );
 			_depRecursive = new Computed( UpdateRecursive );
@@ -409,7 +409,7 @@ namespace KnockoutCS.Forms
 			{
 				if ( GetSelectedNode != null )
 				{
-					// Selection is dependent.
+					// Selection is computed.
 					base.SelectedNode = NodeFromTag( GetSelectedNode() );
 				}
 				else
@@ -542,7 +542,7 @@ namespace KnockoutCS.Forms
 		{
             if (!this.Capture)
             {
-                // Update all dependent sentries.
+                // Update all computed sentries.
                 _depEnabled.OnGet();
                 _depNodes.OnGet();
                 _depRecursive.OnGet();

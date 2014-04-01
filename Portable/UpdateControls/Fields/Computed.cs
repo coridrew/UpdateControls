@@ -43,9 +43,9 @@ namespace KnockoutCS.Fields
 		{
 			get { base.OnGet(); return _value; }
 		}
-		public static implicit operator T(Computed<T> dependent)
+		public static implicit operator T(Computed<T> computed)
 		{
-			return dependent.Value;
+			return computed.Value;
 		}
 
 		public override string VisualizerName(bool withValue)

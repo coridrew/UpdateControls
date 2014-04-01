@@ -62,11 +62,11 @@ namespace KnockoutCS.Forms
 		private int _updating = 0;
 
 		/// <summary>
-		/// Creates a new dependent check box.
+		/// Creates a new computed check box.
 		/// </summary>
 		public UpdateCheckBox()
 		{
-			// Create all dependent sentries.
+			// Create all computed sentries.
 			_depChecked = Computed.New("UpdateCheckBox.Checked", UpdateChecked);
 			_depEnabled = Computed.New("UpdateCheckBox.Enabled", UpdateEnabled);
 		}
@@ -137,7 +137,7 @@ namespace KnockoutCS.Forms
 
 		private void Application_Idle(object sender, EventArgs e)
 		{
-			// Update all dependent sentries.
+			// Update all computed sentries.
 			_depChecked.OnGet();
 			_depEnabled.OnGet();
 		}

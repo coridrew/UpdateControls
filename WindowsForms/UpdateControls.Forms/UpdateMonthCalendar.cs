@@ -82,11 +82,11 @@ namespace KnockoutCS.Forms
 		private int _updating = 0;
 
 		/// <summary>
-		/// Creates a new dependent month calendar.
+		/// Creates a new computed month calendar.
 		/// </summary>
 		public UpdateMonthCalendar()
 		{
-            // Create all dependent sentries.
+            // Create all computed sentries.
 			_depEnabled = Computed.New("UpdateMonthCalendar.Enabled", UpdateEnabled);
 			_depSelection = Computed.New("UpdateMonthCalendar.Selection", UpdateSelection);
 			_depAnnuallyBoldedDates = Computed.New("UpdateMonthCalendar.AnuallyBoldedDates", UpdateAnnuallyBoldedDates);
@@ -186,7 +186,7 @@ namespace KnockoutCS.Forms
 
 		private void Application_Idle(object sender, EventArgs e)
 		{
-			// Update all dependent sentries.
+			// Update all computed sentries.
 			_depEnabled.OnGet();
 			_depSelection.OnGet();
 			_depAnnuallyBoldedDates.OnGet();
