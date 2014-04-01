@@ -42,7 +42,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{9E041F
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpdateControls.UnitTest", "Portable\UpdateControls.UnitTest\UpdateControls.UnitTest.csproj", "{664C559F-A3E9-46AE-A3C5-D95E2E8FB5C2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnockoutCS.UnitTest", "Portable\UpdateControls.UnitTest\KnockoutCS.UnitTest.csproj", "{664C559F-A3E9-46AE-A3C5-D95E2E8FB5C2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
