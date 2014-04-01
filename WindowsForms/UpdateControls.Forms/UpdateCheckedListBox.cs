@@ -160,7 +160,7 @@ namespace KnockoutCS.Forms
 		private Dependent _depItems;
 		private Dependent _depItemCheckState;
 
-		private Independent _dynItemCheckState = new Independent();
+		private Observable _dynItemCheckState = new Observable();
 
 		private int _updating = 0;
 

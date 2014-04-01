@@ -15,21 +15,21 @@ using System.ComponentModel;
 
 namespace KnockoutCS.Fields
 {
-    public class Independent<T> : NamedIndependent
+    public class Observable<T> : NamedObservable
     {
 		protected internal T _value;
 
-		public Independent() { }
-		public Independent(T value) : this((string)null, value) { }
+		public Observable() { }
+		public Observable(T value) : this((string)null, value) { }
 		
-		// Oops, this constructor causes ambiguity in case of Independent<string>. 
+		// Oops, this constructor causes ambiguity in case of Observable<string>. 
 		// In that case, C# compilers will reinterpret existing code that previously 
-		// used the Independent(value) constructor to call Independent(name) instead.
-		//public Independent(string name) : base(name) { }
+		// used the Observable(value) constructor to call Observable(name) instead.
+		//public Observable(string name) : base(name) { }
 		
-		public Independent(string name, T value) : base(name) { _value = value; }
-		public Independent(Type containerType, string name) : base(containerType, name) { }
-		public Independent(Type containerType, string name, T value) : base(containerType, name) { _value = value; }
+		public Observable(string name, T value) : base(name) { _value = value; }
+		public Observable(Type containerType, string name) : base(containerType, name) { }
+		public Observable(Type containerType, string name, T value) : base(containerType, name) { _value = value; }
 
 		public T Value
 		{
@@ -42,7 +42,7 @@ namespace KnockoutCS.Fields
 				}
 			}
 		}
-		public static implicit operator T(Independent<T> independent)
+		public static implicit operator T(Observable<T> independent)
 		{
 			return independent.Value;
 		}
@@ -56,7 +56,7 @@ namespace KnockoutCS.Fields
 		}
 
 		[Obsolete, EditorBrowsable(EditorBrowsableState.Never)]
-		public Independent IndependentSentry
+		public Observable ObservableSentry
 		{
 			get { return this; }
 		}

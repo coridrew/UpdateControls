@@ -161,7 +161,7 @@ namespace KnockoutCS.Forms
 		private Dependent _depItems;
 		private Dependent _depSelectedItem;
 
-		private Independent _dynSelectedItem = Independent.New("UpdateListBox.SelectedItem");
+		private Observable _dynSelectedItem = Observable.New("UpdateListBox.SelectedItem");
 
         private int _updating = 0;
 

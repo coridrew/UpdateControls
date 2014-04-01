@@ -48,7 +48,7 @@ namespace KnockoutCS.Forms
 
 		private Dependent _depEnabled;
 		private Dependent _depValue;
-		private Independent _dynValue = Independent.New("UpdateDateTimePicker.Value");
+		private Observable _dynValue = Observable.New("UpdateDateTimePicker.Value");
 
 		private int _updating = 0;
 

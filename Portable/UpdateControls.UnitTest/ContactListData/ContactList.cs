@@ -5,7 +5,7 @@ namespace KnockoutCS.UnitTest.ContactListData
 {
     public class ContactList
     {
-        private IndependentList<Contact> _contacts = new IndependentList<Contact>();
+        private ObservableList<Contact> _contacts = new ObservableList<Contact>();
 
         public void AddContact(Contact contact)
         {

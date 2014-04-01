@@ -5,7 +5,7 @@ namespace KnockoutCS.UnitTest.CollectionData
     public class SourceCollection
     {
         private List<int> _numbers = new List<int>();
-        private Independent _indNumbers = new Independent();
+        private Observable _indNumbers = new Observable();
 
         public void Insert(int number)
         {

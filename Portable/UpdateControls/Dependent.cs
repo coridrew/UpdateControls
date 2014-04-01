@@ -369,7 +369,7 @@ namespace KnockoutCS
 
 		/// <summary>Intended for the debugger. Returns a tree of Dependents that 
 		/// use this Dependent.</summary>
-		/// <remarks>UsedBy is defined separately in Independent and Dependent so 
+		/// <remarks>UsedBy is defined separately in Observable and Dependent so 
 		/// that the user doesn't have to drill down to the final base class, 
 		/// Precedent, in order to view this property.</remarks>
 		protected DependentVisualizer UsedBy
@@ -393,7 +393,7 @@ namespace KnockoutCS
 		}
 
 		/// <summary>Helper class, intended to be viewed in the debugger, that 
-		/// shows a list of Dependents and Independents that are used by this 
+		/// shows a list of Dependents and Observables that are used by this 
 		/// Dependent.</summary>
 		protected class PrecedentVisualizer
 		{
@@ -411,7 +411,7 @@ namespace KnockoutCS
 						for (PrecedentNode current = _self._firstPrecedent; current != null; current = current.Next)
 						{
 							var dep = current.Precedent as Dependent;
-							var ind = current.Precedent as Independent;
+							var ind = current.Precedent as Observable;
 							if (dep != null)
 								list.Add(new PrecedentVisualizer(dep));
 							else
@@ -427,11 +427,11 @@ namespace KnockoutCS
 			}
 		}
 		/// <summary>Helper class, used by <see cref="PrecedentVisualizer"/>, whose 
-		/// ToString() method shows [I] plus the "extended name" of an Independent.</summary>
+		/// ToString() method shows [I] plus the "extended name" of an Observable.</summary>
 		private class LeafVisualizer
 		{
-			Independent _self;
-			public LeafVisualizer(Independent self) { _self = self; }
+			Observable _self;
+			public LeafVisualizer(Observable self) { _self = self; }
 			public override string ToString() { return _self.VisualizerName(true); }
 		}
 

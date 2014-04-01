@@ -8,7 +8,7 @@ namespace KnockoutCS.UnitTest.MultithreadedData
         public const int MaxValue = 10000;
 
         private Thread _thread;
-        private Independent<int> _value = new Independent<int>();
+        private Observable<int> _value = new Observable<int>();
 
         public SourceThread()
         {

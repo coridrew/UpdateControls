@@ -74,7 +74,7 @@
     <Compile Include="Dependent.cs" />
     <Compile Include="Fields\Dependent.cs" />
     <Compile Include="Fields\Independent.cs" />
-    <Compile Include="Independent.cs" />
+    <Compile Include="Observable.cs" />
     <Compile Include="InertialProperty.cs" />
     <Compile Include="MemoizedTypeName.cs" />
     <Compile Include="NamedPrecedents.cs" />

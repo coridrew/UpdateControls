@@ -6,9 +6,9 @@ using System.Text;
 namespace KnockoutCS.Collections.Impl
 {
 	/// <summary>Helper structure used by DependentDictionary and 
-	/// IndependentDictionary to represent the "Keys" and "Values" members.</summary>
+	/// ObservableDictionary to represent the "Keys" and "Values" members.</summary>
 	/// <remarks>
-	/// If you save a reference to the Keys or Values property of <see cref="IndependentDictionary{TKey,TValue}"/>,
+	/// If you save a reference to the Keys or Values property of <see cref="ObservableDictionary{TKey,TValue}"/>,
 	/// the independent sentry should be informed when that collection is accessed. 
 	/// This helper class ensures that the sentry is notified.
 	/// <para/>

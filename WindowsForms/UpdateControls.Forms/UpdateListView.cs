@@ -210,8 +210,8 @@ namespace KnockoutCS.Forms
 			private Dependent _depImageIndex;
 			private Dependent _depSubItems;
 
-			private Independent _dynSelected = Independent.New("UpdateListView.Selected");
-			private Independent _dynChecked = Independent.New("UpdateListView.Checked");
+			private Observable _dynSelected = Observable.New("UpdateListView.Selected");
+			private Observable _dynChecked = Observable.New("UpdateListView.Checked");
 
 			private bool _selected = false;
 			private bool _checked = false;

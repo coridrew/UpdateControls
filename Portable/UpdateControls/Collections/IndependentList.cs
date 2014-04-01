@@ -13,17 +13,17 @@ using System.Collections.Generic;
 
 namespace KnockoutCS.Collections
 {
-	public class IndependentList<T> : IList<T>
+	public class ObservableList<T> : IList<T>
 	{
         private IList<T> _list;
-		private Independent _indList = new NamedIndependent(MemoizedTypeName<IndependentList<T>>.GenericName());
+		private Observable _indList = new NamedObservable(MemoizedTypeName<ObservableList<T>>.GenericName());
 
-        public IndependentList()
+        public ObservableList()
         {
             _list = new List<T>();
         }
 
-        public IndependentList(IEnumerable<T> collection)
+        public ObservableList(IEnumerable<T> collection)
         {
             _list = new List<T>(collection);
         }

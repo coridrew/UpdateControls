@@ -77,7 +77,7 @@ namespace KnockoutCS.Forms
 		private Dependent _depMonthlyBoldedDates;
 		private Dependent _depBoldedDates;
 
-		private Independent _dynSelection = new Independent();
+		private Observable _dynSelection = new Observable();
 
 		private int _updating = 0;
 

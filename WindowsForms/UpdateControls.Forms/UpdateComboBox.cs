@@ -132,9 +132,9 @@ namespace KnockoutCS.Forms
 		private Dependent _depItems;
 		private Dependent _depSelectedItem;
 
-		private Independent _dynModified = new Independent();
-		private Independent _dynSelectedItem = new Independent();
-        private Independent _dynError = new Independent();
+		private Observable _dynModified = new Observable();
+		private Observable _dynSelectedItem = new Observable();
+        private Observable _dynError = new Observable();
 
 		private int _updating = 0;
 		private bool _modified = false;

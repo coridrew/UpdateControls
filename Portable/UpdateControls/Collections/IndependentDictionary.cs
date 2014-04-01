@@ -14,24 +14,24 @@ using KnockoutCS.Collections.Impl;
 
 namespace KnockoutCS.Collections
 {
-	public class IndependentDictionary<TKey, TValue> : IDictionary<TKey, TValue>
+	public class ObservableDictionary<TKey, TValue> : IDictionary<TKey, TValue>
 	{
 		private IDictionary<TKey, TValue> _dictionary = new Dictionary<TKey, TValue>();
-		private Independent _indDictionary = new NamedIndependent(MemoizedTypeName<IndependentDictionary<TKey, TValue>>.GenericName());
+		private Observable _indDictionary = new NamedObservable(MemoizedTypeName<ObservableDictionary<TKey, TValue>>.GenericName());
 
-		public IndependentDictionary()
+		public ObservableDictionary()
 		{
 			_dictionary = new Dictionary<TKey, TValue>();
 		}
-		public IndependentDictionary(IEqualityComparer<TKey> comp)
+		public ObservableDictionary(IEqualityComparer<TKey> comp)
 		{
 			_dictionary = new Dictionary<TKey, TValue>(comp);
 		}
-		public IndependentDictionary(IDictionary<TKey,TValue> copy)
+		public ObservableDictionary(IDictionary<TKey,TValue> copy)
 		{
 			_dictionary = new Dictionary<TKey, TValue>(copy);
 		}
-		public IndependentDictionary(IDictionary<TKey, TValue> copy, IEqualityComparer<TKey> comp)
+		public ObservableDictionary(IDictionary<TKey, TValue> copy, IEqualityComparer<TKey> comp)
 		{
 			_dictionary = new Dictionary<TKey, TValue>(copy, comp);
 		}

@@ -26,7 +26,7 @@ namespace KnockoutCS.Collections
 		/// <remarks>
 		/// The update method will be called automatically when someone accesses the 
 		/// dictionary, and either (1) it is being accessed for the first time, or
-		/// (2) one of the precedents (Dependent and Independent sentries) that were 
+		/// (2) one of the precedents (Dependent and Observable sentries) that were 
 		/// accessed by updateCollection() has changed since the last time it was
 		/// called.
 		/// <para/>

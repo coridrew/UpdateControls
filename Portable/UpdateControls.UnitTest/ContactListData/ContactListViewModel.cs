@@ -8,7 +8,7 @@ namespace KnockoutCS.UnitTest.ContactListData
     {
         private ContactList _contactList;
         private ContactListSortOrder _sortOrder;
-        private Independent _indSortOrder = new Independent();
+        private Observable _indSortOrder = new Observable();
 
         private List<ContactViewModel> _contactViewModels;
         private Dependent _depContactViewModels;

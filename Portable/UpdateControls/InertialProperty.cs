@@ -25,7 +25,7 @@ namespace KnockoutCS
 
         // Dynamic
         private long _ticks = 0;
-        private Independent _dynTicks = new Independent();
+        private Observable _dynTicks = new Observable();
 
         // Dependent
         private float _targetValue;

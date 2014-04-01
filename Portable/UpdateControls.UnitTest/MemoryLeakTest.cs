@@ -17,20 +17,20 @@ namespace KnockoutCS.UnitTest
         private const int DependentPlatformOffset = 0;
 #endif
 #if SILVERLIGHT
-        // In Silverlight, Independent is 8 bytes smaller. Why?
-        private static long IndependentPlatformOffset = -8;
+        // In Silverlight, Observable is 8 bytes smaller. Why?
+        private static long ObservablePlatformOffset = -8;
 #else
-        private static long IndependentPlatformOffset = 0;
+        private static long ObservablePlatformOffset = 0;
 #endif
 
         [TestMethod]
         //[Ignore]
-        public void IndependentIsAsSmallAsPossible()
+        public void ObservableIsAsSmallAsPossible()
         {
             GC.Collect();
             long start = GC.GetTotalMemory(true);
-            Independent<int> newIndependent = new Independent<int>();
-            newIndependent.Value = 42;
+            Observable<int> newObservable = new Observable<int>();
+            newObservable.Value = 42;
             long end = GC.GetTotalMemory(true);
 
             // Started at 92.
@@ -39,9 +39,9 @@ namespace KnockoutCS.UnitTest
             // Custom linked list implementation for dependents: 48.
             // Other optimizations: 40.
             // Removed WeakReferenceToSelf: 20.
-            Assert.AreEqual(20 + IndependentPlatformOffset, end - start);
+            Assert.AreEqual(20 + ObservablePlatformOffset, end - start);
 
-            int value = newIndependent;
+            int value = newObservable;
             Assert.AreEqual(42, value);
         }
 
@@ -75,9 +75,9 @@ namespace KnockoutCS.UnitTest
         {
             GC.Collect();
             long start = GC.GetTotalMemory(true);
-            Independent<int> newIndependent = new Independent<int>();
-            Dependent<int> newDependent = new Dependent<int>(() => newIndependent);
-            newIndependent.Value = 42;
+            Observable<int> newObservable = new Observable<int>();
+            Dependent<int> newDependent = new Dependent<int>(() => newObservable);
+            newObservable.Value = 42;
             long end = GC.GetTotalMemory(true);
 
             // Started at 336.
@@ -89,7 +89,7 @@ namespace KnockoutCS.UnitTest
             // Other optimizations: 144.
 			// Added WeakReferenceToSelf: 148.
             // Removed WeakReferenceToSelf: 124.
-			Assert.AreEqual(124 + IndependentPlatformOffset, end - start);
+			Assert.AreEqual(124 + ObservablePlatformOffset, end - start);
 
             int value = newDependent;
             Assert.AreEqual(42, value);
@@ -101,9 +101,9 @@ namespace KnockoutCS.UnitTest
         {
             GC.Collect();
             long start = GC.GetTotalMemory(true);
-            Independent<int> newIndependent = new Independent<int>();
-            Dependent<int> newDependent = new Dependent<int>(() => newIndependent);
-            newIndependent.Value = 42;
+            Observable<int> newObservable = new Observable<int>();
+            Dependent<int> newDependent = new Dependent<int>(() => newObservable);
+            newObservable.Value = 42;
             int value = newDependent;
             long end = GC.GetTotalMemory(true);
 
@@ -117,7 +117,7 @@ namespace KnockoutCS.UnitTest
             // Other optimizations: 192.
 			// Added WeakReferenceToSelf: 196.
             // Removed WeakReferenceToSelf: 168 - 324.
-			Assert.AreEqual(324 + IndependentPlatformOffset, end - start);
+			Assert.AreEqual(324 + ObservablePlatformOffset, end - start);
 
             value = newDependent;
             Assert.AreEqual(42, value);

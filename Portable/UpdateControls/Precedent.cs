@@ -200,21 +200,21 @@ namespace KnockoutCS
 		/// <summary>Gets or sets a flag that allows extra debug features.</summary>
 		/// <remarks>
 		/// This flag currently just controls automatic name detection for untitled
-		/// NamedIndependents, and other precedents that were created without a name 
-		/// by calling <see cref="Independent.New"/>() or <see cref="Dependent.New"/>(),
+		/// NamedObservables, and other precedents that were created without a name 
+		/// by calling <see cref="Observable.New"/>() or <see cref="Dependent.New"/>(),
 		/// including dependents created implicitly by <see cref="GuiUpdateHelper"/>.
 		/// <para/>
 		/// DebugMode should be enabled before creating any UpdateControls sentries,
 		/// otherwise some of them may never get a name. For example, if 
 		/// Indepedent.New() is called (without arguments) when DebugMode is false, 
-		/// a "regular" <see cref="Independent"/> is created that is incapable of 
+		/// a "regular" <see cref="Observable"/> is created that is incapable of 
 		/// having a name.
 		/// <para/>
 		/// DebugMode may slow down your program. In particular, if you use named 
-		/// independents (or <see cref="Independent{T}"/>) but do not explicitly 
+		/// independents (or <see cref="Observable{T}"/>) but do not explicitly 
 		/// specify a name, DebugMode will cause them to compute their names based 
 		/// on a stack trace the first time OnGet() is called; this process is
-		/// expensive if it is repeated for a large number of Independents.
+		/// expensive if it is repeated for a large number of Observables.
 		/// </remarks>
 		public static bool DebugMode { get; set; }
 		
@@ -228,8 +228,8 @@ namespace KnockoutCS
 				// Unless VisualizerName has been overridden, we have no idea what 
 				// value is associated with the Precedent. Include an ID code so 
 				// that the user has a chance to detect duplicates (that is, when
-				// he sees two Independents with the same code, they are probably 
-				// the same Independent.)
+				// he sees two Observables with the same code, they are probably 
+				// the same Observable.)
 				return string.Format("{0} #{1:X5}", name, GetHashCode() & 0xFFFFF);
 			} else
 				return name;

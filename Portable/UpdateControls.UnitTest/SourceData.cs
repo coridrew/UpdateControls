@@ -6,7 +6,7 @@ namespace KnockoutCS.UnitTest
 {
 	public class SourceData
 	{
-		private Independent<int> _sourceProperty = new Independent<int>();
+		private Observable<int> _sourceProperty = new Observable<int>();
 		private AutoResetEvent _continue = new AutoResetEvent(false);
 
 		public int SourceProperty

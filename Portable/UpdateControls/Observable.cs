@@ -21,18 +21,18 @@ namespace KnockoutCS
 	/// <threadsafety static="true" instance="true"/>
 	/// <remarks>
 	/// An independent field is one whose value can be changed externally at
-	/// any time. Create one Independent sentry for each independent field in
+	/// any time. Create one Observable sentry for each independent field in
 	/// your object.
 	/// </remarks>
-	/// <example>A class using Independent sentries.
+	/// <example>A class using Observable sentries.
 	/// <code language="C">
 	///	public class Contact
 	///	{
 	///		private string _name = "";
 	///		private string _emailAddress = "";
 	///		
-    ///		private Independent _indName = new Independent();
-    ///		private Independent _indEmailAddress = new Independet();
+    ///		private Observable _indName = new Observable();
+    ///		private Observable _indEmailAddress = new Independet();
 	///
 	///		public Contact()
 	///		{
@@ -72,8 +72,8 @@ namespace KnockoutCS
     ///		Private _name As String = ""
     ///		Private _emailAddress As String = ""
     ///
-    ///		Private _indName As New Independent()
-    ///		Private _indEmailAddress As New Independent()
+    ///		Private _indName As New Observable()
+    ///		Private _indEmailAddress As New Observable()
     ///
     ///		Public Sub New()
     ///		End Sub
@@ -102,13 +102,13 @@ namespace KnockoutCS
     ///	End Class
     /// </code>
 	/// </example>
-	public class Independent : Precedent
+	public class Observable : Precedent
 	{
-		public static Independent New() { return DebugMode ? new NamedIndependent() : new Independent(); }
-		public static NamedIndependent New(string name) { return new NamedIndependent(name); }
-		public static Independent<T> New<T>(string name) { return new Independent<T>(name, default(T)); }
-		public static NamedIndependent New(Type containerType, string name) { return new NamedIndependent(containerType, name); }
-		public static Independent<T> New<T>(Type containerType, string name) { return new Independent<T>(containerType, name); }
+		public static Observable New() { return DebugMode ? new NamedObservable() : new Observable(); }
+		public static NamedObservable New(string name) { return new NamedObservable(name); }
+		public static Observable<T> New<T>(string name) { return new Observable<T>(name, default(T)); }
+		public static NamedObservable New(Type containerType, string name) { return new NamedObservable(containerType, name); }
+		public static Observable<T> New<T>(Type containerType, string name) { return new Observable<T>(containerType, name); }
 
 		/// <summary>
 		/// Call this function just before getting the field that this

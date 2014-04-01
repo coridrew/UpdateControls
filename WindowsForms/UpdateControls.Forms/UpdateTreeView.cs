@@ -49,7 +49,7 @@ namespace KnockoutCS.Forms
 			private Dependent _depNodes;
 			private Dependent _depRecursive;
 
-			private Independent _dynWasExpanded = Independent.New("UpdateTreeView.WasExpanded");
+			private Observable _dynWasExpanded = Observable.New("UpdateTreeView.WasExpanded");
             private bool _wasExpanded = false;
 
 			private int _updating = 0;
@@ -270,7 +270,7 @@ namespace KnockoutCS.Forms
 		private Dependent _depRecursive;
 		private Dependent _depSelectedNode;
 
-		private Independent _dynSelectedNode = new Independent();
+		private Observable _dynSelectedNode = new Observable();
 
 		private int _updating = 0;
 

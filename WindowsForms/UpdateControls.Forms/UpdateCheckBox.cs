@@ -57,7 +57,7 @@ namespace KnockoutCS.Forms
 		private Dependent _depChecked;
 		private Dependent _depEnabled;
 
-		private Independent _dynChecked = Independent.New("UpdateCheckBox.Checked");
+		private Observable _dynChecked = Observable.New("UpdateCheckBox.Checked");
 
 		private int _updating = 0;
 

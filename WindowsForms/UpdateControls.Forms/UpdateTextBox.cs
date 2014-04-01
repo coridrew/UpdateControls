@@ -46,8 +46,8 @@ namespace KnockoutCS.Forms
 
 		private Dependent _depText;
 		private Dependent _depEnabled;
-		private Independent _dynModified = Independent.New("UpdateTextBox.Modified");
-		private Independent _dynError = Independent.New("UpdateTextBox.Error");
+		private Observable _dynModified = Observable.New("UpdateTextBox.Modified");
+		private Observable _dynError = Observable.New("UpdateTextBox.Error");
 
 		private bool _realTime = false;
         private string _errorText = string.Empty;

@@ -100,7 +100,7 @@ namespace KnockoutCS.Forms
 		private Hashtable _formTable = new Hashtable();
 
 		private Dependent _depForms;
-		private Independent _dynFormTable = new Independent();
+		private Observable _dynFormTable = new Observable();
 
 		/// <summary>
 		/// Creates a new dependent form map inside a container.

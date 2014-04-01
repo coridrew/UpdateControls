@@ -36,12 +36,12 @@ namespace KnockoutCS
 		}
 	}
 
-	public class NamedIndependent : Independent
+	public class NamedObservable : Observable
 	{
-		public NamedIndependent() : base() { }
-		public NamedIndependent(string name) : base() { _name = name; }
-		public NamedIndependent(Type valueType) : this(valueType.NameWithGenericParams()) { }
-		public NamedIndependent(Type containerType, string name) :
+		public NamedObservable() : base() { }
+		public NamedObservable(string name) : base() { _name = name; }
+		public NamedObservable(Type valueType) : this(valueType.NameWithGenericParams()) { }
+		public NamedObservable(Type containerType, string name) :
 			this(string.Format("{0}.{1}", containerType.NameWithGenericParams(), name)) { }
 
 		public override void OnGet()
@@ -53,7 +53,7 @@ namespace KnockoutCS
         protected string _name;
 		public string Name
 		{
-			get { return _name ?? "NamedIndependent"; }
+			get { return _name ?? "NamedObservable"; }
 			set { _name = value; }
 		}
 
@@ -64,13 +64,13 @@ namespace KnockoutCS
 	}
 
 	[Obsolete]
-	public class NamedIndependent<T> : KnockoutCS.Fields.Independent<T>
+	public class NamedObservable<T> : KnockoutCS.Fields.Observable<T>
 	{
-		public NamedIndependent() : base() { }
-		public NamedIndependent(T value) : base(value) { }
-		public NamedIndependent(string name, T value) : base(name, value) { }
-		public NamedIndependent(Type containerType, string name) : base(containerType, name) { }
-		public NamedIndependent(Type containerType, string name, T value) : base(containerType, name, value) { }
+		public NamedObservable() : base() { }
+		public NamedObservable(T value) : base(value) { }
+		public NamedObservable(string name, T value) : base(name, value) { }
+		public NamedObservable(Type containerType, string name) : base(containerType, name) { }
+		public NamedObservable(Type containerType, string name, T value) : base(containerType, name, value) { }
 	}
 
 	[Obsolete]

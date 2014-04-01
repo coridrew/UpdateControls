@@ -433,7 +433,7 @@ namespace KnockoutCS.Forms
 		private Dependent _depColumns;
 		private Dependent _depItems;
 		private Dependent _depItemValue;
-        private Independent _dynSelection = new Independent();
+        private Observable _dynSelection = new Observable();
 
         private ColumnDefinitions _columnDefinitions;
         private DataTable _table;

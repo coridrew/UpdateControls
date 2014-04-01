@@ -3,7 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace KnockoutCS.UnitTest
 {
-    public class NotifyingIndependent : Independent
+    public class NotifyingObservable : Observable
     {
         public event Action OnGainDependent;
         public event Action OnLoseDependent;
@@ -26,7 +26,7 @@ namespace KnockoutCS.UnitTest
     {
         private bool _gained;
         private bool _lost;
-        private NotifyingIndependent _independent;
+        private NotifyingObservable _independent;
         private Dependent _dependent;
         private Dependent _secondDependent;
 
@@ -34,7 +34,7 @@ namespace KnockoutCS.UnitTest
         public void Initialize()
         {
             _gained = false;
-            _independent = new NotifyingIndependent();
+            _independent = new NotifyingObservable();
             _independent.OnGainDependent += () => { _gained = true; };
             _independent.OnLoseDependent += () => { _lost = true; };
             _dependent = new Dependent(() => { _independent.OnGet(); });

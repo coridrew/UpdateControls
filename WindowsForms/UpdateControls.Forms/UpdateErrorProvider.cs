@@ -93,7 +93,7 @@ namespace KnockoutCS.Forms
         private IDictionary<Control, string> _getErrorMethod = new Dictionary<Control, string>();
 
         // Turn validation on and off.
-        private Independent _dynValidation = new Independent();
+        private Observable _dynValidation = new Observable();
         private bool _validation = true;
 
         // Visible sentry to update error text.
